@@ -45,7 +45,7 @@ export default function Home() {
 
       <section className="windowSection" id="work">
         <div className="browserWindow">
-          <div className="windowBar"><div className="windowDots" aria-hidden="true"><i /><i /><i /></div><span>Selected work</span><small>2 projects</small></div>
+          <div className="windowBar"><div className="windowDots" aria-hidden="true"><i /><i /><i /></div><span>Selected projects</span><small>2 projects</small></div>
           <div className="windowBody rows">
             {work.map((item) => (
               <a className="row" href="https://www.figma.com/deck/Uv4ebbkIVfmdblK58TaueW" target="_blank" rel="noreferrer" key={item.company}>
