@@ -1,5 +1,4 @@
 import { ThemeToggle } from "./ThemeToggle";
-import { DotField } from "./DotField";
 import { LocalTime } from "./LocalTime";
 
 const work = [
@@ -33,16 +32,10 @@ export default function Home() {
       </nav>
 
       <section className="intro" id="top">
-        <DotField />
         <p className="sectionLabel">Hello, I’m Guy</p>
-        <div className="identity">
-          <div className="profilePicture">
-            <img src="/profile-art.svg" alt="Illustrated portrait of Guy Magen" />
-          </div>
-          <div>
-            <h1>Guy Magen</h1>
-            <p className="role">Senior Product Designer &amp; Builder</p>
-          </div>
+        <div>
+          <h1>Guy Magen</h1>
+          <p className="role">Senior Product Designer &amp; Builder</p>
         </div>
         <p className="lede">I design complex products and build ideas into things people can actually use.</p>
         <p className="bio">For the past 12+ years, I’ve worked with technical teams to make complicated systems feel clear. I care about the whole thing, from understanding the problem to shaping the details and building a working version.</p>
