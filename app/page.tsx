@@ -34,7 +34,7 @@ export default function Home() {
 
       <section className="intro" id="top">
         <GridField />
-        <p className="sectionLabel">Hello, I’m Guy</p>
+        <p className="sectionLabel">Hey there, I’m</p>
         <div>
           <h1>Guy Magen</h1>
           <p className="role">Senior Product Designer &amp; Builder</p>
