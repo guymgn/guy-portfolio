@@ -1,0 +1,19 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="65.9412" height="65.9412" viewBox="0 0 65.9412 65.9412" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="icon-lottie">
+<g clip-path="url(#clip0_0_56)">
+<rect width="65.9412" height="65.9412" rx="12.364" fill="url(#paint0_linear_0_56)"/>
+<g id="58453772 1">
+</g>
+<path id="Vector" d="M46.076 17.5774C47.4665 17.7833 48.4264 19.0784 48.2211 20.4694C48.0159 21.8611 46.7224 22.8233 45.3314 22.6173C42.8683 22.2527 39.1783 26.0858 35.0471 33.9675C29.7731 44.0295 24.8642 48.8235 19.6961 48.441C18.294 48.3371 17.2425 47.1154 17.3459 45.713C17.4493 44.3103 18.6692 43.2563 20.0714 43.3601C22.6235 43.549 26.3722 39.5525 30.5403 31.6003C35.8481 21.4741 40.8236 16.7997 46.076 17.5774Z" fill="white"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_56" x1="-9.8489e-05" y1="2197.56" x2="19860.7" y2="15454.1" gradientUnits="userSpaceOnUse">
+<stop stop-color="#2BEAED"/>
+<stop offset="1" stop-color="#0FCCCE"/>
+</linearGradient>
+<clipPath id="clip0_0_56">
+<rect width="65.9412" height="65.9412" rx="12.364" fill="white"/>
+</clipPath>
+</defs>
+</svg>
