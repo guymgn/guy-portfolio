@@ -23,6 +23,13 @@ const building = [
   ["Mentoring", "Helping designers grow through Startup Designers"],
 ];
 
+const tools = [
+  ["Figma", "Designing products, systems and the details between them"],
+  ["Claude", "Exploring ideas and building working software"],
+  ["Codex", "Turning product thinking into code and experiments"],
+  ["GitHub", "Keeping the work moving, versioned and shareable"],
+];
+
 export default function Home() {
   return (
     <main className="siteShell">
@@ -60,6 +67,21 @@ export default function Home() {
                 <span className="period">{item.period}</span>
                 <span className="arrow">↗</span>
               </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="windowSection" id="tools">
+        <div className="browserWindow">
+          <div className="windowBar"><div className="windowDots" aria-hidden="true"><i /><i /><i /></div><span>Tools I use</span><small>A small, changing stack</small></div>
+          <div className="toolGrid">
+            {tools.map(([name, description], index) => (
+              <div className="toolItem" key={name}>
+                <span>0{index + 1}</span>
+                <strong>{name}</strong>
+                <p>{description}</p>
+              </div>
             ))}
           </div>
         </div>
