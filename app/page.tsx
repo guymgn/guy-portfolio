@@ -1,5 +1,6 @@
 import { ThemeToggle } from "./ThemeToggle";
 import { LocalTime } from "./LocalTime";
+import { GridField } from "./GridField";
 
 const work = [
   {
@@ -32,6 +33,7 @@ export default function Home() {
       </nav>
 
       <section className="intro" id="top">
+        <GridField />
         <p className="sectionLabel">Hello, I’m Guy</p>
         <div>
           <h1>Guy Magen</h1>
