@@ -23,12 +23,6 @@ const building = [
   ["Mentoring", "Helping designers grow through Startup Designers"],
 ];
 
-const toolGroups = [
-  { label: "Product design", tools: [["Figma", "/tools/figma.svg"], ["Rive", "/tools/rive.svg"], ["Lottie", "/tools/lottie.svg"]] },
-  { label: "AI / Dev", tools: [["Webflow", "/tools/webflow.svg"], ["ChatGPT", "/tools/chatgpt.svg"], ["v0", "/tools/v0.svg"], ["Cursor", "/tools/cursor.svg"]] },
-  { label: "3D", tools: [["Spline", "/tools/spline.png"]] },
-];
-
 export default function Home() {
   return (
     <main className="siteShell">
@@ -66,24 +60,6 @@ export default function Home() {
                 <span className="period">{item.period}</span>
                 <span className="arrow">↗</span>
               </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="windowSection" id="tools">
-        <div className="browserWindow">
-          <div className="windowBar"><div className="windowDots" aria-hidden="true"><i /><i /><i /></div><span>Tools I use</span><small>A small, changing stack</small></div>
-          <div className="toolStrip">
-            {toolGroups.map((group) => (
-              <div className="toolGroup" key={group.label}>
-                <div className="toolGroupLabel"><i /><span>{group.label}</span><i /></div>
-                <div className="toolIcons">
-                  {group.tools.map(([name, src]) => (
-                    <div className="toolIcon" key={name} title={name}><img src={src} alt={name} /></div>
-                  ))}
-                </div>
-              </div>
             ))}
           </div>
         </div>
