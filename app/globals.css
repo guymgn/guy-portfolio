@@ -11,6 +11,7 @@
   --footer:#777772;
   --line:#30302d;
   --accent:#7776FF;
+  --dot-color:rgba(151,150,255,.34);
 }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
@@ -26,6 +27,9 @@ nav a:hover,.home { color:var(--text); }
 .themeToggle span { font-size:10px; line-height:1; }
 .themeToggle i { position:absolute; width:18px; height:18px; border-radius:50%; background:var(--accent); transform:translateX(12px); transition:transform .25s ease; }
 section { padding:84px 0; border-bottom:1px solid var(--line); }
+.intro { position:relative; isolation:isolate; overflow:hidden; }
+.intro>*:not(.dotField) { position:relative; z-index:1; }
+.dotField { position:absolute; z-index:0; inset:0; width:100%; height:100%; pointer-events:auto; opacity:.68; mask-image:linear-gradient(to bottom,rgba(0,0,0,.92),rgba(0,0,0,.16) 74%,transparent 100%); }
 .sectionLabel { margin:0 0 42px; color:var(--muted); font-family:var(--font-geist-mono),monospace; font-size:11px; text-transform:uppercase; letter-spacing:.12em; }
 .identity { display:flex; align-items:center; gap:28px; }
 .profilePicture { width:96px; height:96px; flex:0 0 96px; overflow:hidden; border:1px solid color-mix(in srgb,var(--accent) 34%,var(--line)); border-radius:22px; background:#ddddff; box-shadow:0 12px 30px rgba(0,0,0,.18); transform:rotate(-3deg); transition:filter .25s ease,box-shadow .25s ease,transform .25s ease; }
@@ -86,6 +90,7 @@ footer { min-height:70px; display:flex; align-items:center; justify-content:spac
     --tertiary:#62615c;
     --footer:#77756f;
     --line:#d8d6cf;
+    --dot-color:rgba(74,73,92,.28);
   }
   .themeToggle i { transform:translateX(-12px); }
 }
@@ -99,6 +104,7 @@ footer { min-height:70px; display:flex; align-items:center; justify-content:spac
   --tertiary:#62615c;
   --footer:#77756f;
   --line:#d8d6cf;
+  --dot-color:rgba(74,73,92,.28);
 }
 
 :root[data-theme="dark"] {
@@ -110,6 +116,7 @@ footer { min-height:70px; display:flex; align-items:center; justify-content:spac
   --tertiary:#aaa9a3;
   --footer:#777772;
   --line:#30302d;
+  --dot-color:rgba(151,150,255,.34);
 }
 
 :root[data-theme="dark"] .profilePicture { filter:brightness(.88) saturate(.92) contrast(1.06); box-shadow:0 14px 34px rgba(0,0,0,.34); }
@@ -139,4 +146,8 @@ footer { min-height:70px; display:flex; align-items:center; justify-content:spac
   .windowBar>span { text-align:right; }
   .windowBar small { display:none; }
   footer span:nth-child(2) { display:none; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  .dotField { opacity:.45; }
 }

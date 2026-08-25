@@ -1,4 +1,5 @@
 import { ThemeToggle } from "./ThemeToggle";
+import { DotField } from "./DotField";
 
 const work = [
   {
@@ -31,6 +32,7 @@ export default function Home() {
       </nav>
 
       <section className="intro" id="top">
+        <DotField />
         <p className="sectionLabel">Hello, I’m Guy</p>
         <div className="identity">
           <div className="profilePicture">
