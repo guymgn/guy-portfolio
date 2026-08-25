@@ -38,7 +38,17 @@ export default function Home() {
         <GridField />
         <p className="sectionLabel">Hey there, I’m</p>
         <div>
-          <h1>Guy Magen</h1>
+          <h1 className="heroWordmark" aria-label="Guy Magen">
+            <span aria-hidden="true" style={{ animationDelay: "-0.0s" }}>G</span>
+            <span aria-hidden="true" style={{ animationDelay: "-0.5s" }}>u</span>
+            <span aria-hidden="true" style={{ animationDelay: "-1.0s" }}>y</span>
+            <i aria-hidden="true" />
+            <span aria-hidden="true" style={{ animationDelay: "-1.5s" }}>M</span>
+            <span aria-hidden="true" style={{ animationDelay: "-2.0s" }}>a</span>
+            <span aria-hidden="true" style={{ animationDelay: "-2.5s" }}>g</span>
+            <span aria-hidden="true" style={{ animationDelay: "-3.0s" }}>e</span>
+            <span aria-hidden="true" style={{ animationDelay: "-3.5s" }}>n</span>
+          </h1>
           <p className="role">Senior Product Designer &amp; Builder</p>
         </div>
         <p className="lede">12+ years of turning complex systems and mobile apps into A-ha! moments</p>

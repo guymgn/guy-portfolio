@@ -46,6 +46,16 @@ section { padding:84px 0; border-bottom:1px solid var(--line); }
 .sectionLabel { margin:0 0 42px; color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.12em; }
 .intro .sectionLabel { margin-bottom:18px; }
 h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-.06em; font-weight:600; }
+.heroWordmark { display:flex; justify-content:center; align-items:baseline; }
+.heroWordmark span { display:inline-block; min-width:.18em; transform-origin:50% 80%; animation:wordmark-wave 6.5s ease-in-out infinite; will-change:transform; }
+.heroWordmark i { width:.22em; }
+.heroWordmark:hover span { animation-duration:2.8s; }
+@keyframes wordmark-wave {
+  0%,100% { transform:translateY(0) scaleX(1) skewX(0deg); }
+  22% { transform:translateY(-1px) scaleX(1.06) skewX(-1deg); }
+  48% { transform:translateY(1px) scaleX(.94) skewX(1.5deg); }
+  72% { transform:translateY(-.5px) scaleX(1.025) skewX(-.5deg); }
+}
 .role { margin:15px 0 0; color:var(--accent); font-size:15px; }
 .lede { max-width:760px; margin:52px 0 22px; font-size:clamp(27px,4vw,39px); line-height:1.12; letter-spacing:-.035em; }
 .intro .lede { margin-inline:auto; }
@@ -170,4 +180,5 @@ footer { min-height:150px; display:grid; grid-template-columns:1fr auto 1fr; ali
 
 @media (prefers-reduced-motion:reduce) {
   .logoMark,.logoMark span { transition:none; }
+  .heroWordmark span { animation:none; }
 }
