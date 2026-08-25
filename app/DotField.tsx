@@ -34,11 +34,13 @@ export function DotField() {
       context.fillStyle = color || "rgba(119,118,255,.42)";
       const spacing = width < 600 ? 20 : 22;
       const movement = reduceMotion.matches ? 0 : 1;
+      const loopDuration = 9000;
+      const phase = ((time % loopDuration) / loopDuration) * Math.PI * 2;
 
       for (let y = -spacing; y < height + spacing; y += spacing) {
         for (let x = -spacing; x < width + spacing; x += spacing) {
-          const waveX = Math.sin(y * 0.025 + time * 0.00045) * 4.5 * movement;
-          const waveY = Math.cos(x * 0.022 - time * 0.00036) * 4 * movement;
+          const waveX = Math.sin(y * 0.025 + phase) * 4.5 * movement;
+          const waveY = Math.cos(x * 0.022 - phase) * 4 * movement;
           const px = x + waveX;
           const py = y + waveY;
           const dx = px - pointerX;

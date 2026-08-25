@@ -15,7 +15,7 @@
 }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
-body { margin:0; background:var(--bg); color:var(--text); font-family:var(--font-geist-sans),Arial,sans-serif; }
+body { margin:0; overflow-x:hidden; background:var(--bg); color:var(--text); font-family:var(--font-geist-sans),Arial,sans-serif; }
 a { color:inherit; text-decoration:none; }
 .siteShell { width:min(900px,calc(100% - 36px)); margin:auto; }
 nav { height:72px; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; border-bottom:1px solid var(--line); font-size:13px; color:var(--muted); }
@@ -27,9 +27,9 @@ nav a:hover,.home { color:var(--text); }
 .themeToggle span { font-size:10px; line-height:1; }
 .themeToggle i { position:absolute; width:18px; height:18px; border-radius:50%; background:var(--accent); transform:translateX(12px); transition:transform .25s ease; }
 section { padding:84px 0; border-bottom:1px solid var(--line); }
-.intro { position:relative; isolation:isolate; overflow:hidden; }
+.intro { position:relative; isolation:isolate; }
 .intro>*:not(.dotField) { position:relative; z-index:1; }
-.dotField { position:absolute; z-index:0; inset:0; width:100%; height:100%; pointer-events:auto; opacity:.68; mask-image:linear-gradient(to bottom,rgba(0,0,0,.92),rgba(0,0,0,.16) 74%,transparent 100%); }
+.dotField { position:absolute; z-index:0; top:0; bottom:0; left:50%; width:100vw; height:100%; transform:translateX(-50%); pointer-events:auto; opacity:.68; mask-image:linear-gradient(to bottom,rgba(0,0,0,.92),rgba(0,0,0,.16) 74%,transparent 100%); }
 .sectionLabel { margin:0 0 42px; color:var(--muted); font-family:var(--font-geist-mono),monospace; font-size:11px; text-transform:uppercase; letter-spacing:.12em; }
 .identity { display:flex; align-items:center; gap:28px; }
 .profilePicture { width:96px; height:96px; flex:0 0 96px; overflow:hidden; border:1px solid color-mix(in srgb,var(--accent) 34%,var(--line)); border-radius:22px; background:#ddddff; box-shadow:0 12px 30px rgba(0,0,0,.18); transform:rotate(-3deg); transition:filter .25s ease,box-shadow .25s ease,transform .25s ease; }
