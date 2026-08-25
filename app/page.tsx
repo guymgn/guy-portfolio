@@ -39,7 +39,7 @@ export default function Home() {
           <h1>Guy Magen</h1>
           <p className="role">Senior Product Designer &amp; Builder</p>
         </div>
-        <p className="lede">I design complex products and build ideas into things people can actually use.</p>
+        <p className="lede">12+ years of turning complex systems and mobile apps into A-ha! moments</p>
         <p className="bio">For the past 12+ years, I’ve worked with technical teams to make complicated systems feel clear. I care about the whole thing, from understanding the problem to shaping the details and building a working version.</p>
         <div className="status"><span><i /> Based in Israel</span><span>Available for the right team</span></div>
       </section>
