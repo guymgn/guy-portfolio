@@ -32,7 +32,7 @@ nav a:hover,.home { color:var(--text); }
 .themeToggle:hover { border-color:var(--muted); background:var(--panel); }
 .themeToggle i { width:17px; height:17px; border:1.5px solid currentColor; border-radius:50%; background:linear-gradient(90deg,currentColor 50%,transparent 50%); }
 section { padding:84px 0; border-bottom:1px solid var(--line); }
-.intro { position:relative; isolation:isolate; text-align:center; }
+.intro { position:relative; isolation:isolate; text-align:center; border-bottom:0; }
 .intro>*:not(.gridField) { position:relative; z-index:1; }
 .gridField { position:absolute; z-index:0; inset:0 auto 0 50%; width:100vw; height:100%; transform:translateX(-50%); pointer-events:none; mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.88) 68%,transparent 100%); }
 .sectionLabel { margin:0 0 42px; color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.12em; }
