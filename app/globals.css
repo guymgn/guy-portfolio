@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-:root { --bg:#0d0d0d; --panel:#121212; --text:#e8e7e2; --muted:#92928c; --line:#30302d; --accent:#d6ff55; }
+:root { --bg:#0d0d0d; --panel:#121212; --text:#e8e7e2; --muted:#92928c; --line:#30302d; --accent:#7776FF; }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 body { margin:0; background:var(--bg); color:var(--text); font-family:var(--font-geist-sans),Arial,sans-serif; }
