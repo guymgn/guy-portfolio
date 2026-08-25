@@ -17,12 +17,6 @@ const work = [
   },
 ];
 
-const building = [
-  ["Teara", "A thoughtful companion for better conversations"],
-  ["Experiments", "Small tools built with AI, code, motion and 3D"],
-  ["Mentoring", "Helping designers grow through Startup Designers"],
-];
-
 export default function Home() {
   return (
     <main className="siteShell">
@@ -61,13 +55,17 @@ export default function Home() {
 
       <section className="windowSection" id="building">
         <div className="browserWindow">
-          <div className="windowBar"><div className="windowDots" aria-hidden="true"><i /><i /><i /></div><span>What I’m building</span><small>Updated recently</small></div>
-          <div className="windowBody">
-            <p className="sectionCopy">I’m happiest when an idea becomes tangible. Lately, I’ve been using Claude and Codex to turn product ideas into working software, not just prototypes.</p>
-            <div className="plainList">
-              {building.map(([name, description], index) => (
-                <div key={name}><span>0{index + 1}</span><strong>{name}</strong><p>{description}</p></div>
-              ))}
+          <div className="windowBar"><div className="windowDots" aria-hidden="true"><i /><i /><i /></div><span>Building Teara</span><small>Personal iOS project</small></div>
+          <div className="tearaIntro">
+            <div className="tearaCopy">
+              <span className="tearaEyebrow">Teara · The path</span>
+              <h2>Every trip,<br />one path.</h2>
+              <p>Teara turns scattered travel bookings into one clear itinerary. Forward a confirmation and it finds the right trip, parsed privately on your iPhone.</p>
+              <div className="tearaDetails"><span>SwiftUI</span><span>MapKit</span><span>On-device AI</span></div>
+              <small>A personal project, currently in progress.</small>
+            </div>
+            <div className="tearaVisual" aria-hidden="true">
+              <img src="/teara-itinerary.png" alt="" />
             </div>
           </div>
         </div>
