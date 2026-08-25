@@ -1,3 +1,5 @@
+import { ThemeToggle } from "./ThemeToggle";
+
 const work = [
   {
     company: "Stigg",
@@ -24,8 +26,8 @@ export default function Home() {
     <main className="siteShell">
       <nav>
         <a className="home" href="#top">Guy Magen</a>
-        <div><a href="#work">work</a><a href="#building">building</a><a href="#about">about</a></div>
-        <a href="mailto:hi@guymagen.com">contact</a>
+        <div className="navLinks"><a href="#work">work</a><a href="#building">building</a><a href="#about">about</a></div>
+        <div className="navActions"><ThemeToggle /><a href="mailto:hi@guymagen.com">contact</a></div>
       </nav>
 
       <section className="intro" id="top">
