@@ -20,7 +20,7 @@ const work = [
 const building = [
   ["Teara", "A personal iOS app that turns travel bookings into one clear itinerary"],
   ["Mentoring", "Mentoring designers through the “Startup Designers” Israeli community"],
-  ["Side projects", "Building small tools for myself, learning 3D printing, and following ideas to see where they go."],
+  ["Side projects", "Building small tools for myself, learning 3D printing, and following ideas to see where they go. Always learning something new."],
 ];
 
 export default function Home() {
