@@ -63,7 +63,7 @@ export default function Home() {
         <div className="browserWindow">
           <div className="windowBar"><div className="windowDots" aria-hidden="true"><i /><i /><i /></div><span>What I’m building</span><small>Updated recently</small></div>
           <div className="windowBody">
-            <p className="sectionCopy">I’m happiest when an idea becomes tangible. Lately, I’ve been using Claude and Codex to turn product ideas into working software, not just prototypes.</p>
+            <p className="sectionCopy">A mix of products, people, and ideas I care about.</p>
             <div className="plainList">
               {building.map(([name, description]) => (
                 <div key={name}><strong>{name}</strong><p>{description}</p></div>
