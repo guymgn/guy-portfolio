@@ -61,11 +61,7 @@ export default function Home() {
               <span className="tearaEyebrow">Teara · The path</span>
               <h2>Every trip,<br />one path.</h2>
               <p>Teara turns scattered travel bookings into one clear itinerary. Forward a confirmation and it finds the right trip, parsed privately on your iPhone.</p>
-              <div className="tearaDetails"><span>SwiftUI</span><span>MapKit</span><span>On-device AI</span></div>
               <small>A personal project, currently in progress.</small>
-            </div>
-            <div className="tearaVisual" aria-hidden="true">
-              <img src="/teara-itinerary.png" alt="" />
             </div>
           </div>
         </div>
