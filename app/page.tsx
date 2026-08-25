@@ -35,12 +35,9 @@ export default function Home() {
       <section className="intro" id="top">
         <GridField />
         <p className="sectionLabel">Hello, I’m Guy</p>
-        <div className="heroIdentity">
-          <div className="pixelAvatar" role="img" aria-label="Pixel-art avatar of Guy Magen" />
-          <div>
-            <h1>Guy Magen</h1>
-            <p className="role">Senior Product Designer &amp; Builder</p>
-          </div>
+        <div>
+          <h1>Guy Magen</h1>
+          <p className="role">Senior Product Designer &amp; Builder</p>
         </div>
         <p className="lede">I design complex products and build ideas into things people can actually use.</p>
         <p className="bio">For the past 12+ years, I’ve worked with technical teams to make complicated systems feel clear. I care about the whole thing, from understanding the problem to shaping the details and building a working version.</p>
