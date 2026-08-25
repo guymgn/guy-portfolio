@@ -23,16 +23,16 @@ export default function Home() {
   return (
     <main className="siteShell">
       <nav>
-        <a className="home" href="#top">~/guymagen</a>
+        <a className="home" href="#top">Guy Magen</a>
         <div><a href="#work">work</a><a href="#building">building</a><a href="#about">about</a></div>
         <a href="mailto:hi@guymagen.com">contact</a>
       </nav>
 
       <section className="intro" id="top">
-        <p className="command">$ whoami</p>
+        <p className="sectionLabel">Hello, I’m Guy</p>
         <div className="identity">
           <div className="portrait" aria-hidden="true">
-            <span>┌────────┐</span><span>│ GM / 08│</span><span>│ DESIGN │</span><span>│ + BUILD│</span><span>└────────┘</span>
+            <span>G</span><span>M</span>
           </div>
           <div>
             <h1>Guy Magen</h1>
@@ -45,7 +45,7 @@ export default function Home() {
       </section>
 
       <section id="work">
-        <p className="command">$ ls selected-work/</p>
+        <p className="sectionLabel">Selected work</p>
         <div className="rows">
           {work.map((item) => (
             <a className="row" href="https://www.figma.com/deck/Uv4ebbkIVfmdblK58TaueW" target="_blank" rel="noreferrer" key={item.company}>
@@ -59,8 +59,8 @@ export default function Home() {
       </section>
 
       <section id="building">
-        <p className="command">$ cat what-i-build.txt</p>
-        <p className="sectionCopy">I’m happiest when an idea becomes tangible. That might be a coded prototype, a motion study, a tiny product or a new way to explain how something works.</p>
+        <p className="sectionLabel">What I’m building</p>
+        <p className="sectionCopy">I’m happiest when an idea becomes tangible. Lately, I’ve been using Claude and Codex to turn product ideas into working software, not just prototypes.</p>
         <div className="plainList">
           {building.map(([name, description], index) => (
             <div key={name}><span>0{index + 1}</span><strong>{name}</strong><p>{description}</p></div>
@@ -69,7 +69,7 @@ export default function Home() {
       </section>
 
       <section id="about">
-        <p className="command">$ cat about.txt</p>
+        <p className="sectionLabel">A little about me</p>
         <div className="aboutGrid">
           <p>I like messy problems, thoughtful products and people who care about their craft. Outside of product work, I mentor designers, experiment with new tools and keep finding reasons to make things.</p>
           <div><span>Good at</span><p>Product strategy<br />Systems thinking<br />Interaction design<br />Prototyping<br />Design systems</p></div>
@@ -78,13 +78,13 @@ export default function Home() {
       </section>
 
       <section className="contact">
-        <p className="command">$ open contact</p>
+        <p className="sectionLabel">Let’s talk</p>
         <h2>Have an interesting problem?</h2>
         <p>Tell me about it.</p>
         <div className="contactLinks"><a href="mailto:hi@guymagen.com">email ↗</a><a href="https://www.linkedin.com/in/guymagen/" target="_blank" rel="noreferrer">linkedin ↗</a><a href="https://github.com/guymgn" target="_blank" rel="noreferrer">github ↗</a></div>
       </section>
 
-      <footer><span>[guy]</span><span>senior product designer &amp; builder</span><span>2026</span></footer>
+      <footer><span>Guy Magen</span><span>Senior Product Designer &amp; Builder</span><span>2026</span></footer>
     </main>
   );
 }
