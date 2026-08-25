@@ -19,7 +19,7 @@ const work = [
 
 const building = [
   ["Teara", "A personal iOS app that turns travel bookings into one clear itinerary"],
-  ["Mentoring", "Helping designers grow through Startup Designers"],
+  ["Mentoring", "Mentoring designers through the “Startup Designers” Israeli community"],
   ["Side projects", "Building small tools for myself, learning 3D printing, and following ideas to see where they go."],
 ];
 
@@ -65,8 +65,8 @@ export default function Home() {
           <div className="windowBody">
             <p className="sectionCopy">I’m happiest when an idea becomes tangible. Lately, I’ve been using Claude and Codex to turn product ideas into working software, not just prototypes.</p>
             <div className="plainList">
-              {building.map(([name, description], index) => (
-                <div key={name}><span>0{index + 1}</span><strong>{name}</strong><p>{description}</p></div>
+              {building.map(([name, description]) => (
+                <div key={name}><strong>{name}</strong><p>{description}</p></div>
               ))}
             </div>
           </div>
