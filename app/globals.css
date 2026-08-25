@@ -78,7 +78,16 @@ h1 { margin:0; font-family:var(--font-geist-sans),sans-serif; font-size:clamp(48
 .contact>p:not(.sectionLabel) { margin:12px 0 42px; color:var(--muted); font-family:var(--font-geist-sans),sans-serif; font-size:25px; }
 .contactLinks { display:flex; gap:28px; font-size:12px; }
 .contactLinks a { color:var(--accent); border-bottom:1px solid currentColor; padding-bottom:4px; }
-footer { min-height:70px; display:flex; align-items:center; justify-content:space-between; color:var(--footer); font-family:var(--font-geist-mono),monospace; font-size:9px; text-transform:uppercase; letter-spacing:.08em; }
+footer { min-height:150px; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; color:var(--footer); font-family:var(--font-geist-mono),monospace; font-size:9px; text-transform:uppercase; letter-spacing:.08em; }
+.footerIdentity { display:flex; flex-direction:column; gap:8px; }
+.footerIdentity strong { color:var(--text); font-family:var(--font-geist-sans),sans-serif; font-size:14px; text-transform:none; letter-spacing:0; }
+.madeIn { margin:0; color:var(--muted); text-align:center; text-transform:none; letter-spacing:0; font-family:var(--font-geist-sans),sans-serif; font-size:12px; }
+.localTime { justify-self:end; display:grid; grid-template-columns:auto auto; column-gap:11px; text-align:right; }
+.localTime>span,.localTime>small { grid-column:1; color:var(--muted); font-size:8px; line-height:1.5; }
+.localTime strong { grid-column:2; grid-row:1; align-self:center; color:var(--text); font-size:11px; }
+.localTime small { grid-row:2; text-transform:uppercase; }
+.localTime p { grid-column:2; grid-row:2/4; align-self:end; margin:0; color:var(--text); font-size:11px; letter-spacing:.13em; white-space:nowrap; }
+.localTime i { margin:0 3px; color:var(--accent); font-style:normal; }
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -145,7 +154,8 @@ footer { min-height:70px; display:flex; align-items:center; justify-content:spac
   .windowBar { grid-template-columns:1fr auto; }
   .windowBar>span { text-align:right; }
   .windowBar small { display:none; }
-  footer span:nth-child(2) { display:none; }
+  footer { padding:34px 0; grid-template-columns:1fr auto; row-gap:28px; }
+  .madeIn { grid-column:1/-1; grid-row:2; text-align:left; }
 }
 
 @media (prefers-reduced-motion:reduce) {

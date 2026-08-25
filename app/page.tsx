@@ -1,5 +1,6 @@
 import { ThemeToggle } from "./ThemeToggle";
 import { DotField } from "./DotField";
+import { LocalTime } from "./LocalTime";
 
 const work = [
   {
@@ -94,7 +95,11 @@ export default function Home() {
         <div className="contactLinks"><a href="mailto:hi@guymagen.com">email ↗</a><a href="https://www.linkedin.com/in/guymagen/" target="_blank" rel="noreferrer">linkedin ↗</a><a href="https://github.com/guymgn" target="_blank" rel="noreferrer">github ↗</a></div>
       </section>
 
-      <footer><span>Guy Magen</span><span>Senior Product Designer &amp; Builder</span><span>2026</span></footer>
+      <footer>
+        <div className="footerIdentity"><strong>Guy Magen</strong><span>Senior Product Designer &amp; Builder</span></div>
+        <p className="madeIn">Made with ❤️ in Israel</p>
+        <LocalTime />
+      </footer>
     </main>
   );
 }
