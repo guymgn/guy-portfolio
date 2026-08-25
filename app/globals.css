@@ -54,7 +54,7 @@ h1 { margin:0; font-family:var(--font-geist-sans),sans-serif; font-size:clamp(48
 .windowDots i:nth-child(2) { background:#f4ba43; }
 .windowDots i:nth-child(3) { background:#55c96b; }
 .windowBody { padding:0; }
-.row { min-height:138px; padding:0 30px; display:grid; grid-template-columns:1.1fr 1.5fr auto 20px; align-items:center; gap:26px; border-bottom:1px solid var(--line); transition:background-color .2s ease,box-shadow .2s ease; }
+.row { min-height:138px; padding:0 30px; display:grid; grid-template-columns:1.1fr 1.5fr auto 20px; align-items:center; gap:26px; border-bottom:1px solid var(--line); transition:background-color .2s ease; }
 .row:last-child { border-bottom:0; }
 .row>div { display:flex; flex-direction:column; gap:7px; }
 .row strong { font-family:var(--font-geist-sans),sans-serif; font-size:25px; letter-spacing:-.03em; }
@@ -63,13 +63,13 @@ h1 { margin:0; font-family:var(--font-geist-sans),sans-serif; font-size:clamp(48
 .arrow { color:var(--accent); transition:transform .2s ease,opacity .2s ease; }
 
 @media (hover:hover) {
-  .row:hover { background:color-mix(in srgb,var(--accent) 5%,transparent); box-shadow:inset 3px 0 0 color-mix(in srgb,var(--accent) 55%,transparent); }
+  .row:hover { background:color-mix(in srgb,var(--accent) 5%,transparent); }
   .row:hover .arrow { transform:translate(2px,-2px); }
-  .plainList>div:hover { background:color-mix(in srgb,var(--accent) 5%,transparent); box-shadow:inset 3px 0 0 color-mix(in srgb,var(--accent) 55%,transparent); }
+  .plainList>div:hover { background:color-mix(in srgb,var(--accent) 5%,transparent); }
 }
 .sectionCopy { max-width:790px; margin:38px 30px 55px; font-family:var(--font-geist-sans),sans-serif; font-size:27px; line-height:1.35; letter-spacing:-.025em; }
 .plainList { border-top:1px solid var(--line); }
-.plainList>div { display:grid; grid-template-columns:48px 150px 1fr; gap:18px; padding:23px 30px; border-bottom:1px solid var(--line); align-items:baseline; transition:background-color .2s ease,box-shadow .2s ease; }
+.plainList>div { display:grid; grid-template-columns:48px 150px 1fr; gap:18px; padding:23px 30px; border-bottom:1px solid var(--line); align-items:baseline; transition:background-color .2s ease; }
 .plainList span { color:var(--muted); font-family:var(--font-geist-mono),monospace; font-size:10px; }
 .plainList strong { font-size:14px; color:var(--accent); }
 .plainList p { margin:0; color:var(--tertiary); font-family:var(--font-geist-sans),sans-serif; font-size:15px; }
