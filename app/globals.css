@@ -1,8 +1,6 @@
 @import "tailwindcss";
 
-@font-face { font-family:"Sofia Pro"; src:url('/fonts/SofiaPro-Regular.woff2') format('woff2'); font-style:normal; font-weight:400; font-display:swap; }
-@font-face { font-family:"Sofia Pro"; src:url('/fonts/SofiaPro-Medium.woff2') format('woff2'); font-style:normal; font-weight:500 600; font-display:swap; }
-@font-face { font-family:"Sofia Pro"; src:url('/fonts/SofiaPro-Bold.woff2') format('woff2'); font-style:normal; font-weight:700 900; font-display:swap; }
+@font-face { font-family:"DM Sans"; src:url('/fonts/DMSans-Variable.ttf') format('truetype'); font-style:normal; font-weight:100 1000; font-display:swap; }
 
 :root {
   color-scheme: dark light;
@@ -21,7 +19,7 @@
 }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; }
-body { margin:0; overflow-x:hidden; background:var(--bg); color:var(--text); font-family:"Sofia Pro",Arial,sans-serif; }
+body { margin:0; overflow-x:hidden; background:var(--bg); color:var(--text); font-family:"DM Sans",Arial,sans-serif; }
 a { color:inherit; text-decoration:none; }
 .siteShell { width:min(900px,calc(100% - 36px)); margin:auto; }
 nav { position:sticky; z-index:20; top:18px; width:max-content; max-width:100%; min-height:56px; margin:18px auto 0; padding:7px 9px; display:flex; align-items:center; gap:26px; border:1px solid color-mix(in srgb,var(--line) 80%,var(--text)); border-radius:18px; background:color-mix(in srgb,var(--panel) 88%,transparent); box-shadow:0 12px 36px rgba(0,0,0,.14); backdrop-filter:blur(18px); font-size:13px; color:var(--muted); }
@@ -47,14 +45,14 @@ section { padding:84px 0; border-bottom:1px solid var(--line); }
 .intro .sectionLabel { margin-bottom:18px; }
 h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-.06em; font-weight:600; }
 .heroWordmark { display:flex; justify-content:center; align-items:baseline; }
-.heroWordmark span { display:inline-block; min-width:.18em; transform-origin:50% 80%; animation:wordmark-wave 6.5s ease-in-out infinite; will-change:transform; }
+.heroWordmark span { display:inline-block; min-width:.18em; transform-origin:50% 80%; font-variation-settings:"opsz" 40,"wght" 600; animation:wordmark-wave 6.5s ease-in-out infinite; will-change:transform,font-variation-settings; }
 .heroWordmark i { width:.22em; }
 .heroWordmark:hover span { animation-duration:2.8s; }
 @keyframes wordmark-wave {
-  0%,100% { transform:translateY(0) scaleX(1) skewX(0deg); }
-  22% { transform:translateY(-1px) scaleX(1.06) skewX(-1deg); }
-  48% { transform:translateY(1px) scaleX(.94) skewX(1.5deg); }
-  72% { transform:translateY(-.5px) scaleX(1.025) skewX(-.5deg); }
+  0%,100% { font-variation-settings:"opsz" 40,"wght" 600; transform:translateY(0) scaleX(1) skewX(0deg); }
+  22% { font-variation-settings:"opsz" 28,"wght" 760; transform:translateY(-1px) scaleX(1.045) skewX(-1deg); }
+  48% { font-variation-settings:"opsz" 14,"wght" 470; transform:translateY(1px) scaleX(.96) skewX(1deg); }
+  72% { font-variation-settings:"opsz" 34,"wght" 680; transform:translateY(-.5px) scaleX(1.02) skewX(-.5deg); }
 }
 .role { margin:15px 0 0; color:var(--accent); font-size:15px; }
 .lede { max-width:760px; margin:52px 0 22px; font-size:clamp(27px,4vw,39px); line-height:1.12; letter-spacing:-.035em; }
