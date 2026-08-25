@@ -28,10 +28,9 @@ nav { height:72px; display:grid; grid-template-columns:1fr auto 1fr; align-items
 nav .navLinks { display:flex; gap:25px; }
 .navActions { display:flex; align-items:center; justify-content:flex-end; gap:18px; }
 nav a:hover,.home { color:var(--text); }
-.themeToggle { position:relative; width:58px; height:28px; padding:3px 6px; border:1px solid var(--line); border-radius:99px; background:var(--panel); color:var(--muted); display:flex; align-items:center; justify-content:space-between; cursor:pointer; transition:border-color .2s ease,background .2s ease; }
-.themeToggle:hover { border-color:var(--muted); }
-.themeToggle span { font-size:10px; line-height:1; }
-.themeToggle i { position:absolute; width:18px; height:18px; border-radius:50%; background:var(--accent); transform:translateX(12px); transition:transform .25s ease; }
+.themeToggle { width:34px; height:34px; padding:0; border:1px solid var(--line); border-radius:0; background:transparent; color:var(--text); display:grid; place-items:center; cursor:pointer; transition:border-color .2s ease,background-color .2s ease; }
+.themeToggle:hover { border-color:var(--muted); background:var(--panel); }
+.themeToggle i { width:17px; height:17px; border:1.5px solid currentColor; border-radius:50%; background:linear-gradient(90deg,currentColor 50%,transparent 50%); }
 section { padding:84px 0; border-bottom:1px solid var(--line); }
 .intro { position:relative; isolation:isolate; text-align:center; }
 .intro>*:not(.gridField) { position:relative; z-index:1; }
@@ -111,7 +110,6 @@ footer { min-height:150px; display:grid; grid-template-columns:1fr auto 1fr; ali
     --grid-node:rgba(24,24,23,.11);
     --grid-runner:#7776FF;
   }
-  .themeToggle i { transform:translateX(-12px); }
 }
 
 :root[data-theme="light"] {
@@ -141,8 +139,6 @@ footer { min-height:150px; display:grid; grid-template-columns:1fr auto 1fr; ali
   --grid-node:rgba(255,255,255,.075);
   --grid-runner:#7776FF;
 }
-
-:root[data-theme="light"] .themeToggle i { transform:translateX(-12px); }
 
 @media (max-width:680px) {
   nav { grid-template-columns:1fr auto; }
