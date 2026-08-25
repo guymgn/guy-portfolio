@@ -42,7 +42,7 @@ export function GridField() {
         speed: 24 + Math.random() * 34,
         direction,
         delay: Math.random() * 5,
-        opacity: 0.25 + Math.random() * 0.45,
+        opacity: 0.14 + Math.random() * 0.24,
       };
     };
 
@@ -90,8 +90,10 @@ export function GridField() {
 
       if (!reducedMotion.matches) {
         context.strokeStyle = runnerColor;
+        context.shadowColor = runnerColor;
+        context.shadowBlur = 9;
         context.lineCap = "round";
-        context.lineWidth = 1;
+        context.lineWidth = 0.8;
         runners.forEach((runner, index) => {
           if (runner.delay > 0) {
             runner.delay -= delta;
@@ -117,6 +119,7 @@ export function GridField() {
             runners[index] = makeRunner();
           }
         });
+        context.shadowBlur = 0;
       }
 
       frame = requestAnimationFrame(draw);
