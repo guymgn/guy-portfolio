@@ -42,7 +42,7 @@ nav a:hover { color:var(--text); }
 section { padding:84px 0; border-bottom:1px solid var(--line); }
 .intro { position:relative; isolation:isolate; text-align:center; border-bottom:0; }
 .intro>*:not(.gridField) { position:relative; z-index:1; }
-.gridField { position:absolute; z-index:0; inset:0 auto 0 50%; width:100vw; height:100%; transform:translateX(-50%); pointer-events:none; mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.88) 68%,transparent 100%); }
+.gridField { position:absolute; z-index:0; top:-74px; bottom:0; left:50%; width:100vw; height:calc(100% + 74px); transform:translateX(-50%); pointer-events:none; mask-image:linear-gradient(to bottom,#000 0%,rgba(0,0,0,.88) 68%,transparent 100%); }
 .sectionLabel { margin:0 0 42px; color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:.12em; }
 .intro .sectionLabel { margin-bottom:18px; }
 h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-.06em; font-weight:600; }
