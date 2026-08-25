@@ -65,10 +65,11 @@ h1 { margin:0; font-family:var(--font-geist-sans),sans-serif; font-size:clamp(48
 @media (hover:hover) {
   .row:hover { background:color-mix(in srgb,var(--accent) 5%,transparent); box-shadow:inset 3px 0 0 color-mix(in srgb,var(--accent) 55%,transparent); }
   .row:hover .arrow { transform:translate(2px,-2px); }
+  .plainList>div:hover { background:color-mix(in srgb,var(--accent) 5%,transparent); box-shadow:inset 3px 0 0 color-mix(in srgb,var(--accent) 55%,transparent); }
 }
 .sectionCopy { max-width:790px; margin:38px 30px 55px; font-family:var(--font-geist-sans),sans-serif; font-size:27px; line-height:1.35; letter-spacing:-.025em; }
 .plainList { border-top:1px solid var(--line); }
-.plainList>div { display:grid; grid-template-columns:48px 150px 1fr; gap:18px; padding:23px 30px; border-bottom:1px solid var(--line); align-items:baseline; }
+.plainList>div { display:grid; grid-template-columns:48px 150px 1fr; gap:18px; padding:23px 30px; border-bottom:1px solid var(--line); align-items:baseline; transition:background-color .2s ease,box-shadow .2s ease; }
 .plainList span { color:var(--muted); font-family:var(--font-geist-mono),monospace; font-size:10px; }
 .plainList strong { font-size:14px; color:var(--accent); }
 .plainList p { margin:0; color:var(--tertiary); font-family:var(--font-geist-sans),sans-serif; font-size:15px; }
