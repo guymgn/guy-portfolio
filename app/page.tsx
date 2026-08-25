@@ -33,8 +33,8 @@ export default function Home() {
       <section className="intro" id="top">
         <p className="sectionLabel">Hello, I’m Guy</p>
         <div className="identity">
-          <div className="portrait" aria-hidden="true">
-            <span>G</span><span>M</span>
+          <div className="profilePicture">
+            <img src="/profile-art.svg" alt="Illustrated portrait of Guy Magen" />
           </div>
           <div>
             <h1>Guy Magen</h1>
