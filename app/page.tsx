@@ -1,74 +1,90 @@
-const projects = [
-  { company: "Stigg", title: "Making complex pricing systems feel simple", detail: "Product strategy, design systems and platform UX", accent: "green" },
-  { company: "Finout", title: "Turning cloud costs into clear decisions", detail: "Product design, data visualization and workflows", accent: "blue" },
+const work = [
+  {
+    company: "Stigg",
+    role: "Lead Product Designer",
+    description: "Pricing, packaging and entitlements for modern SaaS teams.",
+    period: "2023 to 2026",
+  },
+  {
+    company: "Finout",
+    role: "Senior Product Designer",
+    description: "Cloud cost management made clearer and easier to act on.",
+    period: "2022 to 2023",
+  },
+];
+
+const building = [
+  ["Teara", "A thoughtful companion for better conversations"],
+  ["Experiments", "Small tools built with AI, code, motion and 3D"],
+  ["Mentoring", "Helping designers grow through Startup Designers"],
 ];
 
 export default function Home() {
   return (
-    <main>
-      <nav className="nav shell">
-        <a className="brand" href="#top" aria-label="Guy Magen, home"><span>GM</span></a>
-        <div className="navLinks"><a href="#work">Work</a><a href="#build">Things I build</a><a href="#about">About</a></div>
-        <a className="sayHi" href="mailto:hi@guymagen.com">Say hi</a>
+    <main className="siteShell">
+      <nav>
+        <a className="home" href="#top">~/guymagen</a>
+        <div><a href="#work">work</a><a href="#building">building</a><a href="#about">about</a></div>
+        <a href="mailto:hi@guymagen.com">contact</a>
       </nav>
-      <section className="hero shell" id="top">
-        <div className="eyebrow"><i /> Senior Product Designer &amp; Builder</div>
-        <h1>I design complex products and build what comes next.</h1>
-        <div className="heroFoot">
-          <p>I’m Guy. I turn technical systems into products that feel clear, useful and genuinely good to use.</p>
-          <a className="workLink" href="#work">See selected work <span>↘</span></a>
+
+      <section className="intro" id="top">
+        <p className="command">$ whoami</p>
+        <div className="identity">
+          <div className="portrait" aria-hidden="true">
+            <span>┌────────┐</span><span>│ GM / 08│</span><span>│ DESIGN │</span><span>│ + BUILD│</span><span>└────────┘</span>
+          </div>
+          <div>
+            <h1>Guy Magen</h1>
+            <p className="role">Senior Product Designer &amp; Builder</p>
+          </div>
         </div>
-        <div className="signal" aria-hidden="true">
-          <div className="signalTrack"><span /><span /><span /><span /><span /><span /><span /></div>
-          <b>Ideas</b><b>Systems</b><b>Products</b>
-        </div>
+        <p className="lede">I design complex products and build ideas into things people can actually use.</p>
+        <p className="bio">For the past 12+ years, I’ve worked with technical teams to make complicated systems feel clear. I care about the whole thing, from understanding the problem to shaping the details and building a working version.</p>
+        <div className="status"><span><i /> Based in Israel</span><span>Available for the right team</span></div>
       </section>
-      <section className="work shell" id="work">
-        <header className="sectionHead"><span>01 / Selected work</span><p>A few problems I’ve helped untangle.</p></header>
-        <div className="projectGrid">
-          {projects.map((project, index) => (
-            <a className={`project ${project.accent}`} key={project.company} href="https://www.figma.com/deck/Uv4ebbkIVfmdblK58TaueW" target="_blank" rel="noreferrer">
-              <div className="projectTop"><span>0{index + 1}</span><span>Case study ↗</span></div>
-              <div className="projectVisual">
-                <div className="miniWindow"><div className="dots"><i /><i /><i /></div><div className="windowContent"><span className="line long" /><span className="line" /><div className="blocks"><i /><i /><i /></div></div></div>
-              </div>
-              <div className="projectCopy"><span>{project.company}</span><h2>{project.title}</h2><p>{project.detail}</p></div>
+
+      <section id="work">
+        <p className="command">$ ls selected-work/</p>
+        <div className="rows">
+          {work.map((item) => (
+            <a className="row" href="https://www.figma.com/deck/Uv4ebbkIVfmdblK58TaueW" target="_blank" rel="noreferrer" key={item.company}>
+              <div><strong>{item.company}</strong><span>{item.role}</span></div>
+              <p>{item.description}</p>
+              <span className="period">{item.period}</span>
+              <span className="arrow">↗</span>
             </a>
           ))}
         </div>
       </section>
-      <section className="build shell" id="build">
-        <div><span className="sectionLabel">02 / Things I build</span><h2>Curiosity usually turns into something.</h2></div>
-        <div className="buildCard"><span className="prompt">guy@studio ~ %</span><p>Prototypes, tiny tools, motion studies and experiments with AI.</p><a href="https://github.com/guymgn" target="_blank" rel="noreferrer">Open the workshop ↗</a></div>
-      </section>
-      <section className="about shell" id="about">
-        <div className="aboutIntro">
-          <span className="sectionLabel">03 / A little about me</span>
-          <p>I’ve spent more than 12 years making complicated things easier to understand. I like getting close to the details, asking a lot of questions and building enough of the idea to know if it actually works.</p>
-        </div>
-        <div className="capabilities">
-          <div><span>Design</span><p>Product strategy<br />Complex systems<br />Interaction design<br />Design systems</p></div>
-          <div><span>Build</span><p>Working prototypes<br />Front-end experiments<br />Motion and 3D<br />AI-assisted products</p></div>
-          <div><span>Share</span><p>Team leadership<br />Design mentoring<br />Clear storytelling<br />Good playlists</p></div>
+
+      <section id="building">
+        <p className="command">$ cat what-i-build.txt</p>
+        <p className="sectionCopy">I’m happiest when an idea becomes tangible. That might be a coded prototype, a motion study, a tiny product or a new way to explain how something works.</p>
+        <div className="plainList">
+          {building.map(([name, description], index) => (
+            <div key={name}><span>0{index + 1}</span><strong>{name}</strong><p>{description}</p></div>
+          ))}
         </div>
       </section>
-      <section className="proof shell">
-        <p>Previously designing at</p>
-        <div><b>Stigg</b><b>Finout</b><b>Startup Designers</b></div>
-        <span>Mentoring designers since 2019</span>
-      </section>
-      <footer>
-        <div className="footerInner shell">
-          <span>Have a good problem?</span>
-          <h2>Let’s make something useful.</h2>
-          <div className="footerLinks">
-            <a href="mailto:hi@guymagen.com">hi@guymagen.com ↗</a>
-            <a href="https://www.linkedin.com/in/guymagen/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
-            <a href="https://github.com/guymgn" target="_blank" rel="noreferrer">GitHub ↗</a>
-          </div>
-          <div className="footerBottom"><span>Guy Magen © 2026</span><span>Designed and built with curiosity in Israel</span></div>
+
+      <section id="about">
+        <p className="command">$ cat about.txt</p>
+        <div className="aboutGrid">
+          <p>I like messy problems, thoughtful products and people who care about their craft. Outside of product work, I mentor designers, experiment with new tools and keep finding reasons to make things.</p>
+          <div><span>Good at</span><p>Product strategy<br />Systems thinking<br />Interaction design<br />Prototyping<br />Design systems</p></div>
+          <div><span>Also into</span><p>AI tools<br />Motion<br />3D<br />Front-end<br />Good coffee</p></div>
         </div>
-      </footer>
+      </section>
+
+      <section className="contact">
+        <p className="command">$ open contact</p>
+        <h2>Have an interesting problem?</h2>
+        <p>Tell me about it.</p>
+        <div className="contactLinks"><a href="mailto:hi@guymagen.com">email ↗</a><a href="https://www.linkedin.com/in/guymagen/" target="_blank" rel="noreferrer">linkedin ↗</a><a href="https://github.com/guymgn" target="_blank" rel="noreferrer">github ↗</a></div>
+      </section>
+
+      <footer><span>[guy]</span><span>senior product designer &amp; builder</span><span>2026</span></footer>
     </main>
   );
 }
