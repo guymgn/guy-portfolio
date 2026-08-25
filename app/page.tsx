@@ -46,27 +46,33 @@ export default function Home() {
         <div className="status"><span><i /> Based in Israel</span><span>Available for the right team</span></div>
       </section>
 
-      <section id="work">
-        <p className="sectionLabel">Selected work</p>
-        <div className="rows">
-          {work.map((item) => (
-            <a className="row" href="https://www.figma.com/deck/Uv4ebbkIVfmdblK58TaueW" target="_blank" rel="noreferrer" key={item.company}>
-              <div><strong>{item.company}</strong><span>{item.role}</span></div>
-              <p>{item.description}</p>
-              <span className="period">{item.period}</span>
-              <span className="arrow">↗</span>
-            </a>
-          ))}
+      <section className="windowSection" id="work">
+        <div className="browserWindow">
+          <div className="windowBar"><div className="windowDots" aria-hidden="true"><i /><i /><i /></div><span>Selected work</span><small>2 projects</small></div>
+          <div className="windowBody rows">
+            {work.map((item) => (
+              <a className="row" href="https://www.figma.com/deck/Uv4ebbkIVfmdblK58TaueW" target="_blank" rel="noreferrer" key={item.company}>
+                <div><strong>{item.company}</strong><span>{item.role}</span></div>
+                <p>{item.description}</p>
+                <span className="period">{item.period}</span>
+                <span className="arrow">↗</span>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section id="building">
-        <p className="sectionLabel">What I’m building</p>
-        <p className="sectionCopy">I’m happiest when an idea becomes tangible. Lately, I’ve been using Claude and Codex to turn product ideas into working software, not just prototypes.</p>
-        <div className="plainList">
-          {building.map(([name, description], index) => (
-            <div key={name}><span>0{index + 1}</span><strong>{name}</strong><p>{description}</p></div>
-          ))}
+      <section className="windowSection" id="building">
+        <div className="browserWindow">
+          <div className="windowBar"><div className="windowDots" aria-hidden="true"><i /><i /><i /></div><span>What I’m building</span><small>Updated recently</small></div>
+          <div className="windowBody">
+            <p className="sectionCopy">I’m happiest when an idea becomes tangible. Lately, I’ve been using Claude and Codex to turn product ideas into working software, not just prototypes.</p>
+            <div className="plainList">
+              {building.map(([name, description], index) => (
+                <div key={name}><span>0{index + 1}</span><strong>{name}</strong><p>{description}</p></div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
