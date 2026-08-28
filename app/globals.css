@@ -98,7 +98,10 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
 .aboutGrid span { color:var(--accent); font-size:10px; text-transform:uppercase; letter-spacing:.08em; }
 .aboutGrid div p { color:var(--tertiary); font-size:14px; line-height:1.75; }
 .contactFooter { padding:84px 0 38px; color:var(--footer); }
-.contactMain h2 { margin:0; color:var(--text); font-size:clamp(40px,6vw,64px); line-height:1; letter-spacing:-.055em; text-shadow:0 0 18px color-mix(in srgb,var(--accent) 20%,transparent),0 0 42px color-mix(in srgb,var(--accent) 9%,transparent); }
+.contactMain h2 { margin:0; color:var(--text); font-size:clamp(40px,6vw,64px); line-height:1; letter-spacing:-.055em; }
+.contactWordmark { display:flex; flex-wrap:wrap; column-gap:.2em; }
+.contactWord { display:flex; white-space:nowrap; }
+.contactLetter { display:inline-block; transform-origin:50% 80%; text-shadow:0 0 18px color-mix(in srgb,var(--accent) 20%,transparent),0 0 42px color-mix(in srgb,var(--accent) 9%,transparent); font-variation-settings:"opsz" 40,"wght" 650; animation:wordmark-wave 6.5s ease-in-out infinite; will-change:transform,font-variation-settings; }
 .contactMain>p:not(.sectionLabel) { margin:12px 0 42px; color:var(--muted); font-size:25px; }
 .contactLinks { display:flex; gap:28px; font-size:12px; }
 .contactLinks a { color:var(--accent); border-bottom:1px solid currentColor; padding-bottom:4px; }
@@ -180,5 +183,5 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
 
 @media (prefers-reduced-motion:reduce) {
   .logoMark,.logoMark span { transition:none; }
-  .heroWordmark span { animation:none; }
+  .heroWordmark span,.contactLetter { animation:none; }
 }

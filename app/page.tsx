@@ -23,6 +23,8 @@ const building = [
   { name: "Side projects", description: "Building small tools for myself, learning 3D printing, and following ideas to see where they go. Always learning something new." },
 ];
 
+const contactTitle = "Have an interesting problem?";
+
 export default function Home() {
   return (
     <main className="siteShell">
@@ -101,7 +103,15 @@ export default function Home() {
       <footer className="contactFooter" id="contact">
         <div className="contactMain">
           <p className="sectionLabel">Let’s talk</p>
-          <h2>Have an interesting problem?</h2>
+          <h2 className="contactWordmark" aria-label={contactTitle}>
+            {contactTitle.split(" ").map((word, wordIndex) => (
+              <span className="contactWord" aria-hidden="true" key={word}>
+                {word.split("").map((letter, letterIndex) => (
+                  <span className="contactLetter" key={`${letter}-${letterIndex}`} style={{ animationDelay: `-${(wordIndex * 0.7 + letterIndex * 0.22).toFixed(2)}s` }}>{letter}</span>
+                ))}
+              </span>
+            ))}
+          </h2>
           <p>Tell me about it.</p>
           <div className="contactLinks"><a href="mailto:hi@guymagen.com">email ↗</a><a href="https://www.linkedin.com/in/guymagen/" target="_blank" rel="noreferrer">linkedin ↗</a><a href="https://github.com/guymgn" target="_blank" rel="noreferrer">github ↗</a></div>
         </div>
