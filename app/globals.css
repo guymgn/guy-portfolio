@@ -98,7 +98,7 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
 .aboutGrid span { color:var(--accent); font-size:10px; text-transform:uppercase; letter-spacing:.08em; }
 .aboutGrid div p { color:var(--tertiary); font-size:14px; line-height:1.75; }
 .contactFooter { padding:84px 0 38px; color:var(--footer); }
-.contactMain h2 { margin:0; color:var(--text); font-size:clamp(40px,6vw,64px); line-height:1; letter-spacing:-.055em; }
+.contactMain h2 { margin:0; color:var(--text); font-size:clamp(38px,5.5vw,58px); line-height:1; letter-spacing:-.055em; }
 .contactWordmark { display:flex; flex-wrap:wrap; column-gap:.2em; }
 .contactWord { display:flex; white-space:nowrap; }
 .contactLetter { display:inline-block; transform-origin:50% 80%; text-shadow:0 0 18px color-mix(in srgb,var(--accent) 20%,transparent),0 0 42px color-mix(in srgb,var(--accent) 9%,transparent); font-variation-settings:"opsz" 40,"wght" 650; animation:wordmark-wave 6.5s ease-in-out infinite; will-change:transform,font-variation-settings; }
