@@ -21,7 +21,7 @@ export function FloatingNav({ projectName }: { projectName?: string }) {
       ) : (
         <>
           <a className="home" href="#top" aria-label="Guy Magen, back to top">
-            <span className="navWordmark">Guy Magen</span>
+            <span className="navWordmark">GM</span>
           </a>
           <div className="navLinks"><a href="#work">work</a><a href="#building">building</a><a href="#about">about</a></div>
         </>
