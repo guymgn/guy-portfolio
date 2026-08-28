@@ -8,12 +8,14 @@ const work = [
     role: "Lead Product Designer",
     description: "Pricing, packaging and entitlements for modern SaaS teams.",
     period: "2023 to 2026",
+    href: "/stigg",
   },
   {
     company: "Finout",
     role: "Senior Product Designer",
     description: "Cloud cost management made clearer and easier to act on.",
     period: "2022 to 2023",
+    href: "https://www.figma.com/slides/Uv4ebbkIVfmdblK58TaueW",
   },
 ];
 
@@ -62,7 +64,7 @@ export default function Home() {
           <div className="windowBar"><div className="windowDots" aria-hidden="true"><i /><i /><i /></div><span>Selected projects</span><small>2 projects</small></div>
           <div className="windowBody rows">
             {work.map((item) => (
-              <a className="row" href="https://www.figma.com/deck/Uv4ebbkIVfmdblK58TaueW" target="_blank" rel="noreferrer" key={item.company}>
+              <a className="row" href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined} key={item.company}>
                 <div><strong>{item.company}</strong><span>{item.role}</span></div>
                 <p>{item.description}</p>
                 <span className="period">{item.period}</span>
