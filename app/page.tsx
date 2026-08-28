@@ -1,6 +1,6 @@
-import { ThemeToggle } from "./ThemeToggle";
 import { LocalTime } from "./LocalTime";
 import { GridField } from "./GridField";
+import { FloatingNav } from "./FloatingNav";
 
 const work = [
   {
@@ -30,13 +30,7 @@ const contactTitle = "Have an interesting problem?";
 export default function Home() {
   return (
     <main className="siteShell">
-      <nav>
-        <a className="home" href="#top" aria-label="Guy Magen, back to top">
-          <span className="logoMark" aria-hidden="true"><span className="logoInitial">G</span><span className="logoWord">Guy</span></span>
-        </a>
-        <div className="navLinks"><a href="#work">work</a><a href="#building">building</a><a href="#about">about</a></div>
-        <div className="navActions"><ThemeToggle /></div>
-      </nav>
+      <FloatingNav />
 
       <section className="intro" id="top">
         <GridField />

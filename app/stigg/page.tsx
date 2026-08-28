@@ -1,4 +1,4 @@
-import { ThemeToggle } from "../ThemeToggle";
+import { FloatingNav } from "../FloatingNav";
 
 const highlights = [
   ["0 to 1 design system", "Built the design system from scratch to improve consistency and development speed."],
@@ -14,10 +14,7 @@ function Placeholder({ label }: { label: string }) {
 export default function StiggPage() {
   return (
     <main className="caseShell">
-      <nav className="caseNav">
-        <span className="caseBreadcrumb"><a href="/">Guy Magen</a><i>/</i><strong>Stigg</strong></span>
-        <ThemeToggle />
-      </nav>
+      <FloatingNav projectName="Stigg" />
 
       <header className="caseHero">
         <p className="sectionLabel">Stigg · 2023 to 2026</p>
