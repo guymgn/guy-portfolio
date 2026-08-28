@@ -33,7 +33,7 @@ export default function Home() {
           <span className="logoMark" aria-hidden="true"><span className="logoInitial">G</span><span className="logoWord">Guy</span></span>
         </a>
         <div className="navLinks"><a href="#work">work</a><a href="#building">building</a><a href="#about">about</a></div>
-        <div className="navActions"><a href="mailto:hi@guymagen.com">contact</a><ThemeToggle /></div>
+        <div className="navActions"><ThemeToggle /></div>
       </nav>
 
       <section className="intro" id="top">
