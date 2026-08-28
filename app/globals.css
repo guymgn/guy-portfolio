@@ -32,13 +32,7 @@ nav .navLinks { display:flex; gap:25px; }
 .navActions { margin-left:auto; display:flex; align-items:center; justify-content:flex-end; gap:18px; }
 nav a:hover { color:var(--text); }
 .home { display:block; color:var(--text); }
-.logoMark { position:relative; width:34px; height:34px; display:block; overflow:hidden; border-radius:11px 17px 13px 16px; background:var(--text); color:var(--bg); transition:width .4s cubic-bezier(.22,1,.36,1),border-radius .4s ease,transform .4s ease; }
-.logoMark span { position:absolute; inset:0; display:grid; place-items:center; font-weight:700; line-height:1; transition:opacity .2s ease,transform .4s cubic-bezier(.22,1,.36,1); }
-.logoInitial { font-size:12px; letter-spacing:-.06em; }
-.logoWord { opacity:0; font-size:14px; letter-spacing:-.02em; transform:translateX(-8px); }
-.home:hover .logoMark,.home:focus-visible .logoMark { width:70px; border-radius:17px 12px 17px 13px; transform:rotate(-1deg); }
-.home:hover .logoInitial,.home:focus-visible .logoInitial { opacity:0; transform:translateX(8px); }
-.home:hover .logoWord,.home:focus-visible .logoWord { opacity:1; transform:translateX(0); }
+.navWordmark { padding-left:7px; display:block; font-family:"Hornbill",serif; font-size:20px; font-variation-settings:"wght" 760; letter-spacing:-.025em; line-height:1; white-space:nowrap; }
 .themeToggle { width:34px; height:34px; padding:0; border:0; border-radius:9px; background:transparent; color:var(--text); display:grid; place-items:center; cursor:pointer; transition:background-color .2s ease; }
 .themeToggle:hover { background:color-mix(in srgb,var(--text) 5%,transparent); }
 .themeToggle i { width:17px; height:17px; border:1.5px solid currentColor; border-radius:50%; background:linear-gradient(90deg,currentColor 50%,transparent 50%); }
@@ -246,7 +240,6 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
 
 @media (prefers-reduced-motion:reduce) {
   nav { transition:none; }
-  .logoMark,.logoMark span { transition:none; }
   .heroWordmark span,.contactLetter { animation:none; }
   .status i { animation:none; }
 }
