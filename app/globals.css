@@ -35,8 +35,8 @@ nav a:hover { color:var(--text); }
 .home:hover .logoMark,.home:focus-visible .logoMark { width:70px; border-radius:17px 12px 17px 13px; transform:rotate(-1deg); }
 .home:hover .logoInitial,.home:focus-visible .logoInitial { opacity:0; transform:translateX(8px); }
 .home:hover .logoWord,.home:focus-visible .logoWord { opacity:1; transform:translateX(0); }
-.themeToggle { width:34px; height:34px; padding:0; border:1px solid var(--line); border-radius:0; background:transparent; color:var(--text); display:grid; place-items:center; cursor:pointer; transition:border-color .2s ease,background-color .2s ease; }
-.themeToggle:hover { border-color:var(--muted); background:var(--panel); }
+.themeToggle { width:34px; height:34px; padding:0; border:0; border-radius:9px; background:transparent; color:var(--text); display:grid; place-items:center; cursor:pointer; transition:background-color .2s ease; }
+.themeToggle:hover { background:color-mix(in srgb,var(--text) 5%,transparent); }
 .themeToggle i { width:17px; height:17px; border:1.5px solid currentColor; border-radius:50%; background:linear-gradient(90deg,currentColor 50%,transparent 50%); }
 section { padding:84px 0; border-bottom:1px solid var(--line); }
 .intro { position:relative; isolation:isolate; text-align:center; border-bottom:0; }
