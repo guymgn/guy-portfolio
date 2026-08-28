@@ -106,9 +106,8 @@ export default function Home() {
           <div className="contactLinks"><a href="mailto:hi@guymagen.com">email ↗</a><a href="https://www.linkedin.com/in/guymagen/" target="_blank" rel="noreferrer">linkedin ↗</a><a href="https://github.com/guymgn" target="_blank" rel="noreferrer">github ↗</a></div>
         </div>
         <div className="footerMeta">
-          <div className="footerIdentity"><strong>Guy Magen</strong><span>Senior Product Designer &amp; Builder</span></div>
-          <p className="madeIn">Made with ❤️ in Israel</p>
           <LocalTime />
+          <p className="madeIn">Made with ❤️ in Israel</p>
         </div>
       </footer>
     </main>
