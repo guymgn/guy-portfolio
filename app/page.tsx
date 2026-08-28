@@ -18,9 +18,9 @@ const work = [
 ];
 
 const building = [
-  ["Teara", "A personal iOS app that turns travel bookings into one clear itinerary"],
-  ["Mentoring", "Mentoring designers through the “Startup Designers” Israeli community"],
-  ["Side projects", "Building small tools for myself, learning 3D printing, and following ideas to see where they go. Always learning something new."],
+  { name: "Teara", description: "A personal iOS app that turns travel bookings into one clear itinerary", href: "https://www.teara.io" },
+  { name: "Mentoring", description: "Mentoring designers through the “Startup Designers” Israeli community" },
+  { name: "Side projects", description: "Building small tools for myself, learning 3D printing, and following ideas to see where they go. Always learning something new." },
 ];
 
 export default function Home() {
@@ -77,8 +77,12 @@ export default function Home() {
           <div className="windowBody">
             <p className="sectionCopy">A mix of products, people, and ideas I care about.</p>
             <div className="plainList">
-              {building.map(([name, description]) => (
-                <div key={name}><strong>{name}</strong><p>{description}</p></div>
+              {building.map((item) => item.href ? (
+                <a href={item.href} target="_blank" rel="noreferrer" key={item.name}>
+                  <strong>{item.name}</strong><p>{item.description}</p><span className="buildingArrow">↗</span>
+                </a>
+              ) : (
+                <div key={item.name}><strong>{item.name}</strong><p>{item.description}</p></div>
               ))}
             </div>
           </div>
