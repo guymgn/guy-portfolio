@@ -98,17 +98,18 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="contact">
-        <p className="sectionLabel">Let’s talk</p>
-        <h2>Have an interesting problem?</h2>
-        <p>Tell me about it.</p>
-        <div className="contactLinks"><a href="mailto:hi@guymagen.com">email ↗</a><a href="https://www.linkedin.com/in/guymagen/" target="_blank" rel="noreferrer">linkedin ↗</a><a href="https://github.com/guymgn" target="_blank" rel="noreferrer">github ↗</a></div>
-      </section>
-
-      <footer>
-        <div className="footerIdentity"><strong>Guy Magen</strong><span>Senior Product Designer &amp; Builder</span></div>
-        <p className="madeIn">Made with ❤️ in Israel</p>
-        <LocalTime />
+      <footer className="contactFooter" id="contact">
+        <div className="contactMain">
+          <p className="sectionLabel">Let’s talk</p>
+          <h2>Have an interesting problem?</h2>
+          <p>Tell me about it.</p>
+          <div className="contactLinks"><a href="mailto:hi@guymagen.com">email ↗</a><a href="https://www.linkedin.com/in/guymagen/" target="_blank" rel="noreferrer">linkedin ↗</a><a href="https://github.com/guymgn" target="_blank" rel="noreferrer">github ↗</a></div>
+        </div>
+        <div className="footerMeta">
+          <div className="footerIdentity"><strong>Guy Magen</strong><span>Senior Product Designer &amp; Builder</span></div>
+          <p className="madeIn">Made with ❤️ in Israel</p>
+          <LocalTime />
+        </div>
       </footer>
     </main>
   );
