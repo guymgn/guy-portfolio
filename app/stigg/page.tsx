@@ -16,7 +16,7 @@ export default function StiggPage() {
     <main className="caseShell">
       <nav className="caseNav">
         <a className="caseBack" href="/">← Back</a>
-        <span>Stigg case study</span>
+        <span className="caseBreadcrumb"><a href="/">Guy Magen</a><i>/</i><strong>Stigg</strong></span>
         <ThemeToggle />
       </nav>
 
