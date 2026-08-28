@@ -27,6 +27,9 @@ a { color:inherit; text-decoration:none; }
 nav { position:fixed; z-index:20; top:18px; left:50%; width:min(560px,calc(100% - 36px)); min-height:56px; margin:0; padding:7px 9px; display:flex; align-items:center; gap:26px; overflow:hidden; border:1px solid color-mix(in srgb,var(--text) 14%,transparent); border-radius:18px; background:linear-gradient(135deg,color-mix(in srgb,var(--panel) 62%,transparent),color-mix(in srgb,var(--bg) 42%,transparent)); box-shadow:inset 0 1px 0 color-mix(in srgb,var(--text) 14%,transparent),inset 0 -1px 0 color-mix(in srgb,var(--text) 5%,transparent),0 16px 44px color-mix(in srgb,#000 16%,transparent); -webkit-backdrop-filter:blur(28px) saturate(165%); backdrop-filter:blur(28px) saturate(165%); font-size:13px; color:var(--muted); transition:opacity .32s ease,transform .42s cubic-bezier(.22,1,.36,1); }
 nav::before { content:""; position:absolute; inset:1px; z-index:0; pointer-events:none; border-radius:16px; background:linear-gradient(115deg,color-mix(in srgb,var(--text) 10%,transparent),transparent 34%,transparent 66%,color-mix(in srgb,var(--accent) 8%,transparent)); opacity:.8; }
 nav>* { position:relative; z-index:1; }
+.topNav { position:absolute; z-index:5; width:min(900px,calc(100% - 36px)); overflow:visible; border:0; background:transparent; box-shadow:none; -webkit-backdrop-filter:none; backdrop-filter:none; transform:translate(-50%,0); transition:none; }
+.topNav.caseNav { width:min(1100px,calc(100% - 40px)); }
+.topNav::before { display:none; }
 .navHidden { opacity:0; transform:translate(-50%,-18px); pointer-events:none; }
 .navVisible { opacity:1; transform:translate(-50%,0); }
 nav .navLinks { display:flex; gap:25px; }

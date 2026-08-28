@@ -15,13 +15,17 @@ export function ThemeToggle() {
     const initial = stored === "light" || stored === "dark" ? stored : preferred;
     document.documentElement.dataset.theme = initial;
     setTheme(initial);
+    const syncTheme = () => setTheme(document.documentElement.dataset.theme as Theme);
+    window.addEventListener("themechange", syncTheme);
+    return () => window.removeEventListener("themechange", syncTheme);
   }, []);
 
   function toggleTheme() {
-    const next = theme === "light" ? "dark" : "light";
+    const current = document.documentElement.dataset.theme as Theme;
+    const next = current === "light" ? "dark" : "light";
     document.documentElement.dataset.theme = next;
     window.localStorage.setItem("theme", next);
-    setTheme(next);
+    window.dispatchEvent(new Event("themechange"));
   }
 
   return (
