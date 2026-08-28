@@ -3,14 +3,14 @@
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 
-function NavContents({ projectName }: { projectName?: string }) {
+function NavContents({ projectName, showMark = true }: { projectName?: string; showMark?: boolean }) {
   return (
     <>
       {projectName ? (
         <span className="caseBreadcrumb"><a href="/">Guy Magen</a><i>/</i><strong>{projectName}</strong></span>
       ) : (
         <>
-          <a className="home" href="#top" aria-label="Guy Magen, back to top"><span className="navWordmark">GM</span></a>
+          {showMark && <a className="home" href="#top" aria-label="Guy Magen, back to top"><span className="navWordmark">GM</span></a>}
           <div className="navLinks"><a href="#work">work</a><a href="#building">building</a><a href="#about">about</a></div>
         </>
       )}
@@ -32,7 +32,7 @@ export function FloatingNav({ projectName }: { projectName?: string }) {
 
   return (
     <>
-      <nav className={`topNav ${projectName ? "caseNav" : "homeNav"}`}><NavContents projectName={projectName} /></nav>
+      <nav className={`topNav ${projectName ? "caseNav" : "homeNav"}`}><NavContents projectName={projectName} showMark={false} /></nav>
       <nav className={`floatingNav ${projectName ? "caseNav" : "homeNav"} ${visible ? "navVisible" : "navHidden"}`} aria-hidden={!visible}><NavContents projectName={projectName} /></nav>
     </>
   );
