@@ -113,7 +113,7 @@ export default function Home() {
             ))}
           </h2>
           <p>Tell me about it.</p>
-          <div className="contactLinks"><a href="mailto:hi@guymagen.com">email ↗</a><a href="https://www.linkedin.com/in/guymagen/" target="_blank" rel="noreferrer">linkedin ↗</a><a href="https://github.com/guymgn" target="_blank" rel="noreferrer">github ↗</a></div>
+          <div className="contactLinks"><a href="mailto:hi@guymagen.com">email ↗</a><a href="https://wa.me/972547734245" target="_blank" rel="noreferrer">whatsapp ↗</a><a href="https://www.linkedin.com/in/guymagen/" target="_blank" rel="noreferrer">linkedin ↗</a><a href="https://github.com/guymgn" target="_blank" rel="noreferrer">github ↗</a></div>
         </div>
         <div className="footerMeta">
           <LocalTime />
