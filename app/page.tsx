@@ -54,7 +54,7 @@ export default function Home() {
           <p className="role">Senior Product Designer &amp; Builder</p>
         </div>
         <p className="lede">12+ years of turning complex systems and mobile apps into A-ha! moments</p>
-        <div className="status"><span className="availability">Based in Israel <i /> Available for the right team</span></div>
+        <div className="status"><span className="availability"><i /> Based in Israel · Available for the right team</span></div>
       </section>
 
       <section className="windowSection" id="work">
