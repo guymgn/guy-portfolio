@@ -8,23 +8,30 @@ export function ThemeToggle() {
   const [theme, setTheme] = useState<Theme | null>(null);
 
   useEffect(() => {
-    const stored = window.localStorage.getItem("theme") as Theme | null;
-    const preferred = window.matchMedia("(prefers-color-scheme: light)").matches
-      ? "light"
-      : "dark";
-    const initial = stored === "light" || stored === "dark" ? stored : preferred;
-    document.documentElement.dataset.theme = initial;
-    setTheme(initial);
+    const preference = window.matchMedia("(prefers-color-scheme: light)");
+    const applyPreference = () => {
+      const next = preference.matches ? "light" : "dark";
+      document.documentElement.dataset.theme = next;
+      setTheme(next);
+      window.dispatchEvent(new Event("themechange"));
+    };
     const syncTheme = () => setTheme(document.documentElement.dataset.theme as Theme);
+
+    window.localStorage.removeItem("theme");
+    applyPreference();
+    preference.addEventListener("change", applyPreference);
     window.addEventListener("themechange", syncTheme);
-    return () => window.removeEventListener("themechange", syncTheme);
+
+    return () => {
+      preference.removeEventListener("change", applyPreference);
+      window.removeEventListener("themechange", syncTheme);
+    };
   }, []);
 
   function toggleTheme() {
     const current = document.documentElement.dataset.theme as Theme;
     const next = current === "light" ? "dark" : "light";
     document.documentElement.dataset.theme = next;
-    window.localStorage.setItem("theme", next);
     window.dispatchEvent(new Event("themechange"));
   }
 
