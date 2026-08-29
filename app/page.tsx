@@ -22,7 +22,7 @@ const work = [
 const building = [
   { name: "Teara", description: "A personal iOS app that turns travel bookings into one clear itinerary", href: "https://www.teara.io" },
   { name: "Mentoring", description: "Mentoring designers through the “Startup Designers” Israeli community", href: "https://adplist.org/mentors/guy-magen" },
-  { name: "Side projects", description: "Building small tools for myself, learning 3D printing, and following ideas to see where they go. Always learning something new." },
+  { name: "Side quests", description: "Building small tools for myself, learning 3D printing, and following ideas to see where they go. Always learning something new." },
 ];
 
 const contactTitle = "Let’s build together!";
