@@ -138,7 +138,8 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
 .contactWord { display:flex; white-space:nowrap; }
 .contactLetter { display:inline-block; transform-origin:50% 80%; text-shadow:0 0 18px color-mix(in srgb,var(--accent) 20%,transparent),0 0 42px color-mix(in srgb,var(--accent) 9%,transparent); font-variation-settings:"opsz" 40,"wght" 650; animation:wordmark-wave 6.5s ease-in-out infinite; will-change:transform,font-variation-settings; }
 .contactLinks { display:flex; flex-wrap:wrap; gap:18px 28px; margin-top:34px; font-size:var(--type-small); }
-.contactLinks a { color:var(--accent); border-bottom:1px solid currentColor; padding-bottom:4px; }
+.contactLinks a { padding-bottom:4px; color:var(--accent); background:linear-gradient(currentColor,currentColor) left bottom/0 1px no-repeat; transition:background-size .22s ease; }
+.contactLinks a:hover,.contactLinks a:focus-visible { background-size:100% 1px; }
 .footerMeta { min-height:110px; margin-top:82px; display:grid; grid-template-columns:1fr auto; align-items:end; font-size:var(--type-micro); text-transform:uppercase; letter-spacing:var(--tracking-label); }
 .madeIn { justify-self:end; margin:0; color:var(--muted); text-align:right; text-transform:none; letter-spacing:0; font-size:var(--type-small); }
 .localTime { justify-self:start; display:grid; grid-template-columns:auto auto; column-gap:11px; text-align:left; }
