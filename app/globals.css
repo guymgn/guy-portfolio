@@ -15,7 +15,7 @@
   --line:#30302d;
   --accent:#7776FF;
   --grid-line:rgba(255,255,255,.035);
-  --grid-node:rgba(255,255,255,.13);
+  --grid-node:rgba(255,255,255,.18);
   --grid-runner:#7776FF;
   --cv-button-bg:#e8e7e2;
   --cv-button-text:#181817;
@@ -218,7 +218,7 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
     --footer:#77756f;
     --line:#d8d6cf;
     --grid-line:rgba(24,24,23,.055);
-    --grid-node:rgba(24,24,23,.16);
+    --grid-node:rgba(24,24,23,.22);
     --grid-runner:#7776FF;
     --cv-button-bg:#171717;
     --cv-button-text:#fff;
@@ -236,7 +236,7 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
   --footer:#77756f;
   --line:#d8d6cf;
   --grid-line:rgba(24,24,23,.055);
-  --grid-node:rgba(24,24,23,.16);
+  --grid-node:rgba(24,24,23,.22);
   --grid-runner:#7776FF;
   --cv-button-bg:#171717;
   --cv-button-text:#fff;
@@ -253,7 +253,7 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
   --footer:#777772;
   --line:#30302d;
   --grid-line:rgba(255,255,255,.035);
-  --grid-node:rgba(255,255,255,.13);
+  --grid-node:rgba(255,255,255,.18);
   --grid-runner:#7776FF;
   --cv-button-bg:#e8e7e2;
   --cv-button-text:#181817;
