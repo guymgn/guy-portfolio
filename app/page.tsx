@@ -90,7 +90,7 @@ export default function Home() {
       <section id="about">
         <p className="sectionLabel">A little about me</p>
         <div className="aboutGrid">
-          <p>I like messy problems, thoughtful products and people who care about their craft. Outside of product work, I mentor designers, experiment with new tools and keep finding reasons to make things.</p>
+          <p>For the past 12+ years, I’ve designed SaaS platforms, AI tools, and mobile apps. I’m drawn to complex systems and enjoy turning them into products that feel clear, useful, and easy to understand. These days, I also use AI and code to move beyond prototypes and build working products myself.</p>
           <div className="toolsList">
             <span>Tools I reach for</span>
             <dl>
