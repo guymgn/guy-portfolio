@@ -94,9 +94,10 @@ export default function Home() {
           <div className="toolsList">
             <span>Tools I reach for</span>
             <dl>
-              <div><dt>Product design</dt><dd>Figma, Adobe Creative Cloud, Rive, Lottielab</dd></div>
-              <div><dt>AI / Dev tools</dt><dd>Webflow, Gemini, Claude, v0</dd></div>
-              <div><dt>3D</dt><dd>Womp, Blender</dd></div>
+              <div><dt>Product design</dt><dd>Figma, Rive, Lottie</dd></div>
+              <div><dt>AI / Dev</dt><dd>Codex / ChatGPT, Claude, Gemini</dd></div>
+              <div><dt>3D</dt><dd>Blender</dd></div>
+              <div><dt>Content</dt><dd>Obsidian, Notion</dd></div>
             </dl>
           </div>
         </div>
