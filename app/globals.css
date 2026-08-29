@@ -116,7 +116,7 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
   .plainList>:hover { background:color-mix(in srgb,var(--accent) 5%,transparent); }
   .plainList>a:hover .buildingArrow { transform:translate(2px,-2px); }
 }
-.sectionCopy { max-width:790px; margin:38px 30px 55px 192px; font-size:var(--type-heading); line-height:1.4; letter-spacing:var(--tracking-tight); }
+.sectionCopy { min-height:126px; margin:0; padding:32px 30px; display:flex; align-items:center; justify-content:center; font-family:"Hornbill",serif; font-size:var(--type-heading); font-variation-settings:"wght" 600; line-height:1.4; letter-spacing:0; text-align:center; }
 .plainList { border-top:1px solid var(--line); }
 .plainList>* { display:grid; grid-template-columns:136px 1fr; gap:26px; padding:23px 30px; border-bottom:1px solid var(--line); align-items:baseline; transition:background-color .2s ease; }
 .plainList>a { grid-template-columns:136px 1fr auto; }
