@@ -39,7 +39,7 @@ nav>* { position:relative; z-index:1; }
 .topNav.caseNav { width:100vw; }
 .topNav::before { display:none; }
 .navHidden { opacity:0; transform:translate(-50%,-90px) scale(.96); pointer-events:none; }
-.navLeaving { pointer-events:none; animation:nav-spring-out .56s both; }
+.navLeaving { pointer-events:none; animation:nav-spring-out .38s both; }
 .navVisible { opacity:1; transform:translate(-50%,0); animation:nav-spring-in .68s both; }
 @keyframes nav-spring-in {
   0% { opacity:0; transform:translate(-50%,-24px) scale(.97); }

@@ -34,7 +34,7 @@ export function FloatingNav({ projectName }: { projectName?: string }) {
       } else if (visibleRef.current) {
         visibleRef.current = false;
         setNavState("leaving");
-        exitTimer = window.setTimeout(() => setNavState("hidden"), 560);
+        exitTimer = window.setTimeout(() => setNavState("hidden"), 380);
       }
     };
     updateVisibility();
