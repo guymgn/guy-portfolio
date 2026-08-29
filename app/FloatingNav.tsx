@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 
 function NavContents({ projectName, showMark = true }: { projectName?: string; showMark?: boolean }) {
@@ -20,20 +20,36 @@ function NavContents({ projectName, showMark = true }: { projectName?: string; s
 }
 
 export function FloatingNav({ projectName }: { projectName?: string }) {
-  const [visible, setVisible] = useState(false);
+  const [navState, setNavState] = useState<"hidden" | "visible" | "leaving">("hidden");
+  const visibleRef = useRef(false);
 
   useEffect(() => {
-    const updateVisibility = () => setVisible(window.scrollY > 96);
+    let exitTimer = 0;
+    const updateVisibility = () => {
+      const shouldShow = window.scrollY > 96;
+      window.clearTimeout(exitTimer);
+      if (shouldShow) {
+        visibleRef.current = true;
+        setNavState("visible");
+      } else if (visibleRef.current) {
+        visibleRef.current = false;
+        setNavState("leaving");
+        exitTimer = window.setTimeout(() => setNavState("hidden"), 560);
+      }
+    };
     updateVisibility();
     requestAnimationFrame(updateVisibility);
     window.addEventListener("scroll", updateVisibility, { passive: true });
-    return () => window.removeEventListener("scroll", updateVisibility);
+    return () => {
+      window.clearTimeout(exitTimer);
+      window.removeEventListener("scroll", updateVisibility);
+    };
   }, []);
 
   return (
     <>
       <nav className={`topNav ${projectName ? "caseNav" : "homeNav"}`}><NavContents projectName={projectName} showMark={false} /></nav>
-      <nav className={`floatingNav ${projectName ? "caseNav" : "homeNav"} ${visible ? "navVisible" : "navHidden"}`} aria-hidden={!visible}><NavContents projectName={projectName} /></nav>
+      <nav className={`floatingNav ${projectName ? "caseNav" : "homeNav"} nav${navState[0].toUpperCase()}${navState.slice(1)}`} aria-hidden={navState !== "visible"}><NavContents projectName={projectName} /></nav>
     </>
   );
 }
