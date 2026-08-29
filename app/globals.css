@@ -117,7 +117,7 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
 .plainList strong { color:var(--accent); }
 .plainList p { margin:0; color:var(--tertiary); font-size:var(--type-body); }
 .buildingArrow { color:var(--accent); transition:transform .2s ease; }
-.aboutGrid { display:grid; grid-template-columns:2fr 1fr 1fr; gap:52px; }
+.aboutGrid { display:grid; grid-template-columns:2fr 2fr; gap:52px; }
 .aboutGrid>p { margin:0; font-size:var(--type-heading); line-height:1.5; letter-spacing:var(--tracking-tight); }
 .aboutGrid span { color:var(--accent); font-size:var(--type-micro); text-transform:uppercase; letter-spacing:var(--tracking-label); }
 .aboutGrid div p { color:var(--tertiary); font-size:var(--type-body); line-height:1.65; }
