@@ -14,7 +14,7 @@ function NavContents({ projectName, showMark = true }: { projectName?: string; s
           <div className="navLinks"><a href="#work">work</a><a href="#building">building</a><a href="#about">about</a></div>
         </>
       )}
-      <div className="navActions"><ThemeToggle /></div>
+      <div className="navActions">{showMark && <button className="navCv" type="button">Download CV <span aria-hidden="true">↓</span></button>}<ThemeToggle /></div>
     </>
   );
 }
