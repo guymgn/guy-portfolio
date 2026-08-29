@@ -15,7 +15,7 @@ const work = [
     role: "Senior Product Designer",
     description: "Cloud cost management made clearer and easier to act on.",
     period: "2022 to 2023",
-    href: "https://www.figma.com/slides/Uv4ebbkIVfmdblK58TaueW",
+    href: "/finout",
   },
 ];
 
