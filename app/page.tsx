@@ -22,7 +22,7 @@ const work = [
 const building = [
   { name: "Teara", description: "A personal iOS app that turns travel bookings into one clear itinerary", href: "https://www.teara.io" },
   { name: "Mentoring", description: "Mentoring designers through the “Startup Designers” Israeli community", href: "https://adplist.org/mentors/guy-magen" },
-  { name: "Side quests", description: "Where I let curiosity take the lead. I build small tools for everyday problems, use AI and code to see how far an idea can go, and learn 3D printing through objects that rarely come out right the first time. Away from the screen, I’m usually searching for the next vinyl record, comic book, new artist, or cup of coffee worth getting excited about." },
+  { name: "Side quests", description: "Where I let curiosity take the lead. I build small tools for everyday problems, use AI and code to see how far an idea can go, and learn 3D printing through objects that rarely come out right the first time. Away from the screen, I’m usually searching for the next vinyl record, comic book, new artist, or cup of coffee worth getting excited about. 💻🎧☕🍔" },
 ];
 
 const contactTitle = "Let’s build together!";
