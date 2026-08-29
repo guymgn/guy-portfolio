@@ -1,6 +1,7 @@
 import { LocalTime } from "./LocalTime";
 import { GridField } from "./GridField";
 import { FloatingNav } from "./FloatingNav";
+import { ScrollReveal } from "./ScrollReveal";
 
 const work = [
   {
@@ -37,15 +38,15 @@ export default function Home() {
         <p className="sectionLabel">Hey there, I’m</p>
         <div>
           <h1 className="heroWordmark" aria-label="Guy Magen">
-            <span aria-hidden="true" style={{ animationDelay: "-0.0s" }}>G</span>
-            <span aria-hidden="true" style={{ animationDelay: "-0.5s" }}>u</span>
-            <span aria-hidden="true" style={{ animationDelay: "-1.0s" }}>y</span>
+            <span className="heroLetter" aria-hidden="true"><b style={{ animationDelay: "-0.0s" }}>G</b></span>
+            <span className="heroLetter" aria-hidden="true"><b style={{ animationDelay: "-0.5s" }}>u</b></span>
+            <span className="heroLetter" aria-hidden="true"><b style={{ animationDelay: "-1.0s" }}>y</b></span>
             <i aria-hidden="true" />
-            <span aria-hidden="true" style={{ animationDelay: "-1.5s" }}>M</span>
-            <span aria-hidden="true" style={{ animationDelay: "-2.0s" }}>a</span>
-            <span aria-hidden="true" style={{ animationDelay: "-2.5s" }}>g</span>
-            <span aria-hidden="true" style={{ animationDelay: "-3.0s" }}>e</span>
-            <span aria-hidden="true" style={{ animationDelay: "-3.5s" }}>n</span>
+            <span className="heroLetter" aria-hidden="true"><b style={{ animationDelay: "-1.5s" }}>M</b></span>
+            <span className="heroLetter" aria-hidden="true"><b style={{ animationDelay: "-2.0s" }}>a</b></span>
+            <span className="heroLetter" aria-hidden="true"><b style={{ animationDelay: "-2.5s" }}>g</b></span>
+            <span className="heroLetter" aria-hidden="true"><b style={{ animationDelay: "-3.0s" }}>e</b></span>
+            <span className="heroLetter" aria-hidden="true"><b style={{ animationDelay: "-3.5s" }}>n</b></span>
           </h1>
           <p className="role">Senior Product Designer &amp; Builder</p>
         </div>
@@ -56,7 +57,7 @@ export default function Home() {
         <div className="status"><span className="availability"><i /> Based in Israel · Available for the right team</span></div>
       </section>
 
-      <section className="windowSection" id="work">
+      <ScrollReveal><section className="windowSection" id="work">
         <div className="browserWindow">
           <div className="windowBar"><div className="windowDots" aria-hidden="true"><i /><i /><i /></div><span>Selected projects</span><small>2 projects</small></div>
           <div className="windowBody rows">
@@ -70,9 +71,9 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section></ScrollReveal>
 
-      <section className="windowSection" id="building">
+      <ScrollReveal><section className="windowSection" id="building">
         <div className="browserWindow">
           <div className="windowBar"><div className="windowDots" aria-hidden="true"><i /><i /><i /></div><span>What I’m building</span><small>Updated recently</small></div>
           <div className="windowBody">
@@ -88,9 +89,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section></ScrollReveal>
 
-      <section id="about">
+      <ScrollReveal><section id="about">
         <p className="sectionLabel">A little about me</p>
         <div className="aboutGrid">
           <p>For the past 12+ years, I’ve designed SaaS platforms, AI tools, and mobile apps. I’m drawn to complex systems and enjoy turning them into products that feel clear, useful, and easy to understand. These days, I also use AI and code to move beyond prototypes and build working products myself.</p>
@@ -104,9 +105,9 @@ export default function Home() {
             </dl>
           </div>
         </div>
-      </section>
+      </section></ScrollReveal>
 
-      <footer className="contactFooter" id="contact">
+      <ScrollReveal><footer className="contactFooter" id="contact">
         <div className="contactMain">
           <h2 className="contactWordmark" aria-label={contactTitle}>
             {contactTitle.split(" ").map((word, wordIndex) => (
@@ -123,7 +124,7 @@ export default function Home() {
           <LocalTime />
           <p className="madeIn">Made with ❤️ in Israel</p>
         </div>
-      </footer>
+      </footer></ScrollReveal>
     </main>
   );
 }
