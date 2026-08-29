@@ -15,7 +15,7 @@
   --line:#30302d;
   --accent:#7776FF;
   --grid-line:rgba(255,255,255,.035);
-  --grid-node:rgba(255,255,255,.18);
+  --grid-node:rgba(255,255,255,.32);
   --grid-runner:#7776FF;
   --cv-button-bg:#e8e7e2;
   --cv-button-text:#181817;
@@ -253,7 +253,7 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
   --footer:#777772;
   --line:#30302d;
   --grid-line:rgba(255,255,255,.035);
-  --grid-node:rgba(255,255,255,.18);
+  --grid-node:rgba(255,255,255,.32);
   --grid-runner:#7776FF;
   --cv-button-bg:#e8e7e2;
   --cv-button-text:#181817;
