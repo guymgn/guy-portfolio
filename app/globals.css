@@ -75,7 +75,13 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
 .role { margin:-5px 0 0; color:var(--accent); font-size:15px; }
 .lede { max-width:760px; margin:52px 0 22px; font-size:clamp(27px,4vw,39px); line-height:1.12; letter-spacing:-.035em; }
 .intro .lede { margin-inline:auto; }
-.status { margin-top:42px; display:flex; gap:30px; font-size:var(--type-micro); color:var(--muted); text-transform:uppercase; letter-spacing:var(--tracking-label); }
+.heroActions { margin-top:14px; display:flex; justify-content:center; }
+.cvButton { --border-angle:0turn; position:relative; padding:11px 17px; border:1px solid transparent; border-radius:11px; background:linear-gradient(var(--bg),var(--bg)) padding-box,conic-gradient(from var(--border-angle),color-mix(in srgb,var(--accent) 18%,transparent) 0 58%,var(--accent) 72%,color-mix(in srgb,var(--accent) 28%,transparent) 84%,color-mix(in srgb,var(--accent) 18%,transparent) 100%) border-box; box-shadow:0 0 18px color-mix(in srgb,var(--accent) 9%,transparent); color:var(--text); font:500 var(--type-ui)/1.2 "DM Sans",Arial,sans-serif; cursor:pointer; animation:cv-border-run 3.2s linear infinite; transition:transform .2s ease,box-shadow .2s ease; }
+.cvButton:hover { transform:translateY(-1px); box-shadow:0 0 24px color-mix(in srgb,var(--accent) 16%,transparent); }
+.cvButton span { margin-left:7px; color:var(--accent); }
+@property --border-angle { syntax:"<angle>"; inherits:false; initial-value:0turn; }
+@keyframes cv-border-run { to { --border-angle:1turn; } }
+.status { margin-top:28px; display:flex; gap:30px; font-size:var(--type-micro); color:var(--muted); text-transform:uppercase; letter-spacing:var(--tracking-label); }
 .intro .status { justify-content:center; }
 .status span { display:flex; align-items:center; gap:8px; }
 .status i { width:7px; height:7px; background:#5cc875; border-radius:50%; animation:availability-pulse 2.4s ease-out infinite; }

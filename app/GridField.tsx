@@ -42,7 +42,7 @@ export function GridField() {
         speed: 24 + Math.random() * 34,
         direction,
         delay: Math.random() * 5,
-        opacity: 0.14 + Math.random() * 0.24,
+        opacity: 0.22 + Math.random() * 0.26,
       };
     };
 
@@ -91,9 +91,9 @@ export function GridField() {
       if (!reducedMotion.matches) {
         context.strokeStyle = runnerColor;
         context.shadowColor = runnerColor;
-        context.shadowBlur = 9;
+        context.shadowBlur = 12;
         context.lineCap = "round";
-        context.lineWidth = 0.8;
+        context.lineWidth = 1;
         runners.forEach((runner, index) => {
           if (runner.delay > 0) {
             runner.delay -= delta;

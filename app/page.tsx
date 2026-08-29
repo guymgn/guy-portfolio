@@ -50,6 +50,9 @@ export default function Home() {
           <p className="role">Senior Product Designer &amp; Builder</p>
         </div>
         <p className="lede">12+ years of turning complex systems and mobile apps into A-ha! moments</p>
+        <div className="heroActions">
+          <button className="cvButton" type="button">Download my CV <span aria-hidden="true">↓</span></button>
+        </div>
         <div className="status"><span className="availability"><i /> Based in Israel · Available for the right team</span></div>
       </section>
 
