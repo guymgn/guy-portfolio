@@ -58,7 +58,7 @@ nav .navLinks { display:flex; gap:25px; }
 .navActions { margin-left:auto; display:flex; align-items:center; justify-content:flex-end; gap:18px; }
 .navCv { padding:8px 12px; border:0; border-radius:9px; background:#171717; color:#fff; font:500 var(--type-small)/1.2 "DM Sans",Arial,sans-serif; white-space:nowrap; cursor:pointer; transition:background-color .2s ease,transform .2s ease; }
 .navCv:hover,.navCv:focus-visible { background:#242424; transform:translateY(-1px); }
-.navCv span { margin-left:4px; color:var(--accent); }
+.navCv span { margin-left:4px; color:inherit; }
 nav a:hover { color:var(--text); }
 .home { display:block; color:var(--text); }
 .navWordmark { padding-left:7px; display:block; font-family:"Hornbill",serif; font-size:20px; font-variation-settings:"wght" 760; letter-spacing:-.025em; line-height:1; white-space:nowrap; }
