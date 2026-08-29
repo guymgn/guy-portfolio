@@ -17,6 +17,9 @@
   --grid-line:rgba(255,255,255,.035);
   --grid-node:rgba(255,255,255,.075);
   --grid-runner:#7776FF;
+  --cv-button-bg:#e8e7e2;
+  --cv-button-text:#181817;
+  --cv-button-hover:#fff;
   --type-micro:10px;
   --type-small:12px;
   --type-ui:13px;
@@ -56,8 +59,8 @@ nav>* { position:relative; z-index:1; }
 nav .navLinks { display:flex; gap:25px; }
 .homeNav .navLinks { margin-right:auto; }
 .navActions { margin-left:auto; display:flex; align-items:center; justify-content:flex-end; gap:18px; }
-.navCv { padding:8px 12px; border:0; border-radius:9px; background:#171717; color:#fff; font:500 var(--type-small)/1.2 "DM Sans",Arial,sans-serif; white-space:nowrap; cursor:pointer; transition:background-color .2s ease,transform .2s ease; }
-.navCv:hover,.navCv:focus-visible { background:#242424; transform:translateY(-1px); }
+.navCv { padding:8px 12px; border:0; border-radius:9px; background:var(--cv-button-bg); color:var(--cv-button-text); font:500 var(--type-small)/1.2 "DM Sans",Arial,sans-serif; white-space:nowrap; cursor:pointer; transition:background-color .2s ease,transform .2s ease; }
+.navCv:hover,.navCv:focus-visible { background:var(--cv-button-hover); transform:translateY(-1px); }
 .navCv span { margin-left:4px; color:inherit; }
 nav a:hover { color:var(--text); }
 .home { display:block; color:var(--text); }
@@ -217,6 +220,9 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
     --grid-line:rgba(24,24,23,.055);
     --grid-node:rgba(24,24,23,.11);
     --grid-runner:#7776FF;
+    --cv-button-bg:#171717;
+    --cv-button-text:#fff;
+    --cv-button-hover:#242424;
   }
 }
 
@@ -232,6 +238,9 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
   --grid-line:rgba(24,24,23,.055);
   --grid-node:rgba(24,24,23,.11);
   --grid-runner:#7776FF;
+  --cv-button-bg:#171717;
+  --cv-button-text:#fff;
+  --cv-button-hover:#242424;
 }
 
 :root[data-theme="dark"] {
@@ -246,6 +255,9 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
   --grid-line:rgba(255,255,255,.035);
   --grid-node:rgba(255,255,255,.075);
   --grid-runner:#7776FF;
+  --cv-button-bg:#e8e7e2;
+  --cv-button-text:#181817;
+  --cv-button-hover:#fff;
 }
 
 @media (max-width:680px) {
