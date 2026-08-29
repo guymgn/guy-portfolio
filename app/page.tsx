@@ -96,7 +96,7 @@ export default function Home() {
             <dl>
               <div><dt>Product design</dt><dd>Figma, Rive, Lottie</dd></div>
               <div><dt>AI / Dev</dt><dd>Codex / ChatGPT, Claude, Gemini</dd></div>
-              <div><dt>3D</dt><dd>Blender</dd></div>
+              <div><dt>3D</dt><dd>Blender, Spline</dd></div>
               <div><dt>Content</dt><dd>Obsidian, Notion</dd></div>
             </dl>
           </div>
