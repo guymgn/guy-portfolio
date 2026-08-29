@@ -25,7 +25,7 @@ const building = [
   { name: "Side projects", description: "Building small tools for myself, learning 3D printing, and following ideas to see where they go. Always learning something new." },
 ];
 
-const contactTitle = "Have an interesting problem?";
+const contactTitle = "Let’s build together!";
 
 export default function Home() {
   return (
@@ -98,7 +98,6 @@ export default function Home() {
 
       <footer className="contactFooter" id="contact">
         <div className="contactMain">
-          <p className="sectionLabel">Let’s talk</p>
           <h2 className="contactWordmark" aria-label={contactTitle}>
             {contactTitle.split(" ").map((word, wordIndex) => (
               <span className="contactWord" aria-hidden="true" key={word}>
@@ -108,7 +107,6 @@ export default function Home() {
               </span>
             ))}
           </h2>
-          <p>Tell me about it.</p>
           <div className="contactLinks"><a href="mailto:hi@guymagen.com">email ↗</a><a href="https://wa.me/972547734245" target="_blank" rel="noreferrer">whatsapp ↗</a><a href="https://www.linkedin.com/in/guymagen/" target="_blank" rel="noreferrer">linkedin ↗</a><a href="https://github.com/guymgn" target="_blank" rel="noreferrer">github ↗</a></div>
         </div>
         <div className="footerMeta">
