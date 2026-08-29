@@ -83,7 +83,7 @@ export function GridField() {
       for (let x = 0; x <= width; x += spacing) {
         for (let y = 0; y <= height; y += spacing) {
           context.beginPath();
-          context.arc(x, y, 1.5, 0, Math.PI * 2);
+          context.arc(x, y, 1.7, 0, Math.PI * 2);
           context.fill();
         }
       }
