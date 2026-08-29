@@ -2,6 +2,7 @@ import { LocalTime } from "./LocalTime";
 import { GridField } from "./GridField";
 import { FloatingNav } from "./FloatingNav";
 import { ScrollReveal } from "./ScrollReveal";
+import { TearaStatus } from "./TearaStatus";
 
 const work = [
   {
@@ -81,7 +82,7 @@ export default function Home() {
             <div className="plainList">
               {building.map((item) => item.href ? (
                 <a href={item.href} target="_blank" rel="noreferrer" key={item.name}>
-                  <strong>{item.name}</strong><p>{item.description}</p><span className="buildingArrow">↗</span>
+                  <strong>{item.name}</strong><p>{item.description}{item.name === "Teara" && <TearaStatus />}</p><span className="buildingArrow">↗</span>
                 </a>
               ) : (
                 <div key={item.name}><strong>{item.name}</strong><p>{item.description}</p></div>
