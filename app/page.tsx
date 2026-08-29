@@ -49,7 +49,7 @@ export default function Home() {
           </h1>
           <p className="role">Senior Product Designer &amp; Builder</p>
         </div>
-        <p className="lede">12+ years of turning complex systems and mobile apps into <span className="ahaWrap"><button className="ahaTerm" type="button" aria-describedby="aha-tooltip">A-ha!</button><span className="ahaTooltip" id="aha-tooltip" role="tooltip">That moment when the product clicks and everything makes sense.</span></span> moments</p>
+        <p className="lede">12+ years of turning complex systems<br />and mobile apps into <span className="ahaWrap"><button className="ahaTerm" type="button" aria-describedby="aha-tooltip">A-ha!</button><span className="ahaTooltip" id="aha-tooltip" role="tooltip">That moment when the product clicks and everything makes sense.</span></span> moments</p>
         <div className="heroActions">
           <button className="cvButton" type="button">Download my CV <span aria-hidden="true">↓</span></button>
         </div>
