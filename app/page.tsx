@@ -91,7 +91,14 @@ export default function Home() {
         <p className="sectionLabel">A little about me</p>
         <div className="aboutGrid">
           <p>I like messy problems, thoughtful products and people who care about their craft. Outside of product work, I mentor designers, experiment with new tools and keep finding reasons to make things.</p>
-          <div className="toolsList"><span>Tools I reach for</span><p>Figma, Claude, Codex, Cursor, Webflow, Blender, and whatever helps me make the idea tangible.</p></div>
+          <div className="toolsList">
+            <span>Tools I reach for</span>
+            <dl>
+              <div><dt>Product design</dt><dd>Figma, Adobe Creative Cloud, Rive, Lottielab</dd></div>
+              <div><dt>AI / Dev tools</dt><dd>Webflow, Gemini, Claude, v0</dd></div>
+              <div><dt>3D</dt><dd>Womp, Blender</dd></div>
+            </dl>
+          </div>
         </div>
       </section>
 
