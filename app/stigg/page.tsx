@@ -1,4 +1,5 @@
 import { FloatingNav } from "../FloatingNav";
+import { ContactFooter } from "../ContactFooter";
 
 const highlights = [
   ["0 to 1 design system", "Built the design system from scratch to improve consistency and development speed."],
@@ -84,6 +85,7 @@ export default function StiggPage() {
         <p>All work shown is the property of Stigg. Information is publicly documented, abstracted or anonymized and is included for portfolio purposes only.</p>
         <a href="/">Back to portfolio ↑</a>
       </footer>
+      <ContactFooter />
     </main>
   );
 }

@@ -1,8 +1,8 @@
-import { LocalTime } from "./LocalTime";
 import { GridField } from "./GridField";
 import { FloatingNav } from "./FloatingNav";
 import { ScrollReveal } from "./ScrollReveal";
 import { TearaStatus } from "./TearaStatus";
+import { ContactFooter } from "./ContactFooter";
 
 const work = [
   {
@@ -32,8 +32,6 @@ const building = [
   { name: "Mentoring", description: "Mentoring designers through the “Startup Designers” Israeli community", href: "https://adplist.org/mentors/guy-magen" },
   { name: "Side quests", description: "Where I let curiosity take the lead. I build small tools for everyday problems, use AI and code to see how far an idea can go, and learn 3D printing through objects that rarely come out right the first time. Away from the screen, I’m usually searching for the next vinyl record, comic book, new artist, or cup of coffee worth getting excited about. 💻🎧☕🍔" },
 ];
-
-const contactTitle = "Let’s build together!";
 
 export default function Home() {
   return (
@@ -115,24 +113,7 @@ export default function Home() {
         </div>
       </section></ScrollReveal>
 
-      <ScrollReveal><footer className="contactFooter" id="contact">
-        <div className="contactMain">
-          <h2 className="contactWordmark" aria-label={contactTitle}>
-            {contactTitle.split(" ").map((word, wordIndex) => (
-              <span className="contactWord" aria-hidden="true" key={word}>
-                {word.split("").map((letter, letterIndex) => (
-                  <span className="contactLetter" key={`${letter}-${letterIndex}`} style={{ animationDelay: `-${(wordIndex * 0.7 + letterIndex * 0.22).toFixed(2)}s` }}>{letter}</span>
-                ))}
-              </span>
-            ))}
-          </h2>
-          <div className="contactLinks"><a href="mailto:hi@guymagen.com">email ↗</a><a href="https://wa.me/972547734245" target="_blank" rel="noreferrer">whatsapp ↗</a><a href="https://www.linkedin.com/in/guymagen/" target="_blank" rel="noreferrer">linkedin ↗</a><a href="https://github.com/guymgn" target="_blank" rel="noreferrer">github ↗</a></div>
-        </div>
-        <div className="footerMeta">
-          <LocalTime />
-          <p className="madeIn">Made with ❤️ in Israel</p>
-        </div>
-      </footer></ScrollReveal>
+      <ContactFooter />
     </main>
   );
 }

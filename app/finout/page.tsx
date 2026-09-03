@@ -1,4 +1,5 @@
 import { FloatingNav } from "../FloatingNav";
+import { ContactFooter } from "../ContactFooter";
 
 const highlights = [
   ["One shared view", "Brought AWS, GCP, Kubernetes, Snowflake and SaaS costs into one readable workspace."],
@@ -98,6 +99,7 @@ export default function FinoutPage() {
         <p>All work shown is the property of Finout. Information is publicly documented, abstracted or anonymized and is included for portfolio purposes only.</p>
         <a href="/">Back to portfolio ↑</a>
       </footer>
+      <ContactFooter />
     </main>
   );
 }
