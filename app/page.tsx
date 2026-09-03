@@ -100,7 +100,7 @@ export default function Home() {
             <span>Tools I reach for</span>
             <dl>
               <div><dt>Product design</dt><dd>Figma, Rive, Lottie</dd></div>
-              <div><dt>AI / Dev</dt><dd>Xcode, VS Code, Codex / ChatGPT, Claude, Gemini</dd></div>
+              <div><dt>AI / Dev</dt><dd>Xcode, VS Code, Super.Engineering, Codex / ChatGPT, Claude, Gemini</dd></div>
               <div><dt>3D</dt><dd>Blender, Spline</dd></div>
               <div><dt>Content</dt><dd>Obsidian, Notion</dd></div>
             </dl>
