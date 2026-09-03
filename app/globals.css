@@ -12,7 +12,7 @@
   --secondary:#bab9b3;
   --tertiary:#aaa9a3;
   --footer:#777772;
-  --footer-watermark:rgba(232,231,226,.065);
+  --footer-watermark:#0d0d0d;
   --line:#30302d;
   --accent:#7776FF;
   --grid-line:rgba(255,255,255,.035);
@@ -170,7 +170,7 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
 .toolsList dt { color:var(--muted); }
 .toolsList dd { color:var(--tertiary); }
 .contactFooter { position:relative; isolation:isolate; padding:84px 0 38px; color:var(--footer); }
-.contactFooter::before { content:""; position:absolute; z-index:0; inset:0 50% 0 auto; width:100vw; transform:translateX(50%); background:linear-gradient(to bottom,transparent 30%,color-mix(in srgb,var(--panel) 38%,transparent) 68%,color-mix(in srgb,var(--panel) 62%,var(--bg))); pointer-events:none; }
+.contactFooter::before { content:""; position:absolute; z-index:0; inset:0 50% 0 auto; width:100vw; transform:translateX(50%); background:linear-gradient(to bottom,transparent 70%,color-mix(in srgb,var(--panel) 54%,var(--bg)) 100%); pointer-events:none; }
 .contactFooter::after { content:"Guy Magen"; position:absolute; z-index:1; left:50%; bottom:12px; width:100vw; transform:translateX(-50%); color:var(--footer-watermark); font-family:"Hornbill",serif; font-size:clamp(104px,18vw,250px); font-variation-settings:"opsz" 40,"wght" 720; font-weight:720; line-height:1; letter-spacing:-.055em; text-align:center; white-space:nowrap; pointer-events:none; }
 .contactFooter>* { position:relative; z-index:2; }
 .contactMain h2 { margin:0; padding-bottom:.12em; color:var(--text); font-family:"Hornbill",serif; font-size:clamp(38px,5.5vw,58px); line-height:1.12; letter-spacing:var(--tracking-tight); }
@@ -231,14 +231,14 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
 
 @media (prefers-color-scheme: light) {
   :root {
-    --bg:#f7f6f2;
+    --bg:#f7f6f3;
     --panel:#efeee9;
     --text:#181817;
     --muted:#6f6e69;
     --secondary:#4f4e4a;
     --tertiary:#62615c;
     --footer:#77756f;
-    --footer-watermark:rgba(24,24,23,.045);
+    --footer-watermark:#f7f6f3;
     --line:#d8d6cf;
     --grid-line:rgba(24,24,23,.055);
     --grid-node:rgba(24,24,23,.22);
@@ -250,14 +250,14 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
 }
 
 :root[data-theme="light"] {
-  --bg:#f7f6f2;
+  --bg:#f7f6f3;
   --panel:#efeee9;
   --text:#181817;
   --muted:#6f6e69;
   --secondary:#4f4e4a;
   --tertiary:#62615c;
   --footer:#77756f;
-  --footer-watermark:rgba(24,24,23,.045);
+  --footer-watermark:#f7f6f3;
   --line:#d8d6cf;
   --grid-line:rgba(24,24,23,.055);
   --grid-node:rgba(24,24,23,.22);
@@ -275,7 +275,7 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
   --secondary:#bab9b3;
   --tertiary:#aaa9a3;
   --footer:#777772;
-  --footer-watermark:rgba(232,231,226,.065);
+  --footer-watermark:#0d0d0d;
   --line:#30302d;
   --grid-line:rgba(255,255,255,.035);
   --grid-node:rgba(255,255,255,.32);
