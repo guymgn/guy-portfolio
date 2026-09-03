@@ -6,7 +6,7 @@ import { TearaStatus } from "./TearaStatus";
 
 const work = [
   {
-    company: "Independent work",
+    company: "Consultant",
     role: "Product Designer & Builder",
     description: "Working with early-stage startups on confidential product challenges while looking for my next full-time team.",
     period: "2026 to present",
