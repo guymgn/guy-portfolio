@@ -8,7 +8,7 @@ const work = [
   {
     company: "Consultant",
     role: "Product Designer & Builder",
-    description: "Working with early-stage startups on confidential product challenges while looking for my next full-time team.",
+    description: "Partnering with early-stage startups on product work, from product strategy and interaction design to working software.",
     period: "2026 to present",
   },
   {
