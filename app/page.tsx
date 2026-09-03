@@ -66,7 +66,7 @@ export default function Home() {
 
       <ScrollReveal><section className="windowSection" id="work">
         <div className="browserWindow">
-          <div className="windowBar"><div className="windowDots" aria-hidden="true"><i /><i /><i /></div><span>Selected work</span><small>3 entries</small></div>
+          <div className="windowBar"><div className="windowDots" aria-hidden="true"><i /><i /><i /></div><span>Selected work</span></div>
           <div className="windowBody rows">
             {work.map((item) => item.href ? (
               <a className="row" href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined} key={item.company}>
@@ -83,7 +83,7 @@ export default function Home() {
 
       <ScrollReveal><section className="windowSection" id="building">
         <div className="browserWindow">
-          <div className="windowBar"><div className="windowDots" aria-hidden="true"><i /><i /><i /></div><span>What I’m building</span><small>Updated recently</small></div>
+          <div className="windowBar"><div className="windowDots" aria-hidden="true"><i /><i /><i /></div><span>What I’m building</span></div>
           <div className="windowBody">
             <p className="sectionCopy">A mix of products, people, and ideas I care about.</p>
             <div className="plainList">
