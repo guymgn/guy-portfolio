@@ -1,5 +1,6 @@
 import { FloatingNav } from "../FloatingNav";
 import { ContactFooter } from "../ContactFooter";
+import { BackToTop } from "../BackToTop";
 
 const highlights = [
   ["0 to 1 design system", "Built the design system from scratch to improve consistency and development speed."],
@@ -16,6 +17,7 @@ export default function StiggPage() {
   return (
     <main className="caseShell">
       <FloatingNav projectName="Stigg" />
+      <BackToTop />
 
       <header className="caseHero">
         <p className="sectionLabel">Stigg · 2023 to 2026</p>
@@ -83,7 +85,6 @@ export default function StiggPage() {
 
       <footer className="caseFooter">
         <p>All work shown is the property of Stigg. Information is publicly documented, abstracted or anonymized and is included for portfolio purposes only.</p>
-        <a href="/">Back to portfolio ↑</a>
       </footer>
       <ContactFooter />
     </main>

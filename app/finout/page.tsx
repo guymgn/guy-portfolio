@@ -1,5 +1,6 @@
 import { FloatingNav } from "../FloatingNav";
 import { ContactFooter } from "../ContactFooter";
+import { BackToTop } from "../BackToTop";
 
 const highlights = [
   ["One shared view", "Brought AWS, GCP, Kubernetes, Snowflake and SaaS costs into one readable workspace."],
@@ -16,6 +17,7 @@ export default function FinoutPage() {
   return (
     <main className="caseShell">
       <FloatingNav projectName="Finout" />
+      <BackToTop />
 
       <header className="caseHero">
         <p className="sectionLabel">Finout · 2022 to 2023</p>
@@ -97,7 +99,6 @@ export default function FinoutPage() {
 
       <footer className="caseFooter">
         <p>All work shown is the property of Finout. Information is publicly documented, abstracted or anonymized and is included for portfolio purposes only.</p>
-        <a href="/">Back to portfolio ↑</a>
       </footer>
       <ContactFooter />
     </main>

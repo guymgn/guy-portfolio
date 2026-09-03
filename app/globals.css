@@ -231,6 +231,10 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
 .caseFooter { padding:48px 0 80px; display:flex; justify-content:space-between; gap:40px; border-top:1px solid var(--line); color:var(--muted); font-size:var(--type-small); line-height:1.55; }
 .caseFooter p { max-width:650px; margin:0; }
 .caseFooter a { color:var(--accent); white-space:nowrap; }
+.backToTop { position:fixed; z-index:18; right:24px; bottom:24px; padding:10px 13px; border:1px solid color-mix(in srgb,var(--text) 12%,transparent); border-radius:12px; background:color-mix(in srgb,var(--panel) 72%,transparent); box-shadow:inset 0 1px 0 color-mix(in srgb,var(--text) 10%,transparent),0 12px 34px color-mix(in srgb,#000 14%,transparent); color:var(--secondary); font:500 var(--type-small)/1.2 "DM Sans",Arial,sans-serif; opacity:0; transform:translateY(14px) scale(.97); pointer-events:none; cursor:pointer; transition:opacity .2s ease,transform .28s cubic-bezier(.2,.8,.2,1),color .2s ease; -webkit-backdrop-filter:blur(20px) saturate(150%); backdrop-filter:blur(20px) saturate(150%); }
+.backToTop.isVisible { opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+.backToTop:hover,.backToTop:focus-visible { color:var(--text); }
+.backToTop span { margin-left:5px; color:var(--accent); }
 
 @media (prefers-color-scheme: light) {
   :root {
@@ -328,6 +332,7 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
   .caseChapterHead { margin-bottom:48px; }
   .casePlaceholder { min-height:300px; }
   .caseFooter { flex-direction:column; }
+  .backToTop { right:18px; bottom:18px; }
 }
 
 @media (prefers-reduced-motion:reduce) {
@@ -337,4 +342,5 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
   .heroWordmark .heroLetter { color:var(--text); -webkit-text-stroke-color:transparent; opacity:1; filter:none; }
   .intro>.sectionLabel,.intro>.lede,.intro>.heroActions,.intro>.status,.intro>div:not(.heroActions) .role,.revealSection { opacity:1; transform:none; transition:none; }
   .status i { animation:none; }
+  .backToTop { transition:none; }
 }
