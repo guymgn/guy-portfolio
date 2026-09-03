@@ -14,7 +14,7 @@ const work = [
   },
   {
     company: "Stigg",
-    role: "Lead Product Designer",
+    role: "Senior Product Designer",
     description: "Pricing, packaging and entitlements for modern SaaS teams.",
     period: "2023 to 2026",
     href: "/stigg",
@@ -71,11 +71,11 @@ export default function Home() {
           <div className="windowBody rows">
             {work.map((item) => item.href ? (
               <a className="row" href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined} key={item.company}>
-                <div><strong>{item.company}</strong><span>{item.role}</span></div><p>{item.description}</p><span className="period">{item.period}</span><span className="arrow">↗</span>
+                <div><strong>{item.company}</strong></div><div className="workDescription"><span>{item.role}</span><p>{item.description}</p></div><span className="period">{item.period}</span><span className="arrow">↗</span>
               </a>
             ) : (
               <div className="row rowStatic" key={item.company}>
-                <div><strong>{item.company}</strong><span>{item.role}</span></div><p>{item.description}</p><span className="period">{item.period}</span><span className="workBadge">Confidential</span>
+                <div><strong>{item.company}</strong></div><div className="workDescription"><span>{item.role}</span><p>{item.description}</p></div><span className="period">{item.period}</span><span className="workBadge">Confidential</span>
               </div>
             ))}
           </div>
