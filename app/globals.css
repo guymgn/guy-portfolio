@@ -159,6 +159,7 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
 .plainList strong { color:var(--accent); }
 .plainList p { margin:0; color:var(--tertiary); font-size:var(--type-body); }
 .buildingArrow { color:var(--accent); transition:transform .2s ease; }
+.tearaTeamNote { margin-top:8px; display:block; color:var(--secondary); font-size:var(--type-small); line-height:1.55; }
 .tearaLiveStatus { margin-top:8px; display:flex; align-items:center; gap:7px; color:var(--muted); font-size:var(--type-micro); text-transform:uppercase; letter-spacing:var(--tracking-label); }
 .tearaLiveStatus i { width:6px; height:6px; flex:0 0 auto; border-radius:50%; background:#5cc875; box-shadow:0 0 10px rgba(92,200,117,.45); }
 .aboutGrid { display:grid; grid-template-columns:2fr 2fr; gap:52px; }

@@ -22,7 +22,7 @@ const work = [
 ];
 
 const building = [
-  { name: "Teara", description: "A personal iOS app that turns travel bookings into one clear itinerary. Teara has a tiny team. There’s me, Jarvis on marketing, and Friday on R&D. The latter two happen to be AI agents. 🤖", href: "https://www.teara.io" },
+  { name: "Teara", description: "A personal iOS app that turns travel bookings into one clear itinerary.", note: "Teara has a tiny team. There’s me, Jarvis on marketing, and Friday on R&D. The latter two happen to be AI agents. 🤖", href: "https://www.teara.io" },
   { name: "Mentoring", description: "Mentoring designers through the “Startup Designers” Israeli community", href: "https://adplist.org/mentors/guy-magen" },
   { name: "Side quests", description: "Where I let curiosity take the lead. I build small tools for everyday problems, use AI and code to see how far an idea can go, and learn 3D printing through objects that rarely come out right the first time. Away from the screen, I’m usually searching for the next vinyl record, comic book, new artist, or cup of coffee worth getting excited about. 💻🎧☕🍔" },
 ];
@@ -82,7 +82,7 @@ export default function Home() {
             <div className="plainList">
               {building.map((item) => item.href ? (
                 <a href={item.href} target="_blank" rel="noreferrer" key={item.name}>
-                  <strong>{item.name}</strong><p>{item.description}{item.name === "Teara" && <TearaStatus />}</p><span className="buildingArrow">↗</span>
+                  <strong>{item.name}</strong><p>{item.description}{item.note && <span className="tearaTeamNote">{item.note}</span>}{item.name === "Teara" && <TearaStatus />}</p><span className="buildingArrow">↗</span>
                 </a>
               ) : (
                 <div key={item.name}><strong>{item.name}</strong><p>{item.description}</p></div>
