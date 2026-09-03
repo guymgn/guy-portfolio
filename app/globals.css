@@ -12,6 +12,7 @@
   --secondary:#bab9b3;
   --tertiary:#aaa9a3;
   --footer:#777772;
+  --footer-watermark:rgba(232,231,226,.065);
   --line:#30302d;
   --accent:#7776FF;
   --grid-line:rgba(255,255,255,.035);
@@ -168,7 +169,9 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
 .toolsList dt,.toolsList dd { margin:0; font-size:var(--type-body); line-height:1.55; }
 .toolsList dt { color:var(--muted); }
 .toolsList dd { color:var(--tertiary); }
-.contactFooter { padding:84px 0 38px; color:var(--footer); }
+.contactFooter { position:relative; isolation:isolate; padding:84px 0 190px; color:var(--footer); }
+.contactFooter::after { content:"Guy Magen"; position:absolute; z-index:0; left:50%; bottom:-.16em; width:100vw; transform:translateX(-50%); overflow:hidden; color:var(--footer-watermark); font-family:"Hornbill",serif; font-size:clamp(104px,18vw,250px); font-variation-settings:"opsz" 40,"wght" 720; font-weight:720; line-height:.78; letter-spacing:-.055em; text-align:center; white-space:nowrap; text-shadow:0 0 28px color-mix(in srgb,var(--accent) 12%,transparent),0 0 80px color-mix(in srgb,var(--accent) 8%,transparent); pointer-events:none; }
+.contactFooter>* { position:relative; z-index:1; }
 .contactMain h2 { margin:0; padding-bottom:.12em; color:var(--text); font-family:"Hornbill",serif; font-size:clamp(38px,5.5vw,58px); line-height:1.12; letter-spacing:var(--tracking-tight); }
 .contactWordmark { display:flex; flex-wrap:wrap; column-gap:.2em; }
 .contactWord { display:flex; white-space:nowrap; }
@@ -234,6 +237,7 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
     --secondary:#4f4e4a;
     --tertiary:#62615c;
     --footer:#77756f;
+    --footer-watermark:rgba(24,24,23,.045);
     --line:#d8d6cf;
     --grid-line:rgba(24,24,23,.055);
     --grid-node:rgba(24,24,23,.22);
@@ -252,6 +256,7 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
   --secondary:#4f4e4a;
   --tertiary:#62615c;
   --footer:#77756f;
+  --footer-watermark:rgba(24,24,23,.045);
   --line:#d8d6cf;
   --grid-line:rgba(24,24,23,.055);
   --grid-node:rgba(24,24,23,.22);
@@ -269,6 +274,7 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
   --secondary:#bab9b3;
   --tertiary:#aaa9a3;
   --footer:#777772;
+  --footer-watermark:rgba(232,231,226,.065);
   --line:#30302d;
   --grid-line:rgba(255,255,255,.035);
   --grid-node:rgba(255,255,255,.32);
@@ -299,7 +305,8 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
   .windowBar { grid-template-columns:1fr auto; }
   .windowBar>span { text-align:right; }
   .windowBar small { display:none; }
-  .contactFooter { padding:60px 0 34px; }
+  .contactFooter { padding:60px 0 128px; }
+  .contactFooter::after { bottom:-.1em; font-size:clamp(80px,24vw,130px); }
   .footerMeta { min-height:0; margin-top:68px; }
   .caseShell { width:min(100% - 28px,1100px); }
   .caseNav { gap:18px; }
