@@ -175,10 +175,10 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
 .contactFooter::before { content:""; position:absolute; z-index:0; inset:0; background:linear-gradient(to bottom,var(--bg) 68%,var(--footer-gradient-end) 100%); pointer-events:none; }
 .contactFooter::after { content:"Guy Magen"; position:absolute; z-index:1; left:50%; bottom:12px; width:100%; transform:translate(-50%,60px); color:var(--footer-watermark); font-family:"Hornbill",serif; font-size:clamp(104px,18vw,250px); font-variation-settings:"opsz" 40,"wght" 720; font-weight:720; line-height:1; letter-spacing:-.055em; text-align:center; white-space:nowrap; pointer-events:none; }
 .contactFooter>* { position:relative; z-index:2; }
-.contactMain h2 { margin:0; padding-bottom:.12em; color:var(--text); font-family:"Hornbill",serif; font-size:clamp(38px,5.5vw,58px); line-height:1.12; letter-spacing:var(--tracking-tight); }
+.contactMain h2 { margin:0; padding-bottom:.12em; color:var(--text); font-family:"Hornbill",serif; font-size:clamp(38px,5.5vw,58px); font-weight:500; line-height:1.12; letter-spacing:var(--tracking-tight); }
 .contactWordmark { display:flex; flex-wrap:wrap; column-gap:.2em; }
 .contactWord { display:flex; white-space:nowrap; }
-.contactLetter { display:inline-block; transform-origin:50% 80%; text-shadow:0 0 18px color-mix(in srgb,var(--accent) 20%,transparent),0 0 42px color-mix(in srgb,var(--accent) 9%,transparent); font-variation-settings:"opsz" 40,"wght" 650; animation:wordmark-wave 6.5s ease-in-out infinite; will-change:transform,font-variation-settings; }
+.contactLetter { display:inline-block; text-shadow:0 0 18px color-mix(in srgb,var(--accent) 20%,transparent),0 0 42px color-mix(in srgb,var(--accent) 9%,transparent); font-variation-settings:"opsz" 40,"wght" 500; }
 .contactLinks { display:flex; flex-wrap:wrap; gap:18px 28px; margin-top:34px; font-size:var(--type-small); }
 .contactLinks a { padding-bottom:4px; color:var(--accent); background:linear-gradient(currentColor,currentColor) left bottom/0 1px no-repeat; transition:background-size .22s ease; }
 .contactLinks a:hover,.contactLinks a:focus-visible { background-size:100% 1px; }
