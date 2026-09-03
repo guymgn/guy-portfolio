@@ -170,8 +170,9 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
 .toolsList dt { color:var(--muted); }
 .toolsList dd { color:var(--tertiary); }
 .contactFooter { position:relative; isolation:isolate; padding:84px 0 190px; color:var(--footer); }
-.contactFooter::after { content:"Guy Magen"; position:absolute; z-index:0; left:50%; bottom:-.16em; width:100vw; transform:translateX(-50%); overflow:hidden; color:var(--footer-watermark); font-family:"Hornbill",serif; font-size:clamp(104px,18vw,250px); font-variation-settings:"opsz" 40,"wght" 720; font-weight:720; line-height:.78; letter-spacing:-.055em; text-align:center; white-space:nowrap; text-shadow:0 0 28px color-mix(in srgb,var(--accent) 12%,transparent),0 0 80px color-mix(in srgb,var(--accent) 8%,transparent); pointer-events:none; }
-.contactFooter>* { position:relative; z-index:1; }
+.contactFooter::before { content:""; position:absolute; z-index:0; left:50%; bottom:0; width:100vw; height:260px; transform:translateX(-50%); background:linear-gradient(to bottom,transparent,color-mix(in srgb,var(--panel) 46%,transparent) 52%,color-mix(in srgb,var(--panel) 74%,var(--bg))); pointer-events:none; }
+.contactFooter::after { content:"Guy Magen"; position:absolute; z-index:1; left:50%; bottom:-.16em; width:100vw; transform:translateX(-50%); overflow:hidden; color:var(--footer-watermark); font-family:"Hornbill",serif; font-size:clamp(104px,18vw,250px); font-variation-settings:"opsz" 40,"wght" 720; font-weight:720; line-height:.78; letter-spacing:-.055em; text-align:center; white-space:nowrap; pointer-events:none; }
+.contactFooter>* { position:relative; z-index:2; }
 .contactMain h2 { margin:0; padding-bottom:.12em; color:var(--text); font-family:"Hornbill",serif; font-size:clamp(38px,5.5vw,58px); line-height:1.12; letter-spacing:var(--tracking-tight); }
 .contactWordmark { display:flex; flex-wrap:wrap; column-gap:.2em; }
 .contactWord { display:flex; white-space:nowrap; }
