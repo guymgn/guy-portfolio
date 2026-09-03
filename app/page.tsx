@@ -95,7 +95,15 @@ export default function Home() {
       <ScrollReveal><section id="about">
         <p className="sectionLabel">A little about me</p>
         <div className="aboutGrid">
-          <p>For the past 12+ years, I’ve designed SaaS platforms, AI tools, and mobile apps. I’m drawn to complex systems and enjoy turning them into products that feel clear, useful, and easy to understand. These days, I also use AI and code to move beyond prototypes and build working products myself.</p>
+          <div className="aboutStory">
+            <p>For the past 12+ years, I’ve designed SaaS platforms, AI tools, and mobile apps. I’m drawn to complex systems and enjoy turning them into products that feel clear, useful, and easy to understand. These days, I also use AI and code to move beyond prototypes and build working products myself.</p>
+            <div className="currentWork">
+              <span>Currently</span>
+              <h3>Independent Product Designer &amp; Builder</h3>
+              <p>Working with early-stage startups on confidential product work while looking for my next full-time team.</p>
+              <small>February 2026 to present</small>
+            </div>
+          </div>
           <div className="toolsList">
             <span>Tools I reach for</span>
             <dl>
