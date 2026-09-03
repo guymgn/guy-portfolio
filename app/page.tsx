@@ -10,7 +10,6 @@ const work = [
     role: "Product Designer & Builder",
     description: "Working with early-stage startups on confidential product challenges while looking for my next full-time team.",
     period: "2026 to present",
-    confidential: true,
   },
   {
     company: "Stigg",
@@ -75,7 +74,7 @@ export default function Home() {
               </a>
             ) : (
               <div className="row rowStatic" key={item.company}>
-                <div><strong>{item.company}</strong></div><div className="workDescription"><span>{item.role}</span><p>{item.description}</p></div><span className="period">{item.period}</span><span className="workBadge">Confidential</span>
+                <div><strong>{item.company}</strong></div><div className="workDescription"><span>{item.role}</span><p>{item.description}</p></div><span className="period">{item.period}</span>
               </div>
             ))}
           </div>
