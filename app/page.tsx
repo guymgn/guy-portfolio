@@ -14,7 +14,7 @@ const work = [
   },
   {
     company: "Stigg",
-    role: "Senior Product Designer",
+    role: "Product Designer",
     description: "Pricing, packaging and entitlements for modern SaaS teams.",
     period: "2023 to 2026",
     href: "/stigg",
