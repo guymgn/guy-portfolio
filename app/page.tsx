@@ -6,6 +6,13 @@ import { TearaStatus } from "./TearaStatus";
 
 const work = [
   {
+    company: "Independent work",
+    role: "Product Designer & Builder",
+    description: "Working with early-stage startups on confidential product challenges while looking for my next full-time team.",
+    period: "2026 to present",
+    confidential: true,
+  },
+  {
     company: "Stigg",
     role: "Lead Product Designer",
     description: "Pricing, packaging and entitlements for modern SaaS teams.",
@@ -58,26 +65,18 @@ export default function Home() {
         <div className="status"><span className="availability"><i /> Based in Israel · Available for the right team</span></div>
       </section>
 
-      <ScrollReveal><section className="currentSection" aria-labelledby="current-role">
-        <p className="sectionLabel">Currently</p>
-        <div>
-          <h2 id="current-role">Independent Product Designer &amp; Builder</h2>
-          <p>Working with early-stage startups on confidential product work while looking for my next full-time team.</p>
-        </div>
-        <small>February 2026 to present</small>
-      </section></ScrollReveal>
-
       <ScrollReveal><section className="windowSection" id="work">
         <div className="browserWindow">
-          <div className="windowBar"><div className="windowDots" aria-hidden="true"><i /><i /><i /></div><span>Selected projects</span><small>2 projects</small></div>
+          <div className="windowBar"><div className="windowDots" aria-hidden="true"><i /><i /><i /></div><span>Selected work</span><small>3 entries</small></div>
           <div className="windowBody rows">
-            {work.map((item) => (
+            {work.map((item) => item.href ? (
               <a className="row" href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined} key={item.company}>
-                <div><strong>{item.company}</strong><span>{item.role}</span></div>
-                <p>{item.description}</p>
-                <span className="period">{item.period}</span>
-                <span className="arrow">↗</span>
+                <div><strong>{item.company}</strong><span>{item.role}</span></div><p>{item.description}</p><span className="period">{item.period}</span><span className="arrow">↗</span>
               </a>
+            ) : (
+              <div className="row rowStatic" key={item.company}>
+                <div><strong>{item.company}</strong><span>{item.role}</span></div><p>{item.description}</p><span className="period">{item.period}</span><span className="workBadge">Confidential</span>
+              </div>
             ))}
           </div>
         </div>
