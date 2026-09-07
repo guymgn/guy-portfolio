@@ -98,11 +98,13 @@ export default function Home() {
       </section></ScrollReveal>
 
       <ScrollReveal><section id="about">
-        <p className="sectionLabel">A little about me</p>
         <div className="aboutGrid">
-          <p>For the past 12+ years, I’ve designed SaaS platforms, AI tools, and mobile apps. I’m drawn to complex systems and enjoy turning them into products that feel clear, useful, and easy to understand. These days, I also use AI and code to move beyond prototypes and build working products myself.</p>
+          <div className="aboutCopy">
+            <p className="sectionLabel">A little about me</p>
+            <p>I’ve been designing products for more than 12 years, and I still enjoy the moment when a complicated problem begins to feel simple. Lately, I’ve also been using AI and code to build my own ideas, which means I can take them beyond Figma and turn them into real, working products.</p>
+          </div>
           <div className="toolsList">
-            <span>Tools I reach for</span>
+            <span className="sectionLabel">Tools I reach for</span>
             <dl>
               <div><dt>Product design</dt><dd>Figma, Rive, Lottie</dd></div>
               <div><dt>AI / Dev</dt><dd>Xcode, VS Code, Super.Engineering, Codex / ChatGPT, Claude, Gemini</dd></div>

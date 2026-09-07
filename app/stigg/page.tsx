@@ -1,21 +1,17 @@
 import { FloatingNav } from "../FloatingNav";
 import { ContactFooter } from "../ContactFooter";
 import { BackToTop } from "../BackToTop";
+import { ModelingAccessCanvas } from "./ModelingAccessCanvas";
+import { CreateFeatureCanvas } from "./CreateFeatureCanvas";
+import { FeatureGroupCanvas } from "./FeatureGroupCanvas";
 
-const highlights = [
-  ["0 to 1 design system", "Built the design system from scratch to improve consistency and development speed."],
-  ["Impact at scale", "Defined the feature roadmap for high-growth customers and owned design-to-spec accuracy."],
-  ["Technical alignment", "Worked closely with engineering to make complex backend pricing logic feasible and understandable."],
-  ["Platform evolution", "Helped scale the platform from fundamental entitlements to more advanced workflows."],
-];
-
-function Placeholder({ label }: { label: string }) {
-  return <div className="casePlaceholder"><span>{label}</span><small>Visual placeholder</small></div>;
+function VisualPlaceholder({ title, description }: { title: string; description: string }) {
+  return <div className="casePlaceholder"><small>Visual to build</small><span>{title}</span><p>{description}</p></div>;
 }
 
 export default function StiggPage() {
   return (
-    <main className="caseShell">
+    <main className="caseShell stiggTheme">
       <FloatingNav projectName="Stigg" />
       <BackToTop />
 
@@ -24,7 +20,7 @@ export default function StiggPage() {
         <h1>Designing the model behind modern SaaS pricing</h1>
         <p className="caseDek">A monetization and entitlements platform that helps SaaS companies manage pricing, packaging and customer access with flexibility and scale.</p>
         <dl className="caseMeta">
-          <div><dt>Role</dt><dd>Lead Product Designer</dd></div>
+          <div><dt>Role</dt><dd>Product Designer</dd></div>
           <div><dt>Focus</dt><dd>Product design, UX research, systems</dd></div>
           <div><dt>Platform</dt><dd>Web app</dd></div>
         </dl>
@@ -35,52 +31,53 @@ export default function StiggPage() {
         <div>
           <h2>From access rules to what customers actually see</h2>
           <p>This case study follows one part of my work at Stigg. It starts with the platform’s core access model, moves through reusable Feature Groups built for scale, and ends with the embeddable widgets where that model becomes a customer-facing experience.</p>
-          <p>I joined as a freelance product designer in March 2023 and quickly took ownership of the product design function. I later moved into a full-time role, owning the end-to-end product design strategy.</p>
-        </div>
-      </section>
-
-      <section className="caseHighlights">
-        <p className="sectionLabel">My journey at Stigg</p>
-        <div className="highlightGrid">
-          {highlights.map(([title, copy], index) => <article key={title}><small>0{index + 1}</small><h3>{title}</h3><p>{copy}</p></article>)}
+          <p>The story starts with the platform’s basic access model, moves into reusable Feature Groups built to manage scale, and ends with the embeddable widgets where that model becomes something customers’ users can actually see.</p>
         </div>
       </section>
 
       <section className="caseChapter">
-        <div className="caseChapterHead"><p className="sectionLabel">01 · Modeling access</p><h2>Entitlements are enforced. Features organize them.</h2></div>
+        <div className="caseChapterHead"><p className="sectionLabel">01 · The ecosystem</p><h2>A product model that connects to the rest of the business</h2></div>
+        <div className="caseTwoCol caseCopy">
+          <p className="caseLead">Stigg sits between the product, its billing stack, and the systems teams already use.</p>
+          <p>Integrations with billing providers, CRMs and marketplaces make the pricing model operational. The platform needs to keep product access aligned as customer and subscription data moves across those systems.</p>
+        </div>
+        <VisualPlaceholder title="The Stigg ecosystem" description="A visual map showing how Stigg connects product access with billing, CRM and marketplace tools." />
+      </section>
+
+      <section className="caseChapter">
+        <div className="caseChapterHead"><p className="sectionLabel">02 · Modeling access</p><h2>Entitlements are enforced. Features organize them.</h2></div>
         <div className="caseTwoCol caseCopy">
           <p className="caseLead">One of the fundamental challenges was defining how access actually works.</p>
           <div><p>I designed a structure where Features describe a capability and Entitlements define its rules. This gave teams a clearer way to control who gets what, when and why across pricing and packaging.</p><p>Different capabilities needed different rule types, including boolean access, metered usage, numeric limits and configuration values.</p></div>
         </div>
-        <Placeholder label="Entitlement model and examples" />
+        <ModelingAccessCanvas />
       </section>
 
       <section className="caseChapter">
-        <div className="caseChapterHead"><p className="sectionLabel">02 · Creating features</p><h2>A setup that adapts to the feature, not the other way around</h2></div>
+        <div className="caseChapterHead"><p className="sectionLabel">03 · Creating and configuring features</p><h2>A setup that adapts to every entitlement type</h2></div>
         <div className="caseTwoCol caseCopy">
-          <p className="caseLead">Metered, boolean and list-based features each need their own settings.</p>
-          <p>The creation flow reveals only what is relevant to the selected feature type. That keeps a technical model manageable without hiding the decisions teams need to make.</p>
+          <p className="caseLead">Access is not always a simple on or off decision.</p>
+          <p>Boolean, configuration and metered features each require different rules. The creation flow reveals only what is relevant to the selected type, keeping the technical model manageable while making each configuration decision clear.</p>
         </div>
-        <Placeholder label="Feature creation flow" />
+        <CreateFeatureCanvas />
       </section>
 
       <section className="caseChapter">
-        <div className="caseChapterHead"><p className="sectionLabel">03 · Scaling the model</p><h2>Feature Groups turned repeated setup into reusable infrastructure</h2></div>
-        <div className="caseStory">
-          <article><small>The problem</small><p>Sales needed flexible custom plans to close enterprise deals, while R&amp;D was dealing with growing duplication. Without abstraction, teams could end up recreating more than 100 features for each customer.</p></article>
-          <article><small>The response</small><p>I led discovery across Sales and Engineering, mapped where the model was drifting, and helped shape Feature Groups as a reusable layer for bundling complex entitlement logic.</p></article>
-          <article><small>The outcome</small><p>Teams could reuse shared configurations across plans and add-ons. Guardrails made global changes safer and more predictable for large customers.</p></article>
-        </div>
-        <Placeholder label="Feature Groups before and after" />
-      </section>
-
-      <section className="caseChapter">
-        <div className="caseChapterHead"><p className="sectionLabel">04 · Where the model meets the user</p><h2>Turning entitlement configuration into on-brand widgets</h2></div>
+        <div className="caseChapterHead"><p className="sectionLabel">04 · Feature Groups</p><h2>Turning repeated configuration into something reusable</h2></div>
         <div className="caseTwoCol caseCopy">
-          <p className="caseLead">The model only matters when it becomes a clear experience for the end user.</p>
-          <div><p>I designed the no-code editor behind Stigg’s embeddable widget library, including pricing tables, checkout and customer portals.</p><p>Plans, features and add-ons flow directly from the entitlement configuration, so the interface stays aligned with what is actually enforced. Style and code modes let teams customize the result, while a live preview shows exactly what users will see.</p></div>
+          <p className="caseLead">As product catalogs grow, the same entitlement patterns start appearing across plans and add-ons.</p>
+          <p>Feature Groups introduced a reusable layer: define the group and its features once, then apply it across plans. Each tier can still set its own entitlement values, such as a different support level or monthly bandwidth allowance.</p>
         </div>
-        <Placeholder label="Widget editor and live preview" />
+        <FeatureGroupCanvas />
+      </section>
+
+      <section className="caseChapter">
+        <div className="caseChapterHead"><p className="sectionLabel">05 · Widgets</p><h2>Where the model meets the user</h2></div>
+        <div className="caseTwoCol caseCopy">
+          <p className="caseLead">Stigg turns a team’s entitlement model into embeddable, on-brand widgets.</p>
+          <div><p>I designed the no-code editor behind that surface layer, including pricing tables, checkout, customer portals and other widgets.</p><p>Plans, features and add-ons flow directly from the entitlement configuration. Style and code modes support customization, while the live preview lets teams see what their users will see before publishing.</p></div>
+        </div>
+        <VisualPlaceholder title="Widget editor" description="A living no-code editor where styling changes update an embeddable pricing table in real time." />
       </section>
 
       <footer className="caseFooter">

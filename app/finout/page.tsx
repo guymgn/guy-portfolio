@@ -15,7 +15,7 @@ function Placeholder({ label }: { label: string }) {
 
 export default function FinoutPage() {
   return (
-    <main className="caseShell">
+    <main className="caseShell finoutTheme">
       <FloatingNav projectName="Finout" />
       <BackToTop />
 
