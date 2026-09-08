@@ -33,8 +33,8 @@ function FeatureGroupPlans() {
   const [activeId, setActiveId] = useState("cdn");
   const active = planFeatures.find((feature) => feature.id === activeId) ?? planFeatures[0];
 
-  const renderPlan = (label: string, value: string | string[]) => <article>
-    <b>{label}</b>
+  const renderPlan = (label: string, value: string | string[]) => <article aria-label={label}>
+    <span className="featurePlanOverride">Plan-specific value</span>
     <header><img src={iconFor(active.type)} alt="" /><span><strong>{active.name}</strong><small>feature-{active.id}</small></span><em>{Array.isArray(value) ? `${value.length} Values` : value}</em></header>
     {Array.isArray(value) ? <div className="featurePlanValues">{value.map((item) => <div key={item}><span>{item}</span><small>{item.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}</small></div>)}</div> : <div className="featurePlanSingleValue"><span>Entitlement value</span><strong>{value}</strong></div>}
   </article>;
@@ -46,7 +46,7 @@ function FeatureGroupPlans() {
         <img src={iconFor(feature.type)} alt="" /><span><strong>{feature.name}</strong><small>feature-{feature.id}</small></span><em>{feature.groupValue}</em><i>{feature.interactive ? "›" : ""}</i>
       </button>)}</div>
     </div>
-    <div className="featureGroupPlanResults">
+    <div className="featureGroupPlanResults" key={activeId}>
       {renderPlan("Plan A", active.planA)}
       {renderPlan("Plan B", active.planB)}
     </div>

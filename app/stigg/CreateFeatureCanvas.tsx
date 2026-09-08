@@ -28,6 +28,8 @@ function SelectChevron() {
 }
 
 export function CreateFeatureCanvas() {
+  const [featureName, setFeatureName] = useState("API Calls");
+  const [description, setDescription] = useState("A single, countable request made by a client application");
   const [mainType, setMainType] = useState<MainType>("metered");
   const [detailType, setDetailType] = useState<DetailType>("metered-calculated");
   const [openMenu, setOpenMenu] = useState<"type" | "subtype" | null>(null);
@@ -37,6 +39,7 @@ export function CreateFeatureCanvas() {
     : mainType === "metered"
       ? subTypes.metered.find((type) => type.id === detailType) ?? subTypes.metered[0]
       : null;
+  const featureId = `feature-${featureName.trim().replace(/[^a-z0-9]+/gi, "") || "newFeature"}`;
 
   const selectMainType = (type: MainType) => {
     setMainType(type);
@@ -56,13 +59,13 @@ export function CreateFeatureCanvas() {
         <div className="createFeatureTitle"><h3>Create new feature</h3><span aria-hidden="true">×</span></div>
         <label className="createFeatureField">
           <span>Feature name</span>
-          <input defaultValue="API Calls" aria-label="Feature name" />
+          <input value={featureName} onChange={(event) => setFeatureName(event.target.value)} aria-label="Feature name" />
         </label>
         <label className="createFeatureField">
           <span>Description</span>
-          <input defaultValue="A single, countable request made by a client application" aria-label="Description" />
+          <input value={description} onChange={(event) => setDescription(event.target.value)} aria-label="Description" />
         </label>
-        <div className="createFeatureId"><span>ID</span><i>?</i><code>feature-APICalls</code><button type="button">Edit</button></div>
+        <div className="createFeatureId"><span>ID</span><i>?</i><code>{featureId}</code><button type="button">Edit</button></div>
 
         <div className="stiggSelectField">
           <span>Type</span>

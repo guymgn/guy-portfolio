@@ -44,6 +44,11 @@ export function ModelingAccessCanvas() {
   const [selectedId, setSelectedId] = useState(features[0].id);
   const [isPaused, setIsPaused] = useState(false);
   const selected = features.find((feature) => feature.id === selectedId) ?? features[0];
+  const entitlementOutput = selected.icon === "boolean"
+    ? `{ access: true }`
+    : selected.icon === "enum"
+      ? `{ values: [${selected.value.includes("Standard") ? '"standard", "premium", "pro"' : '"us", "uk", "de"'}] }`
+      : `{ limit: "${selected.value}" }`;
 
   useEffect(() => {
     if (isPaused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -89,6 +94,7 @@ export function ModelingAccessCanvas() {
       <div className="modelingExplanation" aria-live="polite">
         <div className="modelingExplanationLabel"><span>{selected.name}</span></div>
         <p>{selected.explanation}</p>
+        <code>{entitlementOutput}</code>
       </div>
     </div>
   );

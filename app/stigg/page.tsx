@@ -2,82 +2,116 @@ import { FloatingNav } from "../FloatingNav";
 import { ContactFooter } from "../ContactFooter";
 import { BackToTop } from "../BackToTop";
 import { ModelingAccessCanvas } from "./ModelingAccessCanvas";
-import { CreateFeatureCanvas } from "./CreateFeatureCanvas";
 import { FeatureGroupCanvas } from "./FeatureGroupCanvas";
-
-function VisualPlaceholder({ title, description }: { title: string; description: string }) {
-  return <div className="casePlaceholder"><small>Visual to build</small><span>{title}</span><p>{description}</p></div>;
-}
+import { SubscriptionCanvas } from "./SubscriptionCanvas";
+import { WidgetCanvas } from "./WidgetCanvas";
 
 export default function StiggPage() {
   return (
     <main className="caseShell stiggTheme">
+      <div className="stiggMobileBlock">
+        <p className="sectionLabel">Stigg case study</p>
+        <h1>This project is best viewed on desktop</h1>
+        <p>The case study includes detailed interactive product canvases designed for a larger screen.</p>
+        <a href="/">Back to portfolio</a>
+      </div>
       <FloatingNav projectName="Stigg" />
       <BackToTop />
 
       <header className="caseHero">
         <p className="sectionLabel">Stigg · 2023 to 2026</p>
         <h1>Designing the model behind modern SaaS pricing</h1>
-        <p className="caseDek">A monetization and entitlements platform that helps SaaS companies manage pricing, packaging and customer access with flexibility and scale.</p>
+        <p className="caseDek">Three years shaping the core product experience of a monetization and entitlements platform, from pricing models and subscription management to customer-facing experiences.</p>
         <dl className="caseMeta">
           <div><dt>Role</dt><dd>Product Designer</dd></div>
-          <div><dt>Focus</dt><dd>Product design, UX research, systems</dd></div>
-          <div><dt>Platform</dt><dd>Web app</dd></div>
+          <div className="caseMetaFocus"><dt>Focus</dt><dd>Product design, UX research, design systems</dd></div>
         </dl>
       </header>
 
-      <section className="caseIntro caseTwoCol">
-        <p className="sectionLabel">The work</p>
-        <div>
-          <h2>From access rules to what customers actually see</h2>
-          <p>This case study follows one part of my work at Stigg. It starts with the platform’s core access model, moves through reusable Feature Groups built for scale, and ends with the embeddable widgets where that model becomes a customer-facing experience.</p>
-          <p>The story starts with the platform’s basic access model, moves into reusable Feature Groups built to manage scale, and ends with the embeddable widgets where that model becomes something customers’ users can actually see.</p>
+      <section className="caseChapter caseChapterInternalEnd">
+        <div className="caseChapterHead"><p className="sectionLabel">What Stigg solves</p><h2>Pricing is a business decision that becomes a product system</h2></div>
+        <div className="caseTwoCol caseCopy">
+          <p className="caseLead">A plan may begin in a spreadsheet, but the product still has to know what every customer can access.</p>
+          <div><p>As SaaS companies grow, pricing decisions spread across billing providers, application code, sales agreements and customer-facing experiences. Every change creates another place that can drift out of sync.</p><p>Stigg gives teams a shared model for pricing and packaging, subscriptions and entitlements, so commercial decisions can become reliable product behavior.</p></div>
+        </div>
+        <div className="stiggSystemMap" aria-label="How Stigg connects pricing decisions to operational systems">
+          <article><small>Business input</small><strong>Pricing strategy</strong><span>Plans · Packaging</span></article>
+          <i>→</i>
+          <article className="isCore"><small>Shared model</small><strong>Stigg</strong><span>Product Catalog · Subscriptions · Entitlements</span></article>
+          <i>→</i>
+          <div><article><small>Money</small><strong>Billing</strong></article><article><small>Behavior</small><strong>Product access</strong></article><article><small>Experience</small><strong>Customer UI</strong></article></div>
+        </div>
+        <div className="stiggDesignScope">
+          <p className="sectionLabel">Design scope</p>
+          <ul>
+            <li>Core platform workflows</li>
+            <li>Customer and stakeholder research</li>
+            <li>Billing and entitlement interaction models</li>
+            <li>Design system established for the platform</li>
+          </ul>
+        </div>
+      </section>
+
+      <section className="caseChapter caseChapterInternalEnd">
+        <div className="caseChapterHead"><p className="sectionLabel">Research and framing</p><h2>The tools were capable. The mental model was fragmented.</h2></div>
+        <div className="caseTwoCol caseCopy">
+          <p className="caseLead">The research approached the problem from both sides: how teams described pricing decisions and how existing products represented them.</p>
+          <p>Customer and stakeholder conversations were considered alongside a market review of Stripe, Chargebee, Maxio, Metronome and Orb. The recurring gap was not capability, but coherence: each experience often began with one part of the system rather than the complete relationship between packaging, billing and access.</p>
+        </div>
+        <div className="stiggResearchGrid">
+          <article><small>Billing-first</small><strong>Stripe · Chargebee · Maxio</strong><p>Strong subscription and payment primitives, with product access often managed somewhere else.</p></article>
+          <article><small>Usage-first</small><strong>Metronome · Orb</strong><p>Powerful metering and calculation models that could expose technical complexity to operators.</p></article>
+          <article className="isOpportunity"><small>Stigg’s opportunity</small><strong>One operational model</strong><p>Connect packaging, subscriptions, billing and entitlements without forcing users to think like the underlying infrastructure.</p></article>
+        </div>
+        <div className="stiggFindings">
+          <span>01</span><p><strong>People think in customers and plans.</strong> The system still needs products, charges, features and entitlement values.</p>
+          <span>02</span><p><strong>B2B agreements need exceptions.</strong> Flexible configuration cannot make the default path feel unsafe or unpredictable.</p>
+          <span>03</span><p><strong>The result must stay visible.</strong> Users need to understand the subscription they are assembling before they create it.</p>
         </div>
       </section>
 
       <section className="caseChapter">
-        <div className="caseChapterHead"><p className="sectionLabel">01 · The ecosystem</p><h2>A product model that connects to the rest of the business</h2></div>
+        <div className="caseChapterHead"><p className="sectionLabel">Creating a subscription</p><h2>One workflow, many interconnected decisions</h2></div>
         <div className="caseTwoCol caseCopy">
-          <p className="caseLead">Stigg sits between the product, its billing stack, and the systems teams already use.</p>
-          <p>Integrations with billing providers, CRMs and marketplaces make the pricing model operational. The platform needs to keep product access aligned as customer and subscription data moves across those systems.</p>
+          <p className="caseLead">The challenge was preserving flexibility without making a high-impact workflow feel unpredictable.</p>
+          <p>The subscription flow connects a customer to a product and plan, then keeps charges, schedule and billing decisions in context while a persistent preview makes the result understandable before creation. The recreation below is based on the shipped experience; some interface details have evolved since this work was completed.</p>
         </div>
-        <VisualPlaceholder title="The Stigg ecosystem" description="A visual map showing how Stigg connects product access with billing, CRM and marketplace tools." />
+        <SubscriptionCanvas />
       </section>
 
       <section className="caseChapter">
-        <div className="caseChapterHead"><p className="sectionLabel">02 · Modeling access</p><h2>Entitlements are enforced. Features organize them.</h2></div>
+        <div className="caseChapterHead"><p className="sectionLabel">Modeling access</p><h2>The system beneath the subscription</h2></div>
         <div className="caseTwoCol caseCopy">
-          <p className="caseLead">One of the fundamental challenges was defining how access actually works.</p>
-          <div><p>I designed a structure where Features describe a capability and Entitlements define its rules. This gave teams a clearer way to control who gets what, when and why across pricing and packaging.</p><p>Different capabilities needed different rule types, including boolean access, metered usage, numeric limits and configuration values.</p></div>
+          <p className="caseLead">The challenge was giving teams flexibility without exposing the complexity of the underlying authorization model.</p>
+          <div><p>The resulting structure separates capabilities into Features and their rules into Entitlements. This gives teams a clearer way to control who gets what, when and why across pricing and packaging.</p><p>Different capabilities use different rule types, including boolean access, metered usage, numeric limits and configuration values, while retaining a consistent interaction model.</p></div>
         </div>
         <ModelingAccessCanvas />
       </section>
 
       <section className="caseChapter">
-        <div className="caseChapterHead"><p className="sectionLabel">03 · Creating and configuring features</p><h2>A setup that adapts to every entitlement type</h2></div>
+        <div className="caseChapterHead"><p className="sectionLabel">Feature Groups</p><h2>Reuse without losing plan-level flexibility</h2></div>
         <div className="caseTwoCol caseCopy">
-          <p className="caseLead">Access is not always a simple on or off decision.</p>
-          <p>Boolean, configuration and metered features each require different rules. The creation flow reveals only what is relevant to the selected type, keeping the technical model manageable while making each configuration decision clear.</p>
-        </div>
-        <CreateFeatureCanvas />
-      </section>
-
-      <section className="caseChapter">
-        <div className="caseChapterHead"><p className="sectionLabel">04 · Feature Groups</p><h2>Turning repeated configuration into something reusable</h2></div>
-        <div className="caseTwoCol caseCopy">
-          <p className="caseLead">As product catalogs grow, the same entitlement patterns start appearing across plans and add-ons.</p>
-          <p>Feature Groups introduced a reusable layer: define the group and its features once, then apply it across plans. Each tier can still set its own entitlement values, such as a different support level or monthly bandwidth allowance.</p>
+          <p className="caseLead">As catalogs grew, repeated configuration created more work and more opportunities for plans to drift apart.</p>
+          <p>Feature Groups introduced a reusable layer: define the group and its features once, then apply it across plans. Reuse reduces repetition without removing necessary exceptions, so each tier can still set its own support level or monthly bandwidth allowance.</p>
         </div>
         <FeatureGroupCanvas />
       </section>
 
       <section className="caseChapter">
-        <div className="caseChapterHead"><p className="sectionLabel">05 · Widgets</p><h2>Where the model meets the user</h2></div>
+        <div className="caseChapterHead"><p className="sectionLabel">Widget themes</p><h2>One brand system, rendered with a company’s product data</h2></div>
         <div className="caseTwoCol caseCopy">
-          <p className="caseLead">Stigg turns a team’s entitlement model into embeddable, on-brand widgets.</p>
-          <div><p>I designed the no-code editor behind that surface layer, including pricing tables, checkout, customer portals and other widgets.</p><p>Plans, features and add-ons flow directly from the entitlement configuration. Style and code modes support customization, while the live preview lets teams see what their users will see before publishing.</p></div>
+          <p className="caseLead">The challenge was separating presentation from data without making either side feel disconnected.</p>
+          <div><p>A reusable theme controls the shared visual language across the widget library: Checkout, Pricing Table, Customer Portal and Power-up Badge.</p><p>Plans, features and add-ons come directly from a company’s Stigg configuration. The theme shapes how that product and pricing data is presented, while the live preview makes the result visible before publishing.</p></div>
         </div>
-        <VisualPlaceholder title="Widget editor" description="A living no-code editor where styling changes update an embeddable pricing table in real time." />
+        <WidgetCanvas />
+      </section>
+
+      <section className="caseChapter stiggReflection">
+        <div className="caseChapterHead"><p className="sectionLabel">Reflection</p><h2>From individual workflows to a connected product language</h2></div>
+        <div className="caseTwoCol caseCopy">
+          <p className="caseLead">Across three years, the work expanded from solving individual workflows to establishing shared models and reusable patterns across the platform.</p>
+          <div><p>The same principles carried through each feature: make complex configuration understandable, keep consequences visible and allow flexibility without weakening the default path.</p><p>Together, the subscription workflow, entitlement model, Feature Groups, design system and widget themes show one consistent approach to UX: translate infrastructure-level complexity into decisions that people can understand and trust.</p></div>
+        </div>
       </section>
 
       <footer className="caseFooter">
