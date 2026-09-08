@@ -25,6 +25,7 @@ export default function StiggPage() {
         <dl className="caseMeta">
           <div><dt>Role</dt><dd>Product Designer</dd></div>
           <div className="caseMetaFocus"><dt>Focus</dt><dd>Product design, UX research, design systems</dd></div>
+          <div className="caseMetaScope"><dt>Design scope</dt><dd><span>Core platform workflows</span><span>Customer and stakeholder research</span><span>Billing and entitlement interaction models</span><span>Design system established for the platform</span></dd></div>
         </dl>
       </header>
 
@@ -40,15 +41,6 @@ export default function StiggPage() {
           <article className="isCore"><small>Shared model</small><strong>Stigg</strong><span>Product Catalog · Subscriptions · Entitlements</span></article>
           <i>→</i>
           <div><article><small>Money</small><strong>Billing</strong></article><article><small>Behavior</small><strong>Product access</strong></article><article><small>Experience</small><strong>Customer UI</strong></article></div>
-        </div>
-        <div className="stiggDesignScope">
-          <p className="sectionLabel">Design scope</p>
-          <ul>
-            <li>Core platform workflows</li>
-            <li>Customer and stakeholder research</li>
-            <li>Billing and entitlement interaction models</li>
-            <li>Design system established for the platform</li>
-          </ul>
         </div>
       </section>
 
@@ -72,15 +64,20 @@ export default function StiggPage() {
 
       <section className="caseChapter">
         <div className="caseChapterHead"><p className="sectionLabel">Creating a subscription</p><h2>One workflow, many interconnected decisions</h2></div>
-        <div className="caseTwoCol caseCopy">
+        <div className="caseTwoCol caseCopy hasDecisionSupport">
           <p className="caseLead">The challenge was preserving flexibility without making a high-impact workflow feel unpredictable.</p>
           <p>The subscription flow connects a customer to a product and plan, then keeps charges, schedule and billing decisions in context while a persistent preview makes the result understandable before creation. The recreation below is based on the shipped experience; some interface details have evolved since this work was completed.</p>
+        </div>
+        <div className="stiggDecisionGrid" aria-label="Subscription workflow design rationale">
+          <article><small>Tension</small><strong>Many dependent decisions</strong><p>Plan, quantity, timing and billing choices all affect the same subscription.</p></article>
+          <article><small>Design response</small><strong>Structure first, preview throughout</strong><p>Related inputs stay grouped while the resulting subscription remains visible.</p></article>
+          <article><small>What it enables</small><strong>Review before commitment</strong><p>The combined outcome can be checked as one object before it is created.</p></article>
         </div>
         <SubscriptionCanvas />
       </section>
 
       <section className="caseChapter">
-        <div className="caseChapterHead"><p className="sectionLabel">Modeling access</p><h2>The system beneath the subscription</h2></div>
+        <div className="caseChapterHead"><p className="sectionLabel">Modeling access</p><h2>The mechanism beneath the subscription</h2></div>
         <div className="caseTwoCol caseCopy">
           <p className="caseLead">The challenge was giving teams flexibility without exposing the complexity of the underlying authorization model.</p>
           <div><p>The resulting structure separates capabilities into Features and their rules into Entitlements. This gives teams a clearer way to control who gets what, when and why across pricing and packaging.</p><p>Different capabilities use different rule types, including boolean access, metered usage, numeric limits and configuration values, while retaining a consistent interaction model.</p></div>
@@ -89,10 +86,15 @@ export default function StiggPage() {
       </section>
 
       <section className="caseChapter">
-        <div className="caseChapterHead"><p className="sectionLabel">Feature Groups</p><h2>Reuse without losing plan-level flexibility</h2></div>
-        <div className="caseTwoCol caseCopy">
-          <p className="caseLead">As catalogs grew, repeated configuration created more work and more opportunities for plans to drift apart.</p>
-          <p>Feature Groups introduced a reusable layer: define the group and its features once, then apply it across plans. Reuse reduces repetition without removing necessary exceptions, so each tier can still set its own support level or monthly bandwidth allowance.</p>
+        <div className="caseChapterHead"><p className="sectionLabel">Feature Groups</p><h2>One capability, different levels of access</h2></div>
+        <div className="caseTwoCol caseCopy hasDecisionSupport">
+          <p className="caseLead">The challenge was preserving one shared capability while allowing it to mean something different in every plan.</p>
+          <p>Individual features can represent access, limits or configuration values, but companies often sell them as one recognizable capability. Feature Groups create that commercial layer: related features can be packaged together and reused across plans, while each tier retains its own entitlement values.</p>
+        </div>
+        <div className="stiggDecisionGrid" aria-label="Feature Groups design rationale">
+          <article><small>Tension</small><strong>One capability, different tiers</strong><p>The same commercial capability may provide a different level of access in every plan.</p></article>
+          <article><small>Design response</small><strong>Shared group, plan-specific values</strong><p>The group defines what belongs together; each plan controls the entitlements it receives.</p></article>
+          <article><small>What it enables</small><strong>Meaningful tier differentiation</strong><p>Support levels, CDN locations and bandwidth limits can vary without fragmenting the capability.</p></article>
         </div>
         <FeatureGroupCanvas />
       </section>
@@ -111,6 +113,16 @@ export default function StiggPage() {
         <div className="caseTwoCol caseCopy">
           <p className="caseLead">Across three years, the work expanded from solving individual workflows to establishing shared models and reusable patterns across the platform.</p>
           <div><p>The same principles carried through each feature: make complex configuration understandable, keep consequences visible and allow flexibility without weakening the default path.</p><p>Together, the subscription workflow, entitlement model, Feature Groups, design system and widget themes show one consistent approach to UX: translate infrastructure-level complexity into decisions that people can understand and trust.</p></div>
+        </div>
+        <div className="stiggPracticePath">
+          <p className="sectionLabel">How the practice evolved</p>
+          <div>
+            <article><small>Product design</small><strong>Designing workflows in Figma</strong><p>Mapping complex product logic into clear flows, states and interaction patterns.</p></article>
+            <i>→</i>
+            <article><small>System foundations</small><strong>Defining tokens and specifications</strong><p>Turning recurring decisions into shared foundations and implementation-ready guidance for engineering.</p></article>
+            <i>→</i>
+            <article><small>Implemented system</small><strong>Working directly with Storybook</strong><p>Reviewing components in their implemented context and evolving states, behavior and consistency with the development team.</p></article>
+          </div>
         </div>
       </section>
 
