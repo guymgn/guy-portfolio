@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { FloatingNav } from "../FloatingNav";
 import { ContactFooter } from "../ContactFooter";
 import { BackToTop } from "../BackToTop";
@@ -11,7 +12,7 @@ export default function StiggPage() {
     <main className="caseShell stiggTheme">
       <div className="stiggMobileBlock">
         <p className="sectionLabel">Stigg case study</p>
-        <h1>This project is best viewed on desktop</h1>
+        <h1>Go to desktop to view this case study</h1>
         <p>The case study includes detailed interactive product canvases designed for a larger screen.</p>
         <a href="/">Back to portfolio</a>
       </div>
@@ -23,14 +24,14 @@ export default function StiggPage() {
         <h1>Designing the model behind modern SaaS pricing</h1>
         <p className="caseDek">Three years shaping the core product experience of a monetization and entitlements platform, from pricing models and subscription management to customer-facing experiences.</p>
         <dl className="caseMeta">
-          <div><dt>Role</dt><dd>Product Designer</dd></div>
+          <div className="caseMetaBadge"><dt className="srOnly">Role</dt><dd><span className="companyBadgeCrop"><Image src="/company-badges/stigg.png" width={540} height={440} alt="Product Designer at Stigg" /></span></dd></div>
           <div className="caseMetaFocus"><dt>Focus</dt><dd>Product design, UX research, design systems</dd></div>
           <div className="caseMetaScope"><dt>Design scope</dt><dd><span>Core platform workflows</span><span>Customer and stakeholder research</span><span>Billing and entitlement interaction models</span><span>Design system established for the platform</span></dd></div>
         </dl>
       </header>
 
       <section className="caseChapter caseChapterInternalEnd">
-        <div className="caseChapterHead"><p className="sectionLabel">What Stigg solves</p><h2>Pricing is a business decision that becomes a product system</h2></div>
+        <div className="caseChapterHead"><p className="sectionLabel">What Stigg solves</p><h2>Pricing decisions have to become product behavior</h2></div>
         <div className="caseTwoCol caseCopy">
           <p className="caseLead">A plan may begin in a spreadsheet, but the product still has to know what every customer can access.</p>
           <div><p>As SaaS companies grow, pricing decisions spread across billing providers, application code, sales agreements and customer-facing experiences. Every change creates another place that can drift out of sync.</p><p>Stigg gives teams a shared model for pricing and packaging, subscriptions and entitlements, so commercial decisions can become reliable product behavior.</p></div>
@@ -68,11 +69,7 @@ export default function StiggPage() {
           <p className="caseLead">The challenge was preserving flexibility without making a high-impact workflow feel unpredictable.</p>
           <p>The subscription flow connects a customer to a product and plan, then keeps charges, schedule and billing decisions in context while a persistent preview makes the result understandable before creation. The recreation below is based on the shipped experience; some interface details have evolved since this work was completed.</p>
         </div>
-        <div className="stiggDecisionGrid" aria-label="Subscription workflow design rationale">
-          <article><small>Tension</small><strong>Many dependent decisions</strong><p>Plan, quantity, timing and billing choices all affect the same subscription.</p></article>
-          <article><small>Design response</small><strong>Structure first, preview throughout</strong><p>Related inputs stay grouped while the resulting subscription remains visible.</p></article>
-          <article><small>What it enables</small><strong>Review before commitment</strong><p>The combined outcome can be checked as one object before it is created.</p></article>
-        </div>
+        <p className="stiggRationale"><strong>Design rationale</strong><span>Group related decisions, keep their combined effect visible and allow the subscription to be reviewed before creation.</span></p>
         <SubscriptionCanvas />
       </section>
 
@@ -91,11 +88,7 @@ export default function StiggPage() {
           <p className="caseLead">The challenge was preserving one shared capability while allowing it to mean something different in every plan.</p>
           <p>Individual features can represent access, limits or configuration values, but companies often sell them as one recognizable capability. Feature Groups create that commercial layer: related features can be packaged together and reused across plans, while each tier retains its own entitlement values.</p>
         </div>
-        <div className="stiggDecisionGrid" aria-label="Feature Groups design rationale">
-          <article><small>Tension</small><strong>One capability, different tiers</strong><p>The same commercial capability may provide a different level of access in every plan.</p></article>
-          <article><small>Design response</small><strong>Shared group, plan-specific values</strong><p>The group defines what belongs together; each plan controls the entitlements it receives.</p></article>
-          <article><small>What it enables</small><strong>Meaningful tier differentiation</strong><p>Support levels, CDN locations and bandwidth limits can vary without fragmenting the capability.</p></article>
-        </div>
+        <p className="stiggRationale"><strong>Design rationale</strong><span>Keep the capability shared while allowing each plan to define its own entitlement values.</span></p>
         <FeatureGroupCanvas />
       </section>
 
@@ -116,12 +109,10 @@ export default function StiggPage() {
         </div>
         <div className="stiggPracticePath">
           <p className="sectionLabel">How the practice evolved</p>
-          <div>
-            <article><small>Product design</small><strong>Designing workflows in Figma</strong><p>Mapping complex product logic into clear flows, states and interaction patterns.</p></article>
-            <i>→</i>
-            <article><small>System foundations</small><strong>Defining tokens and specifications</strong><p>Turning recurring decisions into shared foundations and implementation-ready guidance for engineering.</p></article>
-            <i>→</i>
-            <article><small>Implemented system</small><strong>Working directly with Storybook</strong><p>Reviewing components in their implemented context and evolving states, behavior and consistency with the development team.</p></article>
+          <div className="stiggPracticeNarrative">
+            <h3>From Figma to the implemented system</h3>
+            <p>During the final year, the role expanded beyond designing workflows in Figma. Recurring decisions were translated into tokens and implementation-ready specifications, followed by direct work in Storybook to review components with the development team and refine their states, behavior and consistency.</p>
+            <p><strong>After launch:</strong> FullStory sessions provided an ongoing view into how shipped workflows were used, helping guide follow-up investigation and incremental refinements.</p>
           </div>
         </div>
       </section>

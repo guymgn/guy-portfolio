@@ -41,7 +41,7 @@ export function SubscriptionCanvas() {
           <header><span>Charge</span><span>Quantity</span><span>Price</span></header>
           {charges.map((charge) => <div className="subscriptionChargeRow" key={charge.id}>
             <div><strong>{charge.name}</strong><em>{charge.feature}</em></div>
-            <div>{charge.editable ? <span className="quantityControl"><button type="button" onClick={() => updateQuantity(charge.id as "seats" | "api" | "templates", charge.id === "api" ? -1000 : -1)}>−</button><b>{charge.quantity.toLocaleString()}</b><button type="button" onClick={() => updateQuantity(charge.id as "seats" | "api" | "templates", charge.id === "api" ? 1000 : 1)}>+</button></span> : <span>1</span>}<em>{charge.unit}</em></div>
+            <div>{charge.editable ? <span className="quantityControl"><button type="button" aria-label={`Decrease ${charge.name}`} onClick={() => updateQuantity(charge.id as "seats" | "api" | "templates", charge.id === "api" ? -1000 : -1)}>−</button><b>{charge.quantity.toLocaleString()}</b><button type="button" aria-label={`Increase ${charge.name}`} onClick={() => updateQuantity(charge.id as "seats" | "api" | "templates", charge.id === "api" ? 1000 : 1)}>+</button></span> : <span>1</span>}</div>
             <div><strong>${charge.price < 1 ? charge.price.toFixed(2) : charge.price.toFixed(2)}</strong><em>{charge.id === "base" ? `/${period === "monthly" ? "month" : "year"}` : `${charge.unit.slice(0,-1) || charge.unit} / ${period === "monthly" ? "month" : "year"}`}</em></div>
           </div>)}
         </div>

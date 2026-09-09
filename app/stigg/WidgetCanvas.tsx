@@ -15,7 +15,7 @@ export function WidgetCanvas() {
   const [openTypography, setOpenTypography] = useState(true);
 
   return (
-    <div className="widgetCanvas" style={{ "--widget-accent": theme.accent, "--widget-text": theme.text, "--widget-background": theme.background, "--widget-border": theme.border, "--widget-soft": theme.soft } as React.CSSProperties}>
+    <div className="widgetCanvas">
       <div className="widgetEditor">
         <aside className="widgetControls">
           <div className="widgetControlsTitle"><strong>ACME theme</strong><small>Widget theme editor</small></div>
@@ -49,7 +49,7 @@ export function WidgetCanvas() {
 
         <div className="widgetPreviewArea">
           <div className="widgetPreviewBar"><span><strong>Pricing table preview</strong><button type="button">ACME workspace data <SelectChevron /></button></span><small>Desktop · 100%</small></div>
-          <div className="widgetPreviewStage">
+          <div className="widgetPreviewStage" style={{ "--widget-accent": theme.accent, "--widget-text": theme.text, "--widget-background": theme.background, "--widget-border": theme.border, "--widget-soft": theme.soft } as React.CSSProperties}>
             <article className="pricingWidget">
               <div className="pricingPlans">
                 <section>
