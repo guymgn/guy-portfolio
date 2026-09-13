@@ -13,7 +13,7 @@ const prompts = ["Show me Guy's strongest systems work", "What tools does Guy us
 const toolsAnswer = `Guy’s toolkit spans a few areas:
 
 - **Product design:** Figma and Sketch
-- **AI & development:** ChatGPT + Codex, Claude + Code, Xcode, and Super.Engineering
+- **AI & development:** ChatGPT + Codex, Claude, Xcode, and Super.Engineering
 - **Content & code management:** Notion, GitHub, and Netlify
 
 He chooses tools based on what helps move an idea from concept to a working product—not just a design artifact.`;

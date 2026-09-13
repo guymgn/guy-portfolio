@@ -114,7 +114,7 @@ export default function Home() {
             <span className="sectionLabel">Tools I reach for</span>
             <dl>
               <div><dt>Product design</dt><dd>Figma, Sketch</dd></div>
-              <div><dt>AI / Dev</dt><dd>ChatGPT + Codex, Claude + Code, Xcode, Super.Engineering</dd></div>
+              <div><dt>AI / Dev</dt><dd>ChatGPT + Codex, Claude, Xcode, Super.Engineering</dd></div>
               <div><dt>Content &amp; code management</dt><dd>Notion, GitHub, Netlify</dd></div>
             </dl>
           </div>
