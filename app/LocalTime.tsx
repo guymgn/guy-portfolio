@@ -8,7 +8,7 @@ function getIsraelTime() {
   const now = new Date();
   const time = new Intl.DateTimeFormat("en-US", {
     timeZone: zone,
-    hour: "2-digit",
+    hour: "numeric",
     minute: "2-digit",
     hour12: true,
   }).format(now);
@@ -21,7 +21,7 @@ function getIsraelTime() {
 }
 
 export function LocalTime() {
-  const [clock, setClock] = useState({ time: "00:00 AM", offset: "UTC+2" });
+  const [clock, setClock] = useState({ time: "12:00 AM", offset: "UTC+2" });
 
   useEffect(() => {
     const update = () => setClock(getIsraelTime());
@@ -36,6 +36,7 @@ export function LocalTime() {
       <strong>TLV</strong>
       <small>Timezone</small>
       <p>{clock.offset} <i>•</i> {clock.time}</p>
+      <span className="madeIn">Made with ❤️ in Israel</span>
     </div>
   );
 }

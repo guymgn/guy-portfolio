@@ -90,9 +90,9 @@ export function FeatureGroupCanvas() {
   return (
     <div className="featureGroupCanvas">
       <div className="createFeatureNote featureGroupNote">
-        <small>Try the flow</small>
+        <small>Interactive walkthrough</small>
         <div className="featureGroupSteps">
-          <button type="button" className={step === 1 ? "isActive" : ""} onClick={() => selectStep(1)}><i>1</i><span><strong>Create a Feature Group</strong><small>Add reusable features from the catalog.</small></span></button>
+          <button type="button" className={step === 1 ? "isActive" : ""} onClick={() => selectStep(1)}><i>1</i><span><strong>Create a Feature Group</strong><small>Add reusable features from the Product Catalog.</small></span></button>
           <button type="button" className={step === 2 ? "isActive" : ""} onClick={() => selectStep(2)}><i>2</i><span><strong>Configure it per plan</strong><small>Compare entitlement values across plan tiers.</small></span></button>
         </div>
       </div>

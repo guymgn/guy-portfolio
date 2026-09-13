@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { trackEvent } from "./Analytics";
 
 export function BackToTop() {
   const [visible, setVisible] = useState(false);
@@ -13,9 +14,10 @@ export function BackToTop() {
   }, []);
 
   const goToTop = () => {
+    trackEvent("Back to Top Clicked");
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     window.scrollTo({ top: 0, behavior: reducedMotion ? "auto" : "smooth" });
   };
 
-  return <button className={`backToTop${visible ? " isVisible" : ""}`} type="button" onClick={goToTop} aria-label="Back to top">Back to top <span aria-hidden="true">↑</span></button>;
+  return <button className={`backToTop${visible ? " isVisible" : ""}`} type="button" onClick={goToTop} aria-label="Back to top" data-analytics-ignore="true">Back to top <span aria-hidden="true">↑</span></button>;
 }

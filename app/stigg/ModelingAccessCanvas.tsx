@@ -72,7 +72,8 @@ export function ModelingAccessCanvas() {
       }}
     >
       <div className="modelingCanvasIntro">
-        <p>Here are a few examples of how features are modeled in Stigg</p>
+        <small>Interactive walkthrough</small>
+        <p>Explore how feature types become entitlement rules.</p>
       </div>
 
       <div className="modelingCards" aria-label="Feature modeling examples">

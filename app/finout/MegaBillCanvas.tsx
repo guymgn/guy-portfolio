@@ -101,8 +101,8 @@ export function MegaBillCanvas() {
   const openRow = (name: string) => { if (path.length < 4) { setChartExpanded(true); setPath((value) => [...value, name]); } };
 
   return (
-    <div className="megaCanvas" aria-label="Interactive reconstruction of the Finout MegaBill">
-      <div className="megaNote"><span>Interactive reconstruction</span><p>Explore the original Figma workflow with simplified, representative data.</p></div>
+    <div className="megaCanvas" aria-label="Interactive Finout MegaBill walkthrough">
+      <div className="megaNote"><div><small>Interactive walkthrough</small><strong>MegaBill investigation</strong></div><p>Group cloud spend and drill from the total cost to the resources behind it.</p></div>
       <div className="megaApp">
         <div className="megaToolbar">
           <div className="megaControls">
@@ -135,7 +135,7 @@ export function MegaBillCanvas() {
             </div>
             <div className="megaLegend">{chartExpanded||path.length>0?rows.slice(0,3).map((row,index)=><span key={row.name}><i className={`legendTone tone${index+1}`}/>{row.name}</span>):<span><i className="legendTone total"/>Total</span>}</div>
             <p className="megaDrillHint">Select a highlighted row to open the next configured dimension.</p>
-            <div className="megaTableWrap"><table className="megaGroupTable"><colgroup><col/><col/><col/><col/><col/></colgroup><thead><tr><th>{current?"Name":rootColumnLabel}</th><th>Total</th><th>Previous period</th><th>Change</th><th>Percentage</th></tr></thead><tbody>{rows.map((row)=>{const change=((row.total-row.previous)/row.previous)*100;return <tr key={row.name} className="isDrillable" tabIndex={0} onClick={()=>openRow(row.name)} onKeyDown={(event)=>{if(event.key==="Enter"||event.key===" ")openRow(row.name);}}><td><b>{row.name}</b><span>Open details →</span></td><td>{money(row.total)}</td><td>{money(row.previous)}</td><td className={change>=0?"costUp":"costDown"}>{change>=0?"▲":"▼"} {Math.abs(change).toFixed(1)}%</td><td>{Math.round((row.total/total)*100)}%</td></tr>})}</tbody></table></div>
+            <div className="megaTableWrap"><table className="megaGroupTable"><colgroup><col/><col/><col/><col/><col/></colgroup><thead><tr><th>{current?"Name":rootColumnLabel}</th><th>Total</th><th>Previous period</th><th>Change</th><th>Percentage</th></tr></thead><tbody>{rows.map((row)=>{const change=((row.total-row.previous)/row.previous)*100;return <tr key={row.name} className="isDrillable" tabIndex={0} onClick={()=>openRow(row.name)} onKeyDown={(event)=>{if(event.key==="Enter"||event.key===" ")openRow(row.name);}}><td><b>{row.name}</b></td><td>{money(row.total)}</td><td>{money(row.previous)}</td><td className={change>=0?"costUp":"costDown"}>{change>=0?"▲":"▼"} {Math.abs(change).toFixed(1)}%</td><td>{Math.round((row.total/total)*100)}%</td></tr>})}</tbody></table></div>
           </>}
         </div>
       </div>

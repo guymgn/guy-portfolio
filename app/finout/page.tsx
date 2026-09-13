@@ -1,9 +1,23 @@
 import Image from "next/image";
+import Link from "next/link";
+import type { Metadata } from "next";
+import { MonitorSmartphone } from "lucide-react";
 import { FloatingNav } from "../FloatingNav";
 import { ContactFooter } from "../ContactFooter";
 import { BackToTop } from "../BackToTop";
 import { ResearchSequenceCanvas } from "./ResearchFlowCanvas";
 import { MegaBillCanvas } from "./MegaBillCanvas";
+import { VirtualTagsCanvas } from "./VirtualTagsCanvas";
+
+const description = "How I helped Finout turn fragmented cloud-cost data into clear, accountable product workflows.";
+
+export const metadata: Metadata = {
+  title: "Finout case study",
+  description,
+  alternates: { canonical: "/finout" },
+  openGraph: { title: "Finout case study | Guy Magen", description, url: "/finout", images: [] },
+  twitter: { card: "summary", title: "Finout case study | Guy Magen", description, images: [] },
+};
 
 const scope = [
   "Core product workflows",
@@ -12,23 +26,15 @@ const scope = [
   "Early design-system foundations and Storybook implementation",
 ];
 
-function FinoutVisual({ slide, alt, caption, priority = false }: { slide: number; alt: string; caption?: string; priority?: boolean }) {
-  return (
-    <figure className="finoutVisual">
-      <Image src={`/finout/slide-${slide}.png`} width={1200} height={675} alt={alt} priority={priority} sizes="(max-width: 900px) 100vw, 1200px" />
-      {caption ? <figcaption>{caption}</figcaption> : null}
-    </figure>
-  );
-}
-
 export default function FinoutPage() {
   return (
-    <main className="caseShell finoutTheme">
+    <main className="caseShell finoutTheme" data-analytics-case-study="Finout">
       <div className="finoutMobileBlock">
         <p className="sectionLabel">Finout case study</p>
+        <MonitorSmartphone className="mobileCaseStudyIcon" aria-hidden="true" />
         <h1>Go to desktop to view this case study</h1>
         <p>The case study uses detailed product visuals designed for a larger screen.</p>
-        <a href="/">Back to portfolio</a>
+        <Link href="/" data-analytics-event="Portfolio Home Opened" data-analytics-source="mobile case study" data-analytics-project="Finout">Back to portfolio</Link>
       </div>
       <FloatingNav projectName="Finout" />
       <BackToTop />
@@ -48,7 +54,7 @@ export default function FinoutPage() {
         <div className="caseChapterHead"><p className="sectionLabel">Research and framing</p><h2>The problem was not a lack of data. It was the work required to understand it.</h2></div>
         <div className="caseTwoCol caseCopy">
           <p className="caseLead">Teams moved between provider dashboards, exports and spreadsheets before they could answer a basic cost question.</p>
-          <p>The research connected an observed workflow breakdown to four recurring needs: visibility, alignment, efficiency and accuracy. Together, they reframed the opportunity from another dashboard to one investigation model.</p>
+          <p>I mapped that fragmented workflow and connected it to four recurring needs: visibility, alignment, efficiency and accuracy. That reframed the opportunity from another dashboard into one investigation model, with two connected jobs: understand the spend, then establish who owns it.</p>
         </div>
         <ResearchSequenceCanvas />
       </section>
@@ -57,41 +63,38 @@ export default function FinoutPage() {
         <div className="caseChapterHead"><p className="sectionLabel">MegaBill</p><h2>One bill for every cloud, service and team</h2></div>
         <div className="caseTwoCol caseCopy">
           <p className="caseLead">A useful overview had to preserve the path into the details without flattening every provider into a generic dashboard.</p>
-          <p>MegaBill created one cross-provider starting point with flexible grouping and a consistent route from total spend to the resource behind a change.</p>
+          <p>I designed MegaBill as the first half of that model: one cross-provider starting point with flexible grouping and a consistent route from total spend to the resource behind a change.</p>
         </div>
         <MegaBillCanvas />
       </section>
 
       <section className="caseChapter">
-        <div className="caseChapterHead"><p className="sectionLabel">Virtual Tags</p><h2>Cost allocation without waiting for engineering</h2></div>
-        <div className="caseStory">
-          <article><small>The constraint</small><p>Native cloud tags were patchy, inconsistently maintained and difficult to apply retroactively.</p></article>
-          <article><small>The insight</small><p>Ownership broke down when every correction depended on engineering or spreadsheets.</p></article>
-          <article><small>The direction</small><p>Use familiar rule logic to classify spend from metadata that already existed.</p></article>
-        </div>
+        <div className="caseChapterHead"><p className="sectionLabel">Virtual Tags</p><h2>Turning untagged cost into accountable spend</h2></div>
         <div className="caseTwoCol caseCopy">
-          <p className="caseLead">The design moved cost classification from an infrastructure task to a self-serve product workflow.</p>
-          <p>Simple “where/then” rules let FinOps teams translate provider metadata into business dimensions such as team, product, environment or customer.</p>
+          <p className="caseLead">MegaBill made spend visible, but incomplete provider metadata still prevented teams from understanding ownership.</p>
+          <p>My work on Virtual Tags began by turning existing metadata into business dimensions such as product, environment and owner. I shaped an ordered rule model for matched and unmatched costs, then extended it through Split Cost so shared costs could be distributed without making the allocation harder to understand or validate.</p>
         </div>
-        <div className="finoutVisualStack">
-          <FinoutVisual slide={19} alt="Untagged cloud costs creating gaps in spend ownership" />
-          <FinoutVisual slide={21} alt="Competitor analysis that informed a no-code approach to cloud cost allocation" />
-        </div>
-        <div className="finoutDemoSlot" aria-label="Planned Virtual Tags interactive reconstruction">
-          <div><small>Interactive reconstruction</small><h3>Virtual Tags rule builder</h3><p>Originally designed in Figma. This portfolio recreation will focus on rule priority, matching feedback and allocation coverage.</p></div>
-          <ol><li><span>01</span>Find unallocated cost</li><li><span>02</span>Define where</li><li><span>03</span>Assign a value</li><li><span>04</span>Preview coverage</li></ol>
+        <VirtualTagsCanvas />
+      </section>
+
+      <section className="caseChapter caseChapterInternalEnd finoutImpact">
+        <div className="caseChapterHead"><p className="sectionLabel">What the system enables</p><h2>One path from fragmented cost data to accountable spend</h2></div>
+        <div className="caseStory">
+          <article><small>See the whole picture</small><p>FinOps, engineering and finance could begin with the same cross-provider view instead of reconciling separate dashboards and exports.</p></article>
+          <article><small>Explain every number</small><p>Grouping, breadcrumbs and contextual details preserved the path from a change in spend to the resource behind it.</p></article>
+          <article><small>Assign clear ownership</small><p>Virtual Tags let FinOps teams convert existing metadata into business context and define what should happen when that context was missing.</p></article>
         </div>
       </section>
 
       <section className="caseChapter finoutReflection">
-        <div className="caseChapterHead"><p className="sectionLabel">Reflection</p><h2>Complex B2B tools become useful when different experts can reason together</h2></div>
+        <div className="caseChapterHead"><p className="sectionLabel">Reflection</p><h2>Clarity came from preserving the path through the data</h2></div>
         <div className="caseTwoCol caseCopy">
-          <p className="caseLead">The strongest design decisions did more than simplify an interface. They created a shared language for cost.</p>
-          <p>MegaBill connected overview to investigation; Virtual Tags connected that investigation to ownership. Together, they turned fragmented infrastructure data into a workflow finance, engineering and FinOps could reason through together.</p>
+          <p className="caseLead">Cloud cost data became useful when people could understand how a number was constructed and who was responsible for it.</p>
+          <p>Across both workflows, I used progressive disclosure as the organizing principle: begin with one clear picture, preserve context through every level, then turn what people discovered into accountable action.</p>
         </div>
       </section>
 
-      <footer className="caseFooter"><p>All work shown is the property of Finout. Information is publicly documented, abstracted or anonymized and is included for portfolio purposes only.</p></footer>
+      <footer className="caseFooter"><p>All work shown is the property of Finout. The interactive walkthroughs began as Figma designs from my original product work and were reconstructed in code for this portfolio, with information abstracted, anonymized and adapted for presentation.</p></footer>
       <ContactFooter />
     </main>
   );

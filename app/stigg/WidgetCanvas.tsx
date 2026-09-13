@@ -44,7 +44,7 @@ export function WidgetCanvas() {
                 <div><span>H3</span><b>B</b><em>16 <small>px</small></em></div>
               </div>}
             </section>
-          </> : <section className="widgetCodePanel"><small>Embed</small><code>{`<PricingTable\n  productId="acme-app"\n  themeId="acme-theme"\n/>`}</code><p>The same product catalog and theme are available through an embeddable component.</p></section>}
+          </> : <section className="widgetCodePanel"><small>Embed</small><code>{`<PricingTable\n  productId="acme-app"\n  themeId="acme-theme"\n/>`}</code><p>The same Product Catalog and theme are available through an embeddable component.</p></section>}
         </aside>
 
         <div className="widgetPreviewArea">

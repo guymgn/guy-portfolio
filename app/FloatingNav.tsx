@@ -2,23 +2,24 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
+import { trackEvent } from "./Analytics";
 
 type HomeSection = "work" | "building" | "about";
 
-function NavContents({ projectName, showMark = true, activeSection }: { projectName?: string; showMark?: boolean; activeSection?: HomeSection }) {
+function NavContents({ projectName, showMark = true, activeSection, surface }: { projectName?: string; showMark?: boolean; activeSection?: HomeSection; surface: "top navigation" | "floating navigation" }) {
   return (
     <>
       {projectName ? (
-        <span className="caseBreadcrumb"><a className="caseMark" href="/" aria-label="Guy Magen, home">GM</a><i>/</i><strong>{projectName}</strong></span>
+        <span className="caseBreadcrumb"><a className="caseMark" href="/" aria-label="Guy Magen, home" data-analytics-event="Portfolio Home Opened" data-analytics-source={surface} data-analytics-project={projectName}>GM</a><i>/</i><strong>{projectName}</strong></span>
       ) : (
         <>
-          {showMark && <a className="home" href="#top" aria-label="Guy Magen, back to top"><span className="navWordmark">GM</span></a>}
+          {showMark && <a className="home" href="#top" aria-label="Guy Magen, back to top" data-analytics-event="Navigation Clicked" data-analytics-section="top" data-analytics-source={surface}><span className="navWordmark">GM</span></a>}
           <div className="navLinks">
-            {(["work", "building", "about"] as HomeSection[]).map((section) => <a key={section} href={`#${section}`} className={activeSection === section ? "isActive" : undefined} aria-current={activeSection === section ? "location" : undefined}>{section}</a>)}
+            {(["work", "building", "about"] as HomeSection[]).map((section) => <a key={section} href={`#${section}`} className={activeSection === section ? "isActive" : undefined} aria-current={activeSection === section ? "location" : undefined} data-analytics-event="Navigation Clicked" data-analytics-section={section} data-analytics-source={surface}>{section}</a>)}
           </div>
         </>
       )}
-      <div className="navActions">{showMark && <button className="navCv" type="button">Download CV <span aria-hidden="true">↓</span></button>}<ThemeToggle /></div>
+      <div className="navActions">{showMark && <a className="navCv" href="/Guy-Magen-CV.pdf" download onClick={() => trackEvent("CV Downloaded", { source: "navigation" })}>Download CV <span aria-hidden="true">↓</span></a>}<ThemeToggle /></div>
     </>
   );
 }
@@ -31,7 +32,13 @@ export function FloatingNav({ projectName }: { projectName?: string }) {
   useEffect(() => {
     let exitTimer = 0;
     const updateVisibility = () => {
-      const shouldShow = window.scrollY > 96;
+      const portfolioChat = projectName ? null : document.querySelector<HTMLElement>(".portfolioAgentDock");
+      const homeVisibilityAnchor = portfolioChat?.offsetParent
+        ? portfolioChat
+        : document.querySelector<HTMLElement>(".intro");
+      const shouldShow = homeVisibilityAnchor
+        ? homeVisibilityAnchor.getBoundingClientRect().bottom <= 0
+        : window.scrollY > 96;
       window.clearTimeout(exitTimer);
       if (shouldShow) {
         visibleRef.current = true;
@@ -45,11 +52,13 @@ export function FloatingNav({ projectName }: { projectName?: string }) {
     updateVisibility();
     requestAnimationFrame(updateVisibility);
     window.addEventListener("scroll", updateVisibility, { passive: true });
+    window.addEventListener("resize", updateVisibility);
     return () => {
       window.clearTimeout(exitTimer);
       window.removeEventListener("scroll", updateVisibility);
+      window.removeEventListener("resize", updateVisibility);
     };
-  }, []);
+  }, [projectName]);
 
   useEffect(() => {
     if (projectName) return;
@@ -79,8 +88,8 @@ export function FloatingNav({ projectName }: { projectName?: string }) {
 
   return (
     <>
-      <nav className={`topNav ${projectName ? "caseNav" : "homeNav"}`}><NavContents projectName={projectName} showMark={false} activeSection={activeSection} /></nav>
-      <nav className={`floatingNav ${projectName ? "caseNav" : "homeNav"} nav${navState[0].toUpperCase()}${navState.slice(1)}`} aria-hidden={navState !== "visible"}><NavContents projectName={projectName} activeSection={activeSection} /></nav>
+      <nav className={`topNav ${projectName ? "caseNav" : "homeNav"}`}><NavContents projectName={projectName} showMark={false} activeSection={activeSection} surface="top navigation" /></nav>
+      <nav className={`floatingNav ${projectName ? "caseNav" : "homeNav"} nav${navState[0].toUpperCase()}${navState.slice(1)}`} aria-hidden={navState !== "visible"}><NavContents projectName={projectName} activeSection={activeSection} surface="floating navigation" /></nav>
     </>
   );
 }

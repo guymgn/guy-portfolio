@@ -51,7 +51,7 @@ export function CreateFeatureCanvas() {
   return (
     <div className="createFeatureCanvas">
       <div className="createFeatureNote">
-        <small>Try the flow</small>
+        <small>Interactive walkthrough</small>
         <p>Choose a feature type and see how the setup reveals only the settings it needs.</p>
       </div>
 

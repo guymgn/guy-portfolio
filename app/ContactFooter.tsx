@@ -16,11 +16,10 @@ export function ContactFooter() {
             </span>
           ))}
         </h2>
-        <div className="contactLinks"><a href="mailto:hi@guymagen.com">email ↗</a><a href="https://wa.me/972547734245" target="_blank" rel="noreferrer">whatsapp ↗</a><a href="https://www.linkedin.com/in/guymagen/" target="_blank" rel="noreferrer">linkedin ↗</a><a href="https://github.com/guymgn" target="_blank" rel="noreferrer">github ↗</a></div>
+        <div className="contactLinks"><a href="mailto:hi@guymagen.com" data-analytics-event="Contact Clicked" data-analytics-channel="email">email ↗</a><a href="https://wa.me/972547734245" target="_blank" rel="noreferrer" data-analytics-event="Contact Clicked" data-analytics-channel="whatsapp">whatsapp ↗</a><a href="https://www.linkedin.com/in/guymagen/" target="_blank" rel="noreferrer" data-analytics-event="Contact Clicked" data-analytics-channel="linkedin">linkedin ↗</a><a href="https://github.com/guymgn" target="_blank" rel="noreferrer" data-analytics-event="Contact Clicked" data-analytics-channel="github">github ↗</a></div>
       </div>
       <div className="footerMeta">
         <LocalTime />
-        <p className="madeIn">Made with ❤️ in Israel</p>
       </div>
     </footer></ScrollReveal>
   );

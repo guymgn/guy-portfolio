@@ -1,0 +1,9 @@
+[build]
+  command = "NITRO_PRESET=netlify npm run build"
+  publish = "dist"
+
+[[redirects]]
+  from = "https://guymagen.com/*"
+  to = "https://www.guymagen.com/:splat"
+  status = 301
+  force = true

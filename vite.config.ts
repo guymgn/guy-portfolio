@@ -35,7 +35,12 @@ const localBindingConfig = {
 };
 
 export default defineConfig(async () => {
-  if (process.env.VERCEL || process.env.NITRO_PRESET === "vercel") {
+  if (
+    process.env.VERCEL ||
+    process.env.NETLIFY ||
+    process.env.NITRO_PRESET === "vercel" ||
+    process.env.NITRO_PRESET === "netlify"
+  ) {
     const { nitro } = await import("nitro/vite");
     return {
       plugins: [tailwindcss(), vinext(), nitro()],
