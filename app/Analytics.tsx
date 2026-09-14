@@ -4,10 +4,12 @@ import { useEffect } from "react";
 import mixpanel from "mixpanel-browser";
 
 const MIXPANEL_TOKEN = "0aa1a4333ae3ecea0e5dda5f90ba6c9d";
+const ANALYTICS_HOSTNAMES = new Set(["www.guymagen.com", "guymagen.com"]);
 let initialized = false;
 
 function initialize() {
-  if (initialized || typeof window === "undefined") return;
+  if (initialized) return true;
+  if (typeof window === "undefined" || !ANALYTICS_HOSTNAMES.has(window.location.hostname)) return false;
 
   mixpanel.init(MIXPANEL_TOKEN, {
     api_host: "https://api-eu.mixpanel.com",
@@ -41,10 +43,11 @@ function initialize() {
   });
 
   initialized = true;
+  return true;
 }
 
 export function trackEvent(name: string, properties?: Record<string, string | number | boolean>) {
-  initialize();
+  if (!initialize()) return;
   mixpanel.track(name, properties);
 }
 
