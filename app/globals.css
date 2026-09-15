@@ -22,12 +22,12 @@
   --cv-button-bg:#e8e7e2;
   --cv-button-text:#181817;
   --cv-button-hover:#fff;
-  --type-micro:11px;
-  --type-small:13px;
+  --type-micro:12px;
+  --type-small:14px;
   --type-ui:var(--type-small);
-  --type-body:16px;
-  --type-body-lg:var(--type-body);
-  --type-heading:24px;
+  --type-body:17px;
+  --type-body-lg:18px;
+  --type-heading:26px;
   --tracking-label:.1em;
   --tracking-tight:-.03em;
 }
