@@ -37,13 +37,13 @@ export const metadata: Metadata = {
     url: "/",
     siteName: "Guy Magen Portfolio",
     locale: "en_US",
-    images: [{ url: "/og.png", width: 1200, height: 630, type: "image/png", alt: socialImageAlt }],
+    images: [{ url: "/og-2026-09-15.png", width: 1200, height: 630, type: "image/png", alt: socialImageAlt }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Guy Magen | Senior Product Designer & Builder",
     description: siteDescription,
-    images: [{ url: "/og.png", alt: socialImageAlt }],
+    images: [{ url: "/og-2026-09-15.png", alt: socialImageAlt }],
   },
   icons: {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],

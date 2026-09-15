@@ -52,4 +52,4 @@ const svg = `
   <text class="role" x="600" y="376" fill="#7776FF" font-size="28" font-weight="550" letter-spacing="-.35" text-anchor="middle">Senior Product Designer &amp; Builder</text>
 </svg>`;
 
-await sharp(Buffer.from(svg)).png({ quality: 100 }).toFile(fileURLToPath(new URL("../public/og.png", import.meta.url)));
+await sharp(Buffer.from(svg)).png({ quality: 100 }).toFile(fileURLToPath(new URL("../public/og-2026-09-15.png", import.meta.url)));
