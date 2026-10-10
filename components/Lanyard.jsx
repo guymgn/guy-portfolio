@@ -19,6 +19,11 @@ const ITERATIONS = 2;
 const SAMPLES = 72;
 const FOV = 24;
 const STRAP_WIDTH = 0.36;
+// Half the distance between the two cards' rings along the shared clip.
+const CLIP_HALF = 0.17;
+// The two rings also sit at different depths on the clip so the cards hang
+// in parallel planes instead of leaning into each other.
+const CLIP_DEPTH = 0.08;
 const RING_RADIUS = 0.095;
 const RING_TUBE = 0.0135;
 const EYELET_RADIUS = 0.036;
@@ -497,6 +502,8 @@ const createSimulation = () => {
       inverseInertia: new THREE.Vector3(1, 1, 1),
       hang: new THREE.Vector3()
     },
+    // Offset from the clip center (strap end) to this card's ring pivot.
+    clip: new THREE.Vector3(),
     grab: null,
     turn: 0,
     twist: 0,
@@ -506,6 +513,7 @@ const createSimulation = () => {
 };
 
 const scratch = {
+  h: new THREE.Vector3(),
   a: new THREE.Vector3(),
   b: new THREE.Vector3(),
   c: new THREE.Vector3(),
@@ -553,7 +561,7 @@ const solveSegment = (sim, i, h, physics) => {
   let b = nodes[i + 1];
   if (last) {
     r.copy(body.hang).applyQuaternion(body.quaternion);
-    b = scratch.b.copy(body.position).add(r);
+    b = scratch.b.copy(body.position).add(r).sub(sim.clip);
   }
   const delta = scratch.a.subVectors(b, a);
   const length = delta.length();
@@ -585,11 +593,28 @@ const solvePin = (body, grab, target) => {
   pushBody(body, r, normal.multiplyScalar(lambda));
 };
 
-// Couple two rigid cards at one attachment, sharing drag forces with the strap.
-const solveSharedAttachment = (first, second) => {
+// The clip is a short horizontal bar whose ends carry each card's ring. It
+// turns with the cards (so flips carry both sides around) but never tilts.
+const clipOffset = (first, second, out) => {
+  out.set(1, 0, 0).applyQuaternion(first.quaternion);
+  out.add(scratch.h.set(1, 0, 0).applyQuaternion(second.quaternion));
+  out.y = 0;
+  if (out.lengthSq() < 1e-6) {
+    out.set(1, 0, 0).applyQuaternion(first.quaternion);
+    out.y = 0;
+  }
+  if (out.lengthSq() < 1e-6) out.set(1, 0, 0);
+  out.normalize();
+  const depth = scratch.h.set(-out.z, 0, out.x);
+  return out.multiplyScalar(CLIP_HALF).addScaledVector(depth, CLIP_DEPTH);
+};
+
+// Couple two rigid cards at opposite ends of the clip, sharing drag forces
+// with the strap. The first card's pivot sits at +clip, the second at -clip.
+const solveSharedAttachment = (first, second, clip) => {
   const ra = first.hang.clone().applyQuaternion(first.quaternion);
   const rb = second.hang.clone().applyQuaternion(second.quaternion);
-  const delta = second.position.clone().add(rb).sub(first.position).sub(ra);
+  const delta = second.position.clone().add(rb).sub(first.position).sub(ra).addScaledVector(clip, 2);
   const distance = delta.length();
   if (distance < 1e-9) return;
   const normal = delta.divideScalar(distance);
@@ -747,13 +772,15 @@ const stepSimulation = (sim, dt, physics, time, companion = null) => {
       stepSimulation(companion, h, physics, time + 0.7);
     }
 
+    if (companion) clipOffset(body, companion.body, sim.clip);
+    else sim.clip.set(0, 0, 0);
     sim.impulses.fill(0);
     if (grab) pin.lerpVectors(grab.from, grab.target, (s + 1) / steps);
     for (let iteration = 0; iteration < ITERATIONS; iteration++) {
       if (!sim.freeCard) for (let i = 0; i < JOINTS; i++) solveSegment(sim, i, h, physics);
       if (grab) solvePin(body, grab, pin);
       if (companion) {
-        solveSharedAttachment(body, companion.body);
+        solveSharedAttachment(body, companion.body, sim.clip);
         if (companion.grab) solvePin(companion.body, companion.grab, companion.grab.target);
         touching = solveCardContact(body, companion.body) || touching;
       }
@@ -798,7 +825,7 @@ const stepSimulation = (sim, dt, physics, time, companion = null) => {
       }
     }
 
-    nodes[JOINTS].copy(body.hang).applyQuaternion(body.quaternion).add(body.position);
+    nodes[JOINTS].copy(body.hang).applyQuaternion(body.quaternion).add(body.position).sub(sim.clip);
     for (let i = 0; i < JOINTS; i++) sim.lengths[i] = nodes[i].distanceTo(nodes[i + 1]);
   }
 
@@ -983,6 +1010,12 @@ const Lanyard = ({
     const eyelet = new THREE.Mesh(new THREE.TorusGeometry(EYELET_RADIUS, 0.0105, 14, 40), metalMaterial);
     clampGroup.add(clampMesh, eyelet);
     scene.add(clampGroup);
+    // Bar through both rings when two cards share the clip.
+    const clipBar = new THREE.Mesh(new THREE.CylinderGeometry(0.011, 0.011, 1, 14), metalMaterial);
+    clipBar.visible = false;
+    scene.add(clipBar);
+    const pinA = new THREE.Vector3();
+    const pinB = new THREE.Vector3();
 
     const sim = createSimulation();
     const companion = createSimulation();
@@ -1014,12 +1047,14 @@ const Lanyard = ({
       placeHanging(companion, layout, false);
       if (!settingsRef.current.secondCard) return;
       const attachment = sim.nodes[JOINTS].clone();
-      sim.body.hang.set(-0.24, layout.hangY, -0.08);
-      companion.body.hang.set(0.24, layout.hangY, 0.08);
-      sim.body.quaternion.setFromAxisAngle(new THREE.Vector3(0, 0, 1), -0.15);
-      companion.body.quaternion.setFromAxisAngle(new THREE.Vector3(0, 0, 1), 0.15);
-      for (const card of [sim, companion]) {
-        card.body.position.copy(attachment).sub(card.body.hang.clone().applyQuaternion(card.body.quaternion));
+      sim.body.hang.set(0, layout.hangY, 0);
+      companion.body.hang.set(0, layout.hangY, 0);
+      sim.body.quaternion.identity();
+      companion.body.quaternion.identity();
+      sim.clip.set(CLIP_HALF, 0, CLIP_DEPTH);
+      for (const [card, side] of [[sim, 1], [companion, -1]]) {
+        card.body.position.copy(attachment).addScaledVector(sim.clip, side)
+          .sub(card.body.hang.clone().applyQuaternion(card.body.quaternion));
         card.body.previous.copy(card.body.position);
         card.body.previousQuaternion.copy(card.body.quaternion);
       }
@@ -1077,7 +1112,7 @@ const Lanyard = ({
       const hangTop = cardTop + (layout.hangY - layout.height / 2);
       sim.anchor.set(anchorX, anchorY, 0);
       configureSimulation(sim, layout, anchorY - hangTop);
-      if (s.secondCard) sim.body.hang.set(-0.24, layout.hangY, -0.08);
+      if (s.secondCard) sim.body.hang.set(0, layout.hangY, 0);
       sim.nodes[0].copy(sim.anchor);
       sim.previous[0].copy(sim.anchor);
     };
@@ -1087,7 +1122,7 @@ const Lanyard = ({
       const layoutKey = `${s.orientation}|${s.cornerRadius}|${s.secondCard}`;
       if (layoutKey !== applied.layoutKey) {
         layout = cardLayout(s.orientation, s.cornerRadius);
-        const geometry = buildCardGeometry({ ...layout, slot: { ...layout.slot, x: s.secondCard ? -0.24 : 0 } });
+        const geometry = buildCardGeometry(layout);
         bodyMesh.geometry.dispose();
         frontMesh.geometry.dispose();
         backMesh.geometry.dispose();
@@ -1097,7 +1132,7 @@ const Lanyard = ({
         secondBodyMesh.geometry.dispose();
         secondFrontMesh.geometry.dispose();
         secondBackMesh.geometry.dispose();
-        const companionGeometry = buildCardGeometry({ ...layout, slot: { ...layout.slot, x: 0.24 } });
+        const companionGeometry = buildCardGeometry(layout);
         secondBodyMesh.geometry = companionGeometry.body;
         secondFrontMesh.geometry = companionGeometry.face;
         secondBackMesh.geometry = companionGeometry.face.clone();
@@ -1108,14 +1143,13 @@ const Lanyard = ({
         secondBackMesh.position.z = backMesh.position.z;
         secondBackMesh.rotation.y = Math.PI;
         ring.position.set(0, layout.ringY, 0);
-        ring.position.x = s.secondCard ? -0.24 : 0;
-        // Each ring bridges from the card plane at its bottom to the shared
-        // attachment depth at its top. Preserve the cards' collision clearance.
-        const ringDepth = s.secondCard ? 0.04 : 0;
+        // Rings hang straight up from the centered slot to their end of the clip;
+        // the clip itself carries the depth offset between the two cards.
+        const ringDepth = 0;
         ring.position.z = -ringDepth;
         ring.rotation.x = -Math.atan2(ringDepth, RING_RADIUS);
         ring.scale.y = Math.hypot(RING_RADIUS, ringDepth) / RING_RADIUS;
-        secondRing.position.set(0.24, layout.ringY, ringDepth);
+        secondRing.position.set(0, layout.ringY, ringDepth);
         secondRing.rotation.x = -ring.rotation.x;
         secondRing.scale.y = ring.scale.y;
         secondGroup.visible = s.secondCard;
@@ -1258,6 +1292,21 @@ const Lanyard = ({
       normal.needsUpdate = true;
       uv.needsUpdate = true;
 
+      if (secondGroup.visible) {
+        // Line the clamp up with the clip bar that carries both rings.
+        pinA.copy(sim.body.hang).applyQuaternion(sim.body.quaternion).add(sim.body.position);
+        pinB.copy(companion.body.hang).applyQuaternion(companion.body.quaternion).add(companion.body.position);
+        const span = pinA.distanceTo(pinB);
+        clipBar.visible = span > 1e-4;
+        if (clipBar.visible) {
+          clipBar.position.addVectors(pinA, pinB).multiplyScalar(0.5);
+          clipBar.scale.set(1, span + 0.05, 1);
+          clipBar.quaternion.setFromUnitVectors(scratch.a.set(0, 1, 0), scratch.b.subVectors(pinA, pinB).normalize());
+          work.end.subVectors(pinA, pinB);
+        }
+      } else {
+        clipBar.visible = false;
+      }
       across.copy(work.end).addScaledVector(axis, -work.end.dot(axis)).normalize();
       facing.crossVectors(across, axis).normalize();
       work.basis.makeBasis(across, axis, facing);
@@ -1475,7 +1524,7 @@ const Lanyard = ({
       canvas.removeEventListener('pointercancel', onPointerUp);
       canvas.removeEventListener('lostpointercapture', onPointerUp);
       canvas.removeEventListener('touchstart', onTouchStart);
-      [bodyMesh, frontMesh, backMesh, secondBodyMesh, secondFrontMesh, secondBackMesh, ring, clampMesh, eyelet, band].forEach(mesh => mesh.geometry?.dispose());
+      [bodyMesh, frontMesh, backMesh, secondBodyMesh, secondFrontMesh, secondBackMesh, ring, clampMesh, eyelet, clipBar, band].forEach(mesh => mesh.geometry?.dispose());
       [frontMaterial, backMaterial, edgeMaterial, metalMaterial, bandMaterial].forEach(material => material.dispose());
       [frontTexture, backTexture, strapTexture, grain, weave].forEach(texture => texture.dispose());
       environment.dispose();

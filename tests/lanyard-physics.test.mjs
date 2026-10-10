@@ -20,7 +20,7 @@ test('attachment rings thread the slots and reach the shared pin depth', () => {
         const bottom = new THREE.Vector3(0, -RING_RADIUS, 0).applyMatrix4(item.matrix);
         const top = new THREE.Vector3(0, RING_RADIUS, 0).applyMatrix4(item.matrix);
         return { bottomError: Math.hypot(bottom.y - layout.slot.y, bottom.z),
-          topError: Math.hypot(top.y - layout.hangY, top.z - (s.secondCard ? (index ? .08 : -.08) : 0)) };
+          topError: Math.hypot(top.y - layout.hangY, top.z) };
       });
     `, { THREE });
     for (const ring of rings) {
@@ -64,12 +64,13 @@ for (const dragHeight of [.4, 1, 3]) test(`shared-strap cards settle after dragg
         placeHanging(card, layout, false);
       }
       second.freeCard = true;
-      first.body.hang.set(-.24, layout.hangY, -.08);
-      second.body.hang.set(.24, layout.hangY, .08);
+      first.body.hang.set(0, layout.hangY, 0);
+      second.body.hang.set(0, layout.hangY, 0);
       const attachment = first.nodes[JOINTS].clone();
-      for (const [card, angle] of [[first, -.15], [second, .15]]) {
-        card.body.quaternion.setFromAxisAngle(new THREE.Vector3(0, 0, 1), angle);
-        card.body.position.copy(attachment).sub(card.body.hang.clone().applyQuaternion(card.body.quaternion));
+      first.clip.set(CLIP_HALF, 0, CLIP_DEPTH);
+      for (const [card, side] of [[first, 1], [second, -1]]) {
+        card.body.position.copy(attachment).addScaledVector(first.clip, side)
+          .sub(card.body.hang.clone().applyQuaternion(card.body.quaternion));
       }
       const physics = { gravity:48, hold:140, stiffness:1920, spring:40, bandDamping:45,
         linearDrag:1.3, angularDrag:2.2, air:.15, broadside:.5, spinAir:.03,
@@ -90,7 +91,9 @@ for (const dragHeight of [.4, 1, 3]) test(`shared-strap cards settle after dragg
         }
       }
       const pin = card => card.body.hang.clone().applyQuaternion(card.body.quaternion).add(card.body.position);
-      return { stable, attachmentError:pin(first).distanceTo(pin(second)),
+      const clip = clipOffset(first.body, second.body, new THREE.Vector3());
+      return { stable, attachmentError:pin(first).sub(pin(second)).sub(clip.multiplyScalar(2)).length(),
+        clipTilt:Math.abs(clip.y),
         maxPenetration,
         speed:Math.max(first.body.velocity.length(), second.body.velocity.length()) };
     })()
