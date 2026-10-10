@@ -48,7 +48,7 @@ Never use `netlify deploy --prod`, the Netlify "Publish deploy" button, or any o
 
 ## Approved behavior to preserve
 
-- Two slightly overlapping badges on one strap. Either can be dragged; clicking either flips both. Badges sit behind readable hero text.
+- Two slightly overlapping badges on one strap. Each hangs from its own ring through a centered hole punch, at opposite ends of a short clip bar. Either can be dragged; clicking either flips both. Badges sit behind readable hero text.
 - Desktop hero: split columns, badges left, text right. Mobile keeps its own separately approved composition; don't carry desktop changes into mobile unless asked.
 - Card colors follow OS appearance (no manual toggle), purple gradient from `#7776FF` in light, dark gray in dark, subtle noise.
 - Analytics: one "Badge Dragged" and one "Badges Flipped" event per completed interaction, never per frame.
@@ -61,7 +61,6 @@ Never use `netlify deploy --prod`, the Netlify "Publish deploy" button, or any o
 ## Verification
 
 - Run focused tests for what changed: `node --test tests/lanyard-analytics.test.mjs tests/lanyard-physics.test.mjs tests/teara-status.test.mjs`. `npm test` contains obsolete starter assertions and isn't a release gate.
-- Known issue: the "drag upward by 3" physics test fails on Linux (18 of 19 pass). Unconfirmed on macOS.
 - Worker type check: `npx tsc -p portfolio-agent/tsconfig.json --skipLibCheck`.
 - Run `git diff --check`.
 - Check changed interactions in a browser, in light and dark mode and at mobile width when relevant, not only that the build passes. "Still 2 lines" or "can't drag" means the change failed; inspect the real layout.
