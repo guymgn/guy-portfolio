@@ -27,7 +27,7 @@ const FACE_WIDTH = 1024;
 
 const FINISHES = {
   glossy: { roughness: 0.42, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.06, foil: 0, anisotropy: 0 },
-  matte: { roughness: 0.85, metalness: 0, clearcoat: 0, clearcoatRoughness: 0.6, foil: 0, anisotropy: 0 },
+  matte: { roughness: 1, metalness: 0, clearcoat: 0, clearcoatRoughness: 0.6, foil: 0, anisotropy: 0, specular: 0.35 },
   holographic: { roughness: 0.3, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.04, foil: 1, anisotropy: 0 },
   metallic: { roughness: 0.36, metalness: 0.75, clearcoat: 0.5, clearcoatRoughness: 0.18, foil: 0, anisotropy: 0.7 }
 };
@@ -1160,14 +1160,18 @@ const Lanyard = ({
         material.clearcoat = finish.clearcoat;
         material.clearcoatRoughness = finish.clearcoatRoughness;
         material.anisotropy = finish.anisotropy;
+        material.specularIntensity = finish.specular ?? 1;
       });
       foilUniforms.foilStrength.value = finish.foil;
       foilUniforms.foilAspect.value = layout.height / layout.width;
       edgeMaterial.color.setRGB(card[0] * 0.92, card[1] * 0.92, card[2] * 0.92, THREE.SRGBColorSpace);
-      edgeMaterial.roughness = Math.min(finish.roughness, 0.35);
+      // Matte cards get matte edges; coated finishes keep a polished edge.
+      const coated = finish.clearcoat > 0;
+      edgeMaterial.roughness = coated ? Math.min(finish.roughness, 0.35) : finish.roughness;
       edgeMaterial.metalness = finish.metalness;
-      edgeMaterial.clearcoat = 1;
+      edgeMaterial.clearcoat = coated ? 1 : 0;
       edgeMaterial.clearcoatRoughness = 0.08;
+      edgeMaterial.specularIntensity = finish.specular ?? 1;
       const metalLook = METALS[s.metal] || METALS.silver;
       metalMaterial.color.set(metalLook.color);
       metalMaterial.roughness = metalLook.roughness;
