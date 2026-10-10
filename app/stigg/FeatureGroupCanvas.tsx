@@ -126,6 +126,12 @@ export function FeatureGroupCanvas() {
           </div>
         </div>
       </div> : <div className={`featureGroupStage is-${transition}`}><FeatureGroupPlans /></div>}
+      <div className="featureGroupProductView">
+        <header><small>Real-life product view</small></header>
+        <video autoPlay muted loop playsInline controls preload="metadata" aria-label="Feature Groups workflow in the Stigg product">
+          <source src="/stigg/feature-groups-flow.mp4" type="video/mp4" />
+        </video>
+      </div>
     </div>
   );
 }

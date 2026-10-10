@@ -47,6 +47,10 @@ const [builds, versions] = await Promise.all([
   apple(`/v1/apps/${app.id}/appStoreVersions?filter%5Bplatform%5D=IOS&limit=10`),
 ]);
 
+const lookupResponse = await fetch(`https://itunes.apple.com/lookup?bundleId=${encodeURIComponent(process.env.TEARA_BUNDLE_ID)}&country=us`);
+if (!lookupResponse.ok) throw new Error(`Public App Store lookup returned ${lookupResponse.status}`);
+const publicListing = (await lookupResponse.json()).results?.[0] ?? null;
+
 const build = builds.data?.[0]?.attributes;
 const version = [...(versions.data ?? [])]
   .sort((a, b) => new Date(b.attributes.createdDate ?? 0) - new Date(a.attributes.createdDate ?? 0))[0]?.attributes;
@@ -66,13 +70,22 @@ const labels = {
 };
 
 const rawState = version?.appStoreState ?? build?.processingState ?? "VALID";
+const publicVersion = publicListing?.version ?? null;
+const hasPendingUpdate = Boolean(version?.versionString)
+  && (version.versionString !== publicVersion || !["READY_FOR_SALE", "READY_FOR_DISTRIBUTION"].includes(rawState));
 const output = {
   app: app.attributes?.name ?? "Teara",
-  version: version?.versionString ?? null,
-  build: build?.version ?? null,
-  status: labels[rawState] ?? rawState.toLowerCase().replaceAll("_", " "),
+  version: publicVersion,
+  build: null,
+  status: publicListing ? "Live on the App Store" : labels[rawState] ?? rawState.toLowerCase().replaceAll("_", " "),
+  appStoreUrl: publicListing?.trackViewUrl ?? null,
+  nextUpdate: hasPendingUpdate ? {
+    version: version?.versionString ?? null,
+    build: build?.version ?? null,
+    status: labels[rawState] ?? rawState.toLowerCase().replaceAll("_", " "),
+  } : null,
   updatedAt: build?.uploadedDate ?? new Date().toISOString(),
 };
 
 await writeFile(resolve("public/teara-status.json"), `${JSON.stringify(output, null, 2)}\n`);
-console.log(`Teara status synced: ${output.status}${output.build ? ` · Build ${output.build}` : ""}`);
+console.log(`Teara status synced: ${output.status}${output.version ? ` · v${output.version}` : ""}${output.nextUpdate ? ` · Next: v${output.nextUpdate.version} ${output.nextUpdate.status}` : ""}`);

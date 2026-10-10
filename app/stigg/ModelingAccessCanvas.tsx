@@ -1,7 +1,3 @@
-"use client";
-
-import { useEffect, useState } from "react";
-
 export type FeatureTypeIconName = "boolean" | "metered-calculated" | "enum" | "integer" | "metered-events";
 
 type Feature = {
@@ -25,6 +21,16 @@ const features: Feature[] = [
   { id: "emails", name: "Emails sent", type: "Metered · raw events", valueLabel: "Limit", value: "50,000 / month", explanation: "Raw usage events are aggregated into a metered feature and evaluated against its recurring limit.", placement: "modelCardEmails", icon: "metered-events" },
 ];
 
+const initialPositions: Record<string, { x: number; y: number }> = {
+  analytics: { x: 60, y: 29 },
+  "api-calls": { x: 0, y: 0 },
+  countries: { x: -105, y: -1 },
+  support: { x: 31, y: 9 },
+  storage: { x: -200, y: 9 },
+  seats: { x: 394, y: 13 },
+  emails: { x: -101, y: 1 },
+};
+
 export function FeatureTypeIcon({ type }: { type: FeatureTypeIconName }) {
   const paths = {
     boolean: [
@@ -41,62 +47,92 @@ export function FeatureTypeIcon({ type }: { type: FeatureTypeIconName }) {
 }
 
 export function ModelingAccessCanvas() {
-  const [selectedId, setSelectedId] = useState(features[0].id);
-  const [isPaused, setIsPaused] = useState(false);
-  const selected = features.find((feature) => feature.id === selectedId) ?? features[0];
-  const entitlementOutput = selected.icon === "boolean"
-    ? `{ access: true }`
-    : selected.icon === "enum"
-      ? `{ values: [${selected.value.includes("Standard") ? '"standard", "premium", "pro"' : '"us", "uk", "de"'}] }`
-      : `{ limit: "${selected.value}" }`;
+  const [positions, setPositions] = useState<Record<string, { x: number; y: number }>>(initialPositions);
+  const [activeCard, setActiveCard] = useState<string | null>(null);
+  const drag = useRef<{
+    id: string;
+    pointerId: number;
+    startX: number;
+    startY: number;
+    originX: number;
+    originY: number;
+    minX: number;
+    maxX: number;
+    minY: number;
+    maxY: number;
+  } | null>(null);
 
-  useEffect(() => {
-    if (isPaused || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const timer = window.setInterval(() => {
-      setSelectedId((currentId) => {
-        const currentIndex = features.findIndex((feature) => feature.id === currentId);
-        return features[(currentIndex + 1) % features.length].id;
-      });
-    }, 3200);
-    return () => window.clearInterval(timer);
-  }, [isPaused]);
+  function startDrag(event: ReactPointerEvent<HTMLButtonElement>, id: string) {
+    if (event.button !== 0 || window.matchMedia("(max-width: 760px)").matches) return;
+
+    const card = event.currentTarget;
+    const canvas = card.closest<HTMLElement>(".modelingCards");
+    if (!canvas) return;
+
+    const cardRect = card.getBoundingClientRect();
+    const canvasRect = canvas.getBoundingClientRect();
+    const origin = positions[id] ?? { x: 0, y: 0 };
+
+    drag.current = {
+      id,
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+      originX: origin.x,
+      originY: origin.y,
+      minX: origin.x + canvasRect.left - cardRect.left,
+      maxX: origin.x + canvasRect.right - cardRect.right,
+      minY: origin.y + canvasRect.top - cardRect.top,
+      maxY: origin.y + canvasRect.bottom - cardRect.bottom,
+    };
+    card.setPointerCapture(event.pointerId);
+    setActiveCard(id);
+  }
+
+  function moveCard(event: ReactPointerEvent<HTMLButtonElement>) {
+    const current = drag.current;
+    if (!current || current.pointerId !== event.pointerId) return;
+
+    const x = Math.min(current.maxX, Math.max(current.minX, current.originX + event.clientX - current.startX));
+    const y = Math.min(current.maxY, Math.max(current.minY, current.originY + event.clientY - current.startY));
+    setPositions((existing) => ({ ...existing, [current.id]: { x, y } }));
+  }
+
+  function endDrag(event: ReactPointerEvent<HTMLButtonElement>) {
+    if (!drag.current || drag.current.pointerId !== event.pointerId) return;
+    drag.current = null;
+    setActiveCard(null);
+  }
 
   return (
-    <div
-      className="modelingCanvas"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onFocusCapture={() => setIsPaused(true)}
-      onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) setIsPaused(false);
-      }}
-    >
-      <div className="modelingCanvasIntro">
-        <small>Interactive walkthrough</small>
-        <p>Explore how feature types become entitlement rules.</p>
-      </div>
-
+    <div className="modelingCanvas">
+      <small className="modelingCanvasHint">Hover for details</small>
       <div className="modelingCards" aria-label="Feature modeling examples">
         {features.map((feature) => (
           <button
-            className={`modelingCard ${feature.placement}${selectedId === feature.id ? " isSelected" : ""}`}
+            className={`modelingCard ${feature.placement}${activeCard === feature.id ? " isDragging" : ""}`}
             type="button"
             key={feature.id}
-            onClick={() => setSelectedId(feature.id)}
-            aria-pressed={selectedId === feature.id}
+            aria-describedby={`${feature.id}-explanation`}
+            style={{
+              "--drag-x": `${positions[feature.id]?.x ?? 0}px`,
+              "--drag-y": `${positions[feature.id]?.y ?? 0}px`,
+            } as CSSProperties}
+            onPointerDown={(event) => startDrag(event, feature.id)}
+            onPointerMove={moveCard}
+            onPointerUp={endDrag}
+            onPointerCancel={endDrag}
           >
             <span><small>Feature</small><strong>{feature.name}</strong></span>
             <span><small>Type</small><span className="modelingType"><FeatureTypeIcon type={feature.icon} /><b>{feature.type}</b></span></span>
             <span><small>{feature.valueLabel}</small><code>{feature.value}</code></span>
+            <span className="modelingCardTooltip" id={`${feature.id}-explanation`} role="tooltip">{feature.explanation}</span>
           </button>
         ))}
-      </div>
-
-      <div className="modelingExplanation" aria-live="polite">
-        <div className="modelingExplanationLabel"><span>{selected.name}</span></div>
-        <p>{selected.explanation}</p>
-        <code>{entitlementOutput}</code>
       </div>
     </div>
   );
 }
+"use client";
+
+import { useRef, useState, type CSSProperties, type PointerEvent as ReactPointerEvent } from "react";

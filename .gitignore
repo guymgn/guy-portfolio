@@ -46,3 +46,9 @@ yarn-error.log*
 # Local generated artifacts
 /tmp/
 /tsconfig.tsbuildinfo
+
+# Local-only folders (agent settings, scratch exports, Wrangler state anywhere)
+/output/
+/.claude/
+.wrangler/
+.dev.vars*

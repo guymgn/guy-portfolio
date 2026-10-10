@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ThemeToggle } from "./ThemeToggle";
+import Link from "next/link";
 import { trackEvent } from "./Analytics";
 
 type HomeSection = "work" | "building" | "about";
@@ -10,7 +10,13 @@ function NavContents({ projectName, showMark = true, activeSection, surface }: {
   return (
     <>
       {projectName ? (
-        <span className="caseBreadcrumb"><a className="caseMark" href="/" aria-label="Guy Magen, home" data-analytics-event="Portfolio Home Opened" data-analytics-source={surface} data-analytics-project={projectName}>GM</a><i>/</i><strong>{projectName}</strong></span>
+        <span className="caseBreadcrumb">
+          <Link className="caseMark" href="/" aria-label="Guy Magen, home" data-analytics-event="Portfolio Home Opened" data-analytics-source={surface} data-analytics-project={projectName}>GM</Link>
+          <i aria-hidden="true">/</i>
+          <Link href="/#work" data-analytics-event="Portfolio Home Opened" data-analytics-source={surface} data-analytics-project={projectName}>Portfolio</Link>
+          <i aria-hidden="true">/</i>
+          <strong aria-current="page">{projectName}</strong>
+        </span>
       ) : (
         <>
           {showMark && <a className="home" href="#top" aria-label="Guy Magen, back to top" data-analytics-event="Navigation Clicked" data-analytics-section="top" data-analytics-source={surface}><span className="navWordmark">GM</span></a>}
@@ -19,7 +25,9 @@ function NavContents({ projectName, showMark = true, activeSection, surface }: {
           </div>
         </>
       )}
-      <div className="navActions">{showMark && <a className="navCv" href="/Guy-Magen-CV.pdf" download onClick={() => trackEvent("CV Downloaded", { source: "navigation" })}>Download CV <span aria-hidden="true">↓</span></a>}<ThemeToggle /></div>
+      {!projectName && showMark && <div className="navActions">
+        <a className="navCv" href="/Guy-Magen-CV.pdf" download onClick={() => trackEvent("CV Downloaded", { source: "navigation" })}>Download CV <span aria-hidden="true">↓</span></a>
+      </div>}
     </>
   );
 }

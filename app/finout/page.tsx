@@ -7,6 +7,7 @@ import { ContactFooter } from "../ContactFooter";
 import { BackToTop } from "../BackToTop";
 import { ResearchSequenceCanvas } from "./ResearchFlowCanvas";
 import { MegaBillCanvas } from "./MegaBillCanvas";
+import { AnomalyDetectionCanvas } from "./AnomalyDetectionCanvas";
 import { VirtualTagsCanvas } from "./VirtualTagsCanvas";
 
 const description = "How I helped Finout turn fragmented cloud-cost data into clear, accountable product workflows.";
@@ -44,7 +45,7 @@ export default function FinoutPage() {
         <h1>Turning cloud cost chaos into one clear picture</h1>
         <p className="caseDek">A cloud cost management platform that helps FinOps, engineering and finance understand spend from the same source of truth.</p>
         <dl className="caseMeta">
-          <div className="caseMetaBadge"><dt className="srOnly">Role</dt><dd><span className="companyBadgeCrop"><Image src="/company-badges/finout.png" width={540} height={440} alt="Senior Product Designer at Finout" /></span></dd></div>
+          <div className="caseMetaBadge caseMetaLogo"><dt className="srOnly">Company</dt><dd><Image src="/company-logos/finout.svg" width={201} height={55} alt="Finout" /></dd></div>
           <div className="caseMetaFocus"><dt>Focus</dt><dd>Product design, UX research, visual design</dd></div>
           <div className="caseMetaScope"><dt>Design scope</dt><dd>{scope.map((item) => <span key={item}>{item}</span>)}</dd></div>
         </dl>
@@ -54,25 +55,34 @@ export default function FinoutPage() {
         <div className="caseChapterHead"><p className="sectionLabel">Research and framing</p><h2>The problem was not a lack of data. It was the work required to understand it.</h2></div>
         <div className="caseTwoCol caseCopy">
           <p className="caseLead">Teams moved between provider dashboards, exports and spreadsheets before they could answer a basic cost question.</p>
-          <p>I mapped that fragmented workflow and connected it to four recurring needs: visibility, alignment, efficiency and accuracy. That reframed the opportunity from another dashboard into one investigation model, with two connected jobs: understand the spend, then establish who owns it.</p>
+          <p>I mapped that fragmented workflow and connected it to four recurring needs: visibility, alignment, efficiency and accuracy. That reframed the opportunity from another dashboard into one investigation model: understand the spend, detect meaningful change and establish who owns it.</p>
         </div>
         <ResearchSequenceCanvas />
       </section>
 
       <section className="caseChapter">
-        <div className="caseChapterHead"><p className="sectionLabel">MegaBill</p><h2>One bill for every cloud, service and team</h2></div>
+        <div className="caseChapterHead"><p className="sectionLabel">MegaBill</p><h2>One view across every cloud, service and team</h2></div>
         <div className="caseTwoCol caseCopy">
-          <p className="caseLead">A useful overview had to preserve the path into the details without flattening every provider into a generic dashboard.</p>
-          <p>I designed MegaBill as the first half of that model: one cross-provider starting point with flexible grouping and a consistent route from total spend to the resource behind a change.</p>
+          <p className="caseLead">Research showed that teams needed one shared overview, but still had to trace every number back to its source.</p>
+          <p>That made the path into detail as important as the overview itself. I designed MegaBill as a cross-provider starting point with flexible grouping and a consistent route from total spend to the resource behind a change.</p>
         </div>
         <MegaBillCanvas />
       </section>
 
       <section className="caseChapter">
+        <div className="caseChapterHead"><p className="sectionLabel">Anomaly Detection</p><h2>A feed for the cost changes that needed attention</h2></div>
+        <div className="caseTwoCol caseCopy">
+          <p className="caseLead">A unified bill improved visibility, but teams still had to actively search for the cost changes that deserved attention.</p>
+          <p>This led to a chronological anomaly feed rather than another dashboard. I gave every item its expected and actual spend, affected cost context and compact trend, with a direct route into MegaBill for investigation.</p>
+        </div>
+        <AnomalyDetectionCanvas />
+      </section>
+
+      <section className="caseChapter">
         <div className="caseChapterHead"><p className="sectionLabel">Virtual Tags</p><h2>Turning untagged cost into accountable spend</h2></div>
         <div className="caseTwoCol caseCopy">
-          <p className="caseLead">MegaBill made spend visible, but incomplete provider metadata still prevented teams from understanding ownership.</p>
-          <p>My work on Virtual Tags began by turning existing metadata into business dimensions such as product, environment and owner. I shaped an ordered rule model for matched and unmatched costs, then extended it through Split Cost so shared costs could be distributed without making the allocation harder to understand or validate.</p>
+          <p className="caseLead">The research separated visibility from accountability: seeing a cost did not explain which product, environment or owner was responsible for it.</p>
+          <p>Incomplete provider metadata made that gap unavoidable. I shaped Virtual Tags as an ordered rule model for matched and unmatched costs, then extended it through Split Cost so shared costs could be distributed without making the allocation harder to understand or validate.</p>
         </div>
         <VirtualTagsCanvas />
       </section>
@@ -81,7 +91,7 @@ export default function FinoutPage() {
         <div className="caseChapterHead"><p className="sectionLabel">What the system enables</p><h2>One path from fragmented cost data to accountable spend</h2></div>
         <div className="caseStory">
           <article><small>See the whole picture</small><p>FinOps, engineering and finance could begin with the same cross-provider view instead of reconciling separate dashboards and exports.</p></article>
-          <article><small>Explain every number</small><p>Grouping, breadcrumbs and contextual details preserved the path from a change in spend to the resource behind it.</p></article>
+          <article><small>Catch meaningful change</small><p>Anomaly Detection surfaced unexpected spend with its context intact, then opened the relevant MegaBill investigation directly.</p></article>
           <article><small>Assign clear ownership</small><p>Virtual Tags let FinOps teams convert existing metadata into business context and define what should happen when that context was missing.</p></article>
         </div>
       </section>
@@ -90,7 +100,7 @@ export default function FinoutPage() {
         <div className="caseChapterHead"><p className="sectionLabel">Reflection</p><h2>Clarity came from preserving the path through the data</h2></div>
         <div className="caseTwoCol caseCopy">
           <p className="caseLead">Cloud cost data became useful when people could understand how a number was constructed and who was responsible for it.</p>
-          <p>Across both workflows, I used progressive disclosure as the organizing principle: begin with one clear picture, preserve context through every level, then turn what people discovered into accountable action.</p>
+          <p>Across these workflows, I used progressive disclosure as the organizing principle: begin with one clear picture, preserve context through every level, then turn what people discovered into accountable action.</p>
         </div>
       </section>
 

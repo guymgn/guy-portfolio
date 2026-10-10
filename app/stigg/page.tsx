@@ -36,9 +36,9 @@ export default function StiggPage() {
       <header className="caseHero">
         <p className="sectionLabel">Stigg · 2023 to 2026</p>
         <h1>Designing the model behind modern SaaS pricing</h1>
-        <p className="caseDek">Three years shaping a monetization and entitlements platform, from pricing models and subscriptions to customer-facing experiences.</p>
+        <p className="caseDek">Three years designing across a monetization and entitlements platform, partnering with product, engineering, customers and internal stakeholders from research through post-launch refinement.</p>
         <dl className="caseMeta">
-          <div className="caseMetaBadge"><dt className="srOnly">Role</dt><dd><span className="companyBadgeCrop"><Image src="/company-badges/stigg.png" width={540} height={440} alt="Product Designer at Stigg" /></span></dd></div>
+          <div className="caseMetaBadge caseMetaLogo"><dt className="srOnly">Company</dt><dd><Image src="/company-logos/stigg.svg" width={210} height={60} alt="Stigg" /></dd></div>
           <div className="caseMetaFocus"><dt>Focus</dt><dd>Product design, UX research, design systems</dd></div>
           <div className="caseMetaScope"><dt>Design scope</dt><dd><span>Core platform workflows</span><span>Customer and stakeholder research</span><span>Billing and entitlement interaction models</span><span>Design system established for the platform</span></dd></div>
         </dl>
@@ -55,7 +55,7 @@ export default function StiggPage() {
           <i>→</i>
           <article className="isCore"><small>Shared model</small><strong>Stigg</strong><span>Product Catalog · Subscriptions · Entitlements</span></article>
           <i>→</i>
-          <div><article><small>Money</small><strong>Billing</strong></article><article><small>Behavior</small><strong>Product access</strong></article><article><small>Experience</small><strong>Customer UI</strong></article></div>
+          <div><article><small>Billing</small><strong>Charge the customer</strong></article><article><small>Product access</small><strong>Enforce entitlements</strong></article><article><small>Customer experience</small><strong>Show plans and usage</strong></article></div>
         </div>
       </section>
 
@@ -63,13 +63,17 @@ export default function StiggPage() {
         <div className="caseChapterHead"><p className="sectionLabel">Research and framing</p><h2>The tools were capable. The mental model was fragmented.</h2></div>
         <div className="caseTwoCol caseCopy">
           <p className="caseLead">As part of my research, I studied how teams described pricing decisions and how competing products represented them.</p>
-          <p>I combined customer and stakeholder conversations with a review of Stripe, Chargebee, Maxio, Metronome and Orb. The opportunity was one coherent model for packaging, billing and access.</p>
+          <p>I combined customer and stakeholder conversations with a review of Stripe, Chargebee, Maxio, Metronome and Orb. The work followed one connected path: define access, package it by plan, activate it for a customer and carry the result into the product experience.</p>
         </div>
         <p className="stiggFindingsLabel">What the research established</p>
         <div className="stiggFindings">
-          <article><span>01</span><p><strong>People think in customers and plans.</strong><small>The system still needs products, charges, features and entitlement values.</small></p></article>
-          <article><span>02</span><p><strong>B2B agreements need exceptions.</strong><small>Flexible configuration cannot make the default path feel unsafe or unpredictable.</small></p></article>
-          <article><span>03</span><p><strong>The result must stay visible.</strong><small>Users need to understand the subscription they are assembling before they create it.</small></p></article>
+          <article><p><strong>People think in customers and plans.</strong><small>The system still needs products, charges, features and entitlement values.</small></p></article>
+          <article><p><strong>B2B agreements need exceptions.</strong><small>Flexible configuration cannot make the default path feel unsafe or unpredictable.</small></p></article>
+          <article><p><strong>The result must stay visible.</strong><small>Users need to understand the subscription they are assembling before they create it.</small></p></article>
+        </div>
+        <div className="stiggScenario">
+          <div><small>A pricing change touches more than billing</small><p>A product team wants to launch a plan with 25 seats, premium support and a monthly API limit. The decision begins with pricing, but billing, entitlement logic, application behavior and the customer experience must remain aligned.</p></div>
+          <strong>The design challenge was not creating another configuration screen. It was giving every team one shared representation of that decision.</strong>
         </div>
       </section>
 
@@ -110,11 +114,11 @@ export default function StiggPage() {
       </section>
 
       <section className="caseChapter caseChapterInternalEnd stiggImpact">
-        <div className="caseChapterHead"><p className="sectionLabel">What the system enables</p><h2>One product language, carried from customer decisions into delivery</h2></div>
+        <div className="caseChapterHead"><p className="sectionLabel">What changed in practice</p><h2>One product language, carried from customer decisions into delivery</h2></div>
         <div className="caseStory">
-          <article><small>Customer understanding</small><p>Configuration and its consequences stayed visible in the same workflow, helping complex subscription decisions remain understandable before creation.</p></article>
-          <article><small>Product coherence</small><p>Features, Entitlements and Feature Groups established a shared language for representing access across plans, subscriptions and customer experiences.</p></article>
-          <article><small>Design and engineering</small><p>Recurring decisions became tokens, implementation-ready specifications and Storybook components that could be reviewed and refined with engineering.</p></article>
+          <article><small>A connected product model</small><p>Features, Entitlements, Feature Groups and Subscriptions became connected parts of one production workflow rather than separate configuration concepts.</p></article>
+          <article><small>Used in live configurations</small><p>The workflows shipped in Stigg’s platform and supported real customer pricing, packaging and access configurations.</p></article>
+          <article><small>Designed to evolve</small><p>Shared tokens, implementation-ready specifications and Storybook components supported delivery, while FullStory sessions guided post-launch refinements.</p></article>
         </div>
       </section>
 
@@ -124,17 +128,10 @@ export default function StiggPage() {
           <p className="caseLead">Complex systems do not need to feel simple, but the decisions within them must remain understandable.</p>
           <p>Across each workflow, clarity came from showing relationships, keeping consequences in context and giving flexible paths a dependable default.</p>
         </div>
-        <div className="stiggPracticePath">
-          <p className="sectionLabel">How the practice evolved</p>
-          <div className="stiggPracticeNarrative">
-            <p>In the final year, recurring decisions became tokens, implementation-ready specifications and Storybook components reviewed directly with engineering.</p>
-            <p><strong>After launch:</strong> FullStory sessions helped identify hesitation and guide follow-up refinements.</p>
-          </div>
-        </div>
       </section>
 
       <footer className="caseFooter">
-        <p>All work shown is the property of Stigg. The interactive walkthroughs began as Figma designs from my original product work and were reconstructed in code for this portfolio, with information abstracted, anonymized and adapted for presentation.</p>
+        <p>All work shown is the property of Stigg. This case study combines an anonymized recording of the real product with interactive walkthroughs reconstructed from my original Figma designs, with information abstracted and adapted for presentation.</p>
       </footer>
       <ContactFooter />
     </main>

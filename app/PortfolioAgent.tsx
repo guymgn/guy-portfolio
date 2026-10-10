@@ -5,6 +5,7 @@ import { ArrowUp, LoaderCircle, Sparkles } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
 import { trackEvent } from "./Analytics";
+import { isTearaStatusQuestion, loadTearaStatus, tearaReleaseAnswer } from "../lib/teara-status";
 
 const AGENT_ENDPOINT = "https://guy-portfolio-agent.weathered-flower-de49.workers.dev/chat";
 
@@ -17,6 +18,8 @@ const toolsAnswer = `Guy’s toolkit spans a few areas:
 - **Content & code management:** Notion, GitHub, and Netlify
 
 He chooses tools based on what helps move an idea from concept to a working product—not just a design artifact.`;
+
+const tearaAppStoreLink: AgentLink = { label: "View Teara on the App Store", href: "https://apps.apple.com/us/app/teara/id6800005317" };
 
 type Guide = "portfolio" | "jarvis";
 type AgentLink = { label: string; href: string };
@@ -86,6 +89,19 @@ export function PortfolioAgent() {
     if (guide === "portfolio" && clean.toLowerCase().replace(/[?.!]+$/, "") === "what tools does guy use") {
       trackEvent("Agent Response Received", { guide, has_links: false, offered_jarvis_handoff: false, source: "preset_answer" });
       setMessages([...nextMessages, { role: "assistant", content: toolsAnswer, guide, links: [] }]);
+      setLoading(false);
+      return;
+    }
+
+    if (isTearaStatusQuestion(clean, history, guide)) {
+      let content: string;
+      try {
+        content = tearaReleaseAnswer(await loadTearaStatus());
+      } catch {
+        content = "I couldn’t load Teara’s current release status just now. Please check the App Store for the latest version.";
+      }
+      trackEvent("Agent Response Received", { guide, has_links: true, offered_jarvis_handoff: false, source: "preset_answer" });
+      setMessages([...nextMessages, { role: "assistant", content, guide, links: [tearaAppStoreLink] }]);
       setLoading(false);
       return;
     }

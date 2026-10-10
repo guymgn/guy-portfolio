@@ -10,6 +10,7 @@ const approvedLinks = new Set([
   "/finout",
   "mailto:hi@guymagen.com",
   "https://www.teara.io",
+  "https://apps.apple.com/us/app/teara/id6800005317",
   "https://www.linkedin.com/in/guymagen/",
   "https://github.com/guymgn",
 ]);

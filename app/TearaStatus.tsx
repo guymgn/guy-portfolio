@@ -1,25 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
-type Status = {
-  version: string | null;
-  build: string | null;
-  status: string;
-};
+import { loadTearaStatus, type TearaStatusData } from "../lib/teara-status";
 
 export function TearaStatus() {
-  const [status, setStatus] = useState<Status | null>(null);
+  const [status, setStatus] = useState<TearaStatusData | null>(null);
 
   useEffect(() => {
-    fetch("/teara-status.json", { cache: "no-store" })
-      .then((response) => response.ok ? response.json() : null)
+    loadTearaStatus()
       .then(setStatus)
       .catch(() => setStatus(null));
   }, []);
 
   if (!status) return null;
-  const details = [status.version ? `v${status.version}` : null, status.build ? `Build ${status.build}` : null].filter(Boolean).join(" · ");
+  const details = [status.version ? `v${status.version}` : null, status.build ? `Build ${status.build}` : null, status.status].filter(Boolean).join(" · ");
+  const nextDetails = status.nextUpdate
+    ? [status.nextUpdate.version ? `v${status.nextUpdate.version}` : null, status.nextUpdate.build ? `Build ${status.nextUpdate.build}` : null, status.nextUpdate.status].filter(Boolean).join(" · ")
+    : null;
 
-  return <span className="tearaLiveStatus"><i aria-hidden="true" />{status.status}{details ? ` · ${details}` : ""}</span>;
+  return <span className="tearaLiveStatus"><span>Production: {details}{nextDetails ? <small> · Pending: {nextDetails}</small> : null}</span></span>;
 }

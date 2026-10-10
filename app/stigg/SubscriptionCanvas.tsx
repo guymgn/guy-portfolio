@@ -21,6 +21,7 @@ export function SubscriptionCanvas() {
   const updateQuantity = (id: "seats" | "api" | "templates", delta: number) => setQuantities((current) => ({ ...current, [id]: Math.max(1, current[id] + delta) }));
 
   return <div className="subscriptionCanvas">
+    <small className="subscriptionCanvasLabel">Interactive workflow</small>
     <div className="subscriptionFlow">
       <div className="subscriptionBreadcrumb">Customers <i>/</i> Jared Dunn <i>/</i> Create subscription</div>
       <header><span><strong>Jared Dunn</strong><small>jared@piedpiper.com · customer-abc1234</small></span></header>
@@ -60,7 +61,6 @@ export function SubscriptionCanvas() {
     </div>
 
     <aside className="subscriptionPreview" aria-live="polite">
-      <small>Updates as you configure</small>
       <h3>Subscription preview</h3>
       <div><strong>ACME app / Essentials</strong><span>{period === "monthly" ? "Monthly" : "Annual"}</span></div>
       {charges.map((charge) => <div key={charge.id}><span>{charge.quantity.toLocaleString()} × {charge.name}</span><span>${(charge.quantity * charge.price).toFixed(2)}</span></div>)}

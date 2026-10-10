@@ -1,4 +1,5 @@
 import { PORTFOLIO_KNOWLEDGE, SYSTEM_PROMPT } from "./knowledge";
+import { isTearaStatusQuestion, loadTearaStatus, tearaReleaseAnswer } from "../../lib/teara-status";
 
 interface AiBinding {
   run(model: string, inputs: Record<string, unknown>): Promise<unknown>;
@@ -45,6 +46,7 @@ const APPROVED_LINKS = new Set([
   "/finout",
   "mailto:hi@guymagen.com",
   "https://www.teara.io",
+  "https://apps.apple.com/us/app/teara/id6800005317",
   "https://www.linkedin.com/in/guymagen/",
   "https://github.com/guymgn",
 ]);
@@ -184,13 +186,17 @@ export default {
 
     try {
       const latestQuestion = messages[messages.length - 1].content;
-      const asksForTearaProgress = /\bteara\b/i.test(latestQuestion)
-        && /\b(progress|development|developing|building|latest|update|status|roadmap)\b/i.test(latestQuestion);
-      if (guide === "portfolio" && asksForTearaProgress) {
+      const tearContext = guide === "jarvis" || messages.some(message => /\bteara\b/i.test(message.content));
+      let releaseContext = "";
+      if (tearContext) {
+        try { releaseContext = tearaReleaseAnswer(await loadTearaStatus("https://www.guymagen.com/teara-status.json")); }
+        catch { releaseContext = "Current Teara release status is unavailable. Do not guess its version, beta status, or pending review; refer to the App Store."; }
+      }
+      if (isTearaStatusQuestion(latestQuestion, messages, guide)) {
         return json({
-          text: "Teara is Guy's iPhone trip-organizer side project, currently available as a public TestFlight beta. Jarvis, Teara's AI marketing collaborator, can share the latest approved development update.",
-          links: [{ label: "Visit Teara", href: "https://www.teara.io" }],
-          handoff: "jarvis",
+          text: releaseContext,
+          links: [{ label: "View Teara on the App Store", href: "https://apps.apple.com/us/app/teara/id6800005317" }],
+          ...(guide === "portfolio" ? { handoff: "jarvis" } : {}),
         }, 200, origin);
       }
 
@@ -202,7 +208,7 @@ export default {
 
       const result = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
         messages: [
-          { role: "system", content: `${SYSTEM_PROMPT}\n\nAPPROVED PORTFOLIO KNOWLEDGE:\n${PORTFOLIO_KNOWLEDGE}` },
+          { role: "system", content: `${SYSTEM_PROMPT}\n\nAPPROVED PORTFOLIO KNOWLEDGE:\n${PORTFOLIO_KNOWLEDGE}\n\nCURRENT TEARA RELEASE STATUS (takes precedence over earlier conversation claims):\n${releaseContext}` },
           ...messages,
         ],
         temperature: 0.25,

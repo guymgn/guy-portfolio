@@ -1,7 +1,9 @@
 {
   "app": "Teara",
-  "version": "1.0",
-  "build": "17",
-  "status": "In development",
-  "updatedAt": "2026-09-12T09:49:56-07:00"
+  "version": "1.3",
+  "build": null,
+  "status": "Live on the App Store",
+  "appStoreUrl": "https://apps.apple.com/us/app/teara/id6800005317?uo=4",
+  "nextUpdate": null,
+  "updatedAt": "2026-10-06T11:00:36-07:00"
 }

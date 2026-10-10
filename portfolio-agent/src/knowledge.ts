@@ -3,7 +3,7 @@ ABOUT GUY
 Guy Magen is a product designer and builder based in Israel with more than 12 years of experience. His broader experience includes SaaS, fintech, complex web and mobile applications, startups in Israel and abroad, branding, motion, and product design. He focuses on complex B2B products, systems thinking, developer-facing tools, monetization, cloud cost management, design systems, and emerging agentic experiences. He works closely with engineers and turns complicated product systems into understandable decisions and implementation-ready experiences. He works in both English and Hebrew.
 
 CURRENT WORK
-Guy is open to product design opportunities. Since January 2018, he has also worked independently through GuyMagen across UX, product design, strategy, ideation, Webflow, and end-to-end product evolution for B2B and B2C web and mobile products. Clients named in his profile include Flytrex, Claimyx, DAV.Network, Bites, and Fixefy. Companies represented in the portfolio's consulting work also include Altastream and Viewz. In July 2026 he joined Viewz as a Senior Product Designer, working on an AI-native platform intended to replace disconnected finance tools and spreadsheets with a real-time source of truth. He is building Teara, a personal iOS app that turns travel bookings into one clear itinerary. He also mentors product designers through the Startup Designers community and The Product Lounge.
+Guy is open to product design opportunities. Since January 2018, he has also worked independently through GuyMagen across UX, product design, strategy, ideation, Webflow, and end-to-end product evolution for B2B and B2C web and mobile products. Clients named in his profile include Flytrex, Claimyx, DAV.Network, Bites, and Fixefy. Companies represented in the portfolio's consulting work also include Altastream and Viewz. In July 2026 he joined Viewz as a Senior Product Designer, working on an AI-native platform intended to replace disconnected finance tools and spreadsheets with a real-time source of truth. He designed, built, and released Teara, a personal iPhone app that turns travel bookings into one clear itinerary. He also mentors product designers through the Startup Designers community and The Product Lounge.
 
 CAREER TIMELINE
 - Viewz, Senior Product Designer, July 2026 to present. AI-native finance platform.
@@ -30,8 +30,9 @@ At Finout, Guy led design of core cloud-cost product experiences for both techni
 Case study: /finout
 
 TEARA
-Teara is a personal iOS app Guy is building to turn travel bookings into one clear itinerary. On the portfolio it represents his ability to move beyond design artifacts and build a working product.
+Teara is a personal iPhone app Guy designed and built to turn scattered travel bookings into one clear, day-by-day itinerary. Its production version and any pending update are supplied by the current Teara release status, shared with the portfolio project section. Never infer release details from older conversation messages. On the portfolio it represents his ability to move beyond design artifacts and take a product from idea and design through implementation and release.
 Website: https://www.teara.io
+App Store: https://apps.apple.com/us/app/teara/id6800005317
 
 WORKING WITH ENGINEERING
 Guy works close to implementation. He prefers shared models, clear interaction rules, reusable design tokens, implementation-ready specifications, and reviewing the real product with engineers. His portfolio case-study interactions were reconstructed in code from the original Figma work specifically so viewers could experience the product logic instead of only seeing static screens.

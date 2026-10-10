@@ -1,10 +1,12 @@
 import Image from "next/image";
 import { GridField } from "./GridField";
+import { HeroLanyard } from "./HeroLanyard";
 import { FloatingNav } from "./FloatingNav";
 import { ScrollReveal } from "./ScrollReveal";
 import { TearaStatus } from "./TearaStatus";
 import { ContactFooter } from "./ContactFooter";
 import { PortfolioAgent } from "./PortfolioAgent";
+import { TearaVideoPromo } from "./TearaVideoPromo";
 
 const work = [
   {
@@ -29,6 +31,14 @@ const work = [
     href: "/finout",
     tooltip: "finout-v2",
   },
+  {
+    company: "Unreleased",
+    role: "AI security case study",
+    description: "Two anonymized workflows from an unreleased security app: governing unmanaged AI and rotating API keys without disrupting integrations.",
+    period: "2026",
+    href: "/ai-governance",
+    concealed: true,
+  },
 ];
 
 const building = [
@@ -40,11 +50,13 @@ const building = [
 export default function Home() {
   return (
     <main className="siteShell">
+      <HeroLanyard />
       <FloatingNav />
+      <TearaVideoPromo />
 
       <section className="intro" id="top">
         <GridField />
-        <p className="sectionLabel">Hey there, I’m</p>
+        <p className="sectionLabel"><span className="heroWave" aria-hidden="true">👋</span>Hey there, I’m</p>
         <div className="heroIdentity">
           <Image className="heroPortrait heroPortraitLight" src="/guymagen.svg" width={58} height={58} alt="" aria-hidden="true" priority />
           <Image className="heroPortrait heroPortraitDark" src="/guymagen-dark.svg" width={58} height={58} alt="" aria-hidden="true" priority />
@@ -73,7 +85,7 @@ export default function Home() {
             <div className="expertiseRow workExpertise" aria-label="Areas of expertise"><span>Complex B2B platforms</span><span>Agentic product experiences</span><span>Entitlements &amp; access</span><span>Data-heavy workflows</span><span>Design systems</span></div>
             {work.map((item) => item.href ? (
               <a className="row" href={item.href} target={item.href.startsWith("http") ? "_blank" : undefined} rel={item.href.startsWith("http") ? "noreferrer" : undefined} data-analytics-event="Project Opened" data-analytics-project={item.company} key={item.company}>
-                <div><strong>{item.company}</strong></div><div className="workDescription"><span>{item.role}</span><p>{item.description}</p></div><span className="period">{item.period}</span><span className="arrow">↗</span>
+                <div className="workIdentity"><strong className={item.concealed ? "concealedProject" : undefined}>{item.company}</strong>{item.concealed && <span className="concealedProjectTooltip" role="tooltip">AI governance + API keys management</span>}</div><div className="workDescription"><span>{item.role}</span><p>{item.description}</p></div><span className="period">{item.period}</span><span className="arrow">↗</span>
                 {item.tooltip && <span className="projectBadgeTooltip" aria-hidden="true"><Image src={`/tooltip-images/${item.tooltip}.png`} width={540} height={440} alt="" /></span>}
               </a>
             ) : (
