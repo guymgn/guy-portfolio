@@ -50,7 +50,7 @@ export function TearaVideoPromo() {
     <a
       ref={promoRef}
       className="tearaVideoPromo"
-      href="https://apps.apple.com/app/id6800005317"
+      href="https://apps.apple.com/il/app/teara/id6800005317"
       target="_blank"
       rel="noreferrer"
       aria-label={parked ? "Show Teara App Store card" : "Visit Teara on the App Store"}
