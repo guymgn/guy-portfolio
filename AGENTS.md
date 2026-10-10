@@ -50,13 +50,12 @@ Never use `netlify deploy --prod`, the Netlify "Publish deploy" button, or any o
 
 - Two slightly overlapping badges on one strap. Each hangs from its own ring through a centered hole punch, at opposite ends of a short clip bar. Either can be dragged; clicking either flips both. Badges sit behind readable hero text.
 - Desktop hero: split columns, badges left, text right. Mobile keeps its own separately approved composition; don't carry desktop changes into mobile unless asked.
-- Card colors follow OS appearance (no manual toggle), purple gradient from `#7776FF` in light, dark gray in dark, subtle noise.
+- Badge artwork comes from Figma (Materials file, page 1): badge 1 is `card-front.png` (purple, black line art) and `card-back.png` (photo); badge 2 is `card-front-2.png` ("All Access") and `card-back-2.png` (illustration on black). Both badges look the same in light and dark mode.
 - Analytics: one "Badge Dragged" and one "Badges Flipped" event per completed interaction, never per frame.
 - Case breadcrumb: `GM / Portfolio / [case study]`.
 - Back to top sits at the viewport edge (desktop bottom/right 24px, mobile bottom 18px).
 - Teara promo: desktop and tablet only (hidden at 680px and below), partly offscreen and angled at rest, straightens on hover to 10px inside the viewport. No "T" branding on the parked handle.
 - Every place that mentions Teara's release (project section, promo, chat answers) must agree with `teara-status.json`.
-- Badge 2 replacement images are pending from Guy. Don't invent them.
 
 ## Verification
 

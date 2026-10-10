@@ -35,8 +35,11 @@ export function HeroLanyard() {
           onInteraction={trackBadgeInteraction}
           frontImage="/card-front.png"
           backImage="/card-back.png"
-          cardColor={dark ? "#333333" : "#7776FF"}
-          cardGradientEnd={dark ? "#505050" : "#6261D9"}
+          secondFrontImage="/card-front-2.png"
+          secondBackImage="/card-back-2.png"
+          secondCardColor="#000000"
+          cardColor="#7776FF"
+          cardGradientEnd="#6261D9"
           finish="matte"
           cornerRadius={0.5}
           size={0.47}

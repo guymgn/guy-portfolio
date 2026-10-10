@@ -839,6 +839,11 @@ const stepSimulation = (sim, dt, physics, time, companion = null) => {
 const Lanyard = ({
   frontImage,
   backImage,
+  // Optional artwork and card color for the second badge. Without them the
+  // second badge reuses the first badge's images, swapped.
+  secondFrontImage,
+  secondBackImage,
+  secondCardColor = null,
   imageFit = 'cover',
   cardColor = '#ffffff',
   cardGradientEnd = null,
@@ -870,6 +875,9 @@ const Lanyard = ({
   settingsRef.current = {
     frontImage,
     backImage,
+    secondFrontImage,
+    secondBackImage,
+    secondCardColor,
     imageFit: imageFit === 'contain' ? 'contain' : 'cover',
     cardColor,
     cardGradientEnd,
@@ -928,12 +936,16 @@ const Lanyard = ({
     scene.add(keyLight, fillLight);
 
     const imageCache = new Map();
-    const images = { front: null, back: null, strap: null };
+    const images = { front: null, back: null, strap: null, secondFront: null, secondBack: null };
     const frontCanvas = document.createElement('canvas');
     const backCanvas = document.createElement('canvas');
     const strapCanvas = document.createElement('canvas');
     const frontTexture = makeCanvasTexture(frontCanvas, anisotropy);
     const backTexture = makeCanvasTexture(backCanvas, anisotropy);
+    const secondFrontCanvas = document.createElement('canvas');
+    const secondBackCanvas = document.createElement('canvas');
+    const secondFrontTexture = makeCanvasTexture(secondFrontCanvas, anisotropy);
+    const secondBackTexture = makeCanvasTexture(secondBackCanvas, anisotropy);
     const strapTexture = makeCanvasTexture(strapCanvas, anisotropy);
     strapTexture.wrapS = THREE.ClampToEdgeWrapping;
     strapTexture.wrapT = THREE.RepeatWrapping;
@@ -966,9 +978,22 @@ const Lanyard = ({
       normalMap: grain,
       normalScale: new THREE.Vector2(0.06, 0.06)
     });
-    frontMaterial.onBeforeCompile = injectFoil;
-    backMaterial.onBeforeCompile = injectFoil;
+    const secondFrontMaterial = new THREE.MeshPhysicalMaterial({
+      map: secondFrontTexture,
+      normalMap: grain,
+      normalScale: new THREE.Vector2(0.06, 0.06)
+    });
+    const secondBackMaterial = new THREE.MeshPhysicalMaterial({
+      map: secondBackTexture,
+      normalMap: grain,
+      normalScale: new THREE.Vector2(0.06, 0.06)
+    });
+    const faceMaterials = [frontMaterial, backMaterial, secondFrontMaterial, secondBackMaterial];
+    faceMaterials.forEach(material => {
+      material.onBeforeCompile = injectFoil;
+    });
     const edgeMaterial = new THREE.MeshPhysicalMaterial();
+    const secondEdgeMaterial = new THREE.MeshPhysicalMaterial();
     const metalMaterial = new THREE.MeshStandardMaterial({ metalness: 1 });
     const bandMaterial = new THREE.MeshPhysicalMaterial({
       map: strapTexture,
@@ -991,9 +1016,9 @@ const Lanyard = ({
     scene.add(cardGroup);
 
     const secondGroup = new THREE.Group();
-    const secondBodyMesh = new THREE.Mesh(undefined, edgeMaterial);
-    const secondFrontMesh = new THREE.Mesh(undefined, backMaterial);
-    const secondBackMesh = new THREE.Mesh(undefined, frontMaterial);
+    const secondBodyMesh = new THREE.Mesh(undefined, secondEdgeMaterial);
+    const secondFrontMesh = new THREE.Mesh(undefined, secondFrontMaterial);
+    const secondBackMesh = new THREE.Mesh(undefined, secondBackMaterial);
     const secondRing = new THREE.Mesh(ring.geometry, metalMaterial);
     secondRing.rotation.copy(ring.rotation);
     secondGroup.add(secondBodyMesh, secondFrontMesh, secondBackMesh, secondRing);
@@ -1070,13 +1095,25 @@ const Lanyard = ({
         frontCanvas.height = height;
         backCanvas.width = width;
         backCanvas.height = height;
+        secondFrontCanvas.width = width;
+        secondFrontCanvas.height = height;
+        secondBackCanvas.width = width;
+        secondBackCanvas.height = height;
         frontTexture.dispose();
         backTexture.dispose();
+        secondFrontTexture.dispose();
+        secondBackTexture.dispose();
       }
       paintFace(frontCanvas, images.front, color, s.imageFit, s.cardGradientEnd);
       paintFace(backCanvas, images.back || images.front, color, s.imageFit, s.cardGradientEnd);
+      const secondColor = s.secondCardColor ? parseColor(s.secondCardColor, color) : color;
+      const secondGradient = s.secondCardColor ? null : s.cardGradientEnd;
+      paintFace(secondFrontCanvas, images.secondFront || images.back || images.front, secondColor, s.imageFit, secondGradient);
+      paintFace(secondBackCanvas, images.secondBack || images.front, secondColor, s.imageFit, secondGradient);
       frontTexture.needsUpdate = true;
       backTexture.needsUpdate = true;
+      secondFrontTexture.needsUpdate = true;
+      secondBackTexture.needsUpdate = true;
       start();
     };
 
@@ -1166,29 +1203,33 @@ const Lanyard = ({
         }
       }
 
-      const imageKey = `${s.frontImage}|${s.backImage}|${s.strapImage}`;
+      const imageKey = `${s.frontImage}|${s.backImage}|${s.secondFrontImage}|${s.secondBackImage}|${s.strapImage}`;
       if (imageKey !== applied.imageKey) {
         const token = ++imageToken;
         Promise.all([
           loadImage(imageCache, s.frontImage),
           loadImage(imageCache, s.backImage),
-          loadImage(imageCache, s.strapImage)
-        ]).then(([front, back, strap]) => {
+          loadImage(imageCache, s.strapImage),
+          loadImage(imageCache, s.secondFrontImage),
+          loadImage(imageCache, s.secondBackImage)
+        ]).then(([front, back, strap, secondFront, secondBack]) => {
           if (!alive || token !== imageToken) return;
           images.front = front;
           images.back = back;
           images.strap = strap;
+          images.secondFront = secondFront;
+          images.secondBack = secondBack;
           paintFaces();
           repaintStrap();
         });
       }
-      const faceKey = `${layoutKey}|${s.cardColor}|${s.cardGradientEnd}|${s.imageFit}`;
+      const faceKey = `${layoutKey}|${s.cardColor}|${s.cardGradientEnd}|${s.secondCardColor}|${s.imageFit}`;
       if (faceKey !== applied.faceKey) paintFaces();
       if (s.strapColor !== applied.strapColor) repaintStrap();
 
       const finish = FINISHES[s.finish] || FINISHES.glossy;
       const card = parseColor(s.cardColor, [1, 1, 1]);
-      [frontMaterial, backMaterial].forEach(material => {
+      faceMaterials.forEach(material => {
         material.roughness = finish.roughness;
         material.metalness = finish.metalness;
         material.clearcoat = finish.clearcoat;
@@ -1199,13 +1240,17 @@ const Lanyard = ({
       foilUniforms.foilStrength.value = finish.foil;
       foilUniforms.foilAspect.value = layout.height / layout.width;
       edgeMaterial.color.setRGB(card[0] * 0.92, card[1] * 0.92, card[2] * 0.92, THREE.SRGBColorSpace);
+      const secondCard = s.secondCardColor ? parseColor(s.secondCardColor, card) : card;
+      secondEdgeMaterial.color.setRGB(secondCard[0] * 0.92, secondCard[1] * 0.92, secondCard[2] * 0.92, THREE.SRGBColorSpace);
       // Matte cards get matte edges; coated finishes keep a polished edge.
       const coated = finish.clearcoat > 0;
-      edgeMaterial.roughness = coated ? Math.min(finish.roughness, 0.35) : finish.roughness;
-      edgeMaterial.metalness = finish.metalness;
-      edgeMaterial.clearcoat = coated ? 1 : 0;
-      edgeMaterial.clearcoatRoughness = 0.08;
-      edgeMaterial.specularIntensity = finish.specular ?? 1;
+      [edgeMaterial, secondEdgeMaterial].forEach(material => {
+        material.roughness = coated ? Math.min(finish.roughness, 0.35) : finish.roughness;
+        material.metalness = finish.metalness;
+        material.clearcoat = coated ? 1 : 0;
+        material.clearcoatRoughness = 0.08;
+        material.specularIntensity = finish.specular ?? 1;
+      });
       const metalLook = METALS[s.metal] || METALS.silver;
       metalMaterial.color.set(metalLook.color);
       metalMaterial.roughness = metalLook.roughness;
@@ -1525,8 +1570,8 @@ const Lanyard = ({
       canvas.removeEventListener('lostpointercapture', onPointerUp);
       canvas.removeEventListener('touchstart', onTouchStart);
       [bodyMesh, frontMesh, backMesh, secondBodyMesh, secondFrontMesh, secondBackMesh, ring, clampMesh, eyelet, clipBar, band].forEach(mesh => mesh.geometry?.dispose());
-      [frontMaterial, backMaterial, edgeMaterial, metalMaterial, bandMaterial].forEach(material => material.dispose());
-      [frontTexture, backTexture, strapTexture, grain, weave].forEach(texture => texture.dispose());
+      [...faceMaterials, edgeMaterial, secondEdgeMaterial, metalMaterial, bandMaterial].forEach(material => material.dispose());
+      [frontTexture, backTexture, secondFrontTexture, secondBackTexture, strapTexture, grain, weave].forEach(texture => texture.dispose());
       environment.dispose();
       renderer.dispose();
       if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
