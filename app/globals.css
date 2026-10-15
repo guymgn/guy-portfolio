@@ -80,7 +80,8 @@ nav a:hover { color:var(--text); }
 .home { display:block; color:var(--text); }
 .navWordmark { padding-left:7px; display:block; font-family:"Hornbill",serif; font-size:20px; font-variation-settings:"wght" 760; letter-spacing:-.025em; line-height:1; white-space:nowrap; }
 section { padding:84px 0; border-bottom:1px solid var(--line); }
-.heroLanyard { --lanyard-frame-ratio:.38; position:absolute; z-index:1; top:0; left:max(18px,calc((100% - 1200px)/2)); width:min(calc(100% - 36px),1200px); height:600px; }
+.heroLanyard { --lanyard-frame-ratio:.38; --lanyard-bleed-left:240px; position:absolute; z-index:1; top:0; left:max(18px,calc((100% - 1200px)/2)); width:min(calc(100% - 36px),1200px); height:600px; }
+.heroLanyard>.lanyard { margin-left:calc(-1 * var(--lanyard-bleed-left)); width:calc(100% + var(--lanyard-bleed-left)); }
 .intro { position:relative; min-height:700px; padding-bottom:34px; display:flex; flex-direction:column; justify-content:center; text-align:center; border-bottom:0; }
 @media (min-width:681px) {
   .intro { min-height:900px; top:-30px; margin-bottom:-110px; }
@@ -1768,7 +1769,7 @@ h1 { margin:0; font-size:clamp(48px,8vw,78px); line-height:.95; letter-spacing:-
 }
 
 @media (max-width:680px) {
-  .heroLanyard { --lanyard-frame-ratio:1; left:50%; width:100%; transform:translateX(-50%); }
+  .heroLanyard { --lanyard-frame-ratio:1; --lanyard-bleed-left:0px; left:50%; width:100%; transform:translateX(-50%); }
   .tearaVideoPromo { display:none; }
   .tearaLiveStatus { white-space:normal; }
   .siteShell { width:100%; max-width:100%; margin-inline:0; padding-inline:18px; }

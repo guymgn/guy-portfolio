@@ -1198,7 +1198,7 @@ const Lanyard = ({
     const mouth = new THREE.Vector3();
     const tuck = new THREE.Vector3();
     const curve = new THREE.CatmullRomCurve3(controls, false, 'centripetal');
-    const view = { width: 1, height: 1, frameWidth: 1 };
+    const view = { width: 1, height: 1, frameWidth: 1, bleed: 0 };
     let layout = cardLayout('portrait', 0.3);
     let applied = {};
     let strapScale = STRAP_WIDTH;
@@ -1309,8 +1309,9 @@ const Lanyard = ({
       camera.aspect = aspect;
       camera.position.set(0, 0, viewHeight / 2 / Math.tan((FOV * Math.PI) / 360));
       camera.lookAt(0, 0, 0);
-      // Preserve the left column's framing while rendering beyond its right edge.
-      camera.setViewOffset(view.frameWidth, view.height, 0, 0, view.width, view.height);
+      // Preserve the left column's framing while rendering beyond its right
+      // edge, and beyond its left edge by the bleed so swinging cards aren't clipped.
+      camera.setViewOffset(view.frameWidth, view.height, -view.bleed, 0, view.width, view.height);
       camera.updateProjectionMatrix();
       camera.updateMatrixWorld();
       foilUniforms.foilKey.value.set(-2.5, 4, 6).normalize().transformDirection(camera.matrixWorldInverse);
@@ -1366,7 +1367,7 @@ const Lanyard = ({
         secondGroup.visible = s.secondCard;
         applied.framingKey = '';
       }
-      const framingKey = `${layoutKey}|${s.size}|${s.anchor}|${s.strapLength}|${view.width}|${view.height}|${view.frameWidth}`;
+      const framingKey = `${layoutKey}|${s.size}|${s.anchor}|${s.strapLength}|${view.width}|${view.height}|${view.frameWidth}|${view.bleed}`;
       if (framingKey !== applied.framingKey) {
         frameView();
         if (!placed) {
@@ -1721,8 +1722,12 @@ const Lanyard = ({
     const resize = () => {
       view.width = Math.max(1, container.clientWidth);
       view.height = Math.max(1, container.clientHeight);
-      const frameRatio = parseFloat(getComputedStyle(container).getPropertyValue('--lanyard-frame-ratio')) || 1;
-      view.frameWidth = view.width * clamp(frameRatio, 0.1, 1);
+      const style = getComputedStyle(container);
+      const frameRatio = parseFloat(style.getPropertyValue('--lanyard-frame-ratio')) || 1;
+      // Extra canvas to the left of the layout column (set in CSS) that the
+      // cards can swing into without being cut off.
+      view.bleed = clamp(parseFloat(style.getPropertyValue('--lanyard-bleed-left')) || 0, 0, view.width - 1);
+      view.frameWidth = (view.width - view.bleed) * clamp(frameRatio, 0.1, 1);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
       renderer.setSize(view.width, view.height, false);
       apply();
