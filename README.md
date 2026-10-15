@@ -1,5 +1,7 @@
 # guymagen.com
 
+[![The guymagen.com hero: two hanging ID badges next to "Hey there, I'm Guy Magen, Senior Product Designer & Builder"](docs/readme-hero.png)](https://www.guymagen.com)
+
 The source behind [guymagen.com](https://www.guymagen.com), the portfolio of Guy Magen, a Senior Product Designer and builder with 12+ years of experience designing complex B2B products across SaaS, fintech, cloud cost management and AI tools.
 
 I designed and built the site myself, with AI coding tools as part of the workflow. It is meant to show the work, and also how I work: taking a messy, complex product problem, finding the model underneath it, and turning that into something people can understand and use.
