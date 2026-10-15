@@ -51,27 +51,6 @@ I designed and built the site myself, with AI coding tools as part of the workfl
 
 - Built with **OpenAI Codex** and **Claude** as coding partners: I set the direction, design and review every change, and use them to move from idea to working code quickly
 
-## Running it locally
-
-Requires Node.js 22.13 or newer.
-
-```bash
-npm install
-npm run dev        # http://localhost:3000
-```
-
-Production build (as Netlify runs it):
-
-```bash
-NITRO_PRESET=netlify npm run build
-```
-
-Focused tests for the badge physics, analytics and Teara status:
-
-```bash
-node --test tests/lanyard-analytics.test.mjs tests/lanyard-physics.test.mjs tests/teara-status.test.mjs
-```
-
 ## Contact
 
 [guymagen.com](https://www.guymagen.com) · [hi@guymagen.com](mailto:hi@guymagen.com)
