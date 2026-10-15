@@ -40,6 +40,7 @@ export function HeroLanyard() {
           secondBackImage="/card-back-2.png"
           secondCardColor="#333333"
           placeholders={badgePlaceholders}
+          shadowOpacity={dark ? 0.32 : 0.13}
           cardColor="#333333"
           finish="matte"
           cornerRadius={0.5}

@@ -435,6 +435,48 @@ const drawFitted = (ctx, image, width, height, fit) => {
   ctx.drawImage(image, (width - w) / 2, (height - h) / 2, w, h);
 };
 
+// Soft card-shaped blur used for the badges' drop shadows.
+const makeShadowTexture = () => {
+  const width = 128;
+  const height = 160;
+  const inset = 14;
+  // Card-shaped alpha mask, softened with a few box-blur passes. Done by hand
+  // so it renders the same in every browser (canvas filters aren't universal).
+  let alpha = new Float32Array(width * height);
+  for (let y = inset; y < height - inset; y++) {
+    for (let x = inset; x < width - inset; x++) alpha[y * width + x] = 1;
+  }
+  const radius = 6;
+  for (let pass = 0; pass < 3; pass++) {
+    const next = new Float32Array(width * height);
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        let sum = 0;
+        for (let k = -radius; k <= radius; k++) sum += alpha[y * width + Math.min(width - 1, Math.max(0, x + k))];
+        next[y * width + x] = sum / (radius * 2 + 1);
+      }
+    }
+    alpha = new Float32Array(width * height);
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        let sum = 0;
+        for (let k = -radius; k <= radius; k++) sum += next[Math.min(height - 1, Math.max(0, y + k)) * width + x];
+        alpha[y * width + x] = sum / (radius * 2 + 1);
+      }
+    }
+  }
+  const data = new Uint8Array(width * height * 4);
+  for (let i = 0; i < width * height; i++) data[i * 4 + 3] = Math.round(alpha[i] * 255);
+  const texture = new THREE.DataTexture(data, width, height, THREE.RGBAFormat);
+  texture.magFilter = THREE.LinearFilter;
+  texture.minFilter = THREE.LinearFilter;
+  texture.needsUpdate = true;
+  return texture;
+};
+// Shadows fall on a plane behind both cards, lit from the upper left.
+const SHADOW_Z = -0.45;
+const SHADOW_LIGHT = { x: 0.3, y: -0.45 };
+
 const faceBackgrounds = new Map();
 const pixelCanvas = typeof document === 'undefined' ? null : document.createElement('canvas');
 
@@ -892,6 +934,8 @@ const Lanyard = ({
   // Optional tiny versions of the four faces (for example inline data URIs),
   // shown pixelated until the full images load.
   placeholders = null,
+  // Opacity of the soft shadow each card casts behind it (0 disables).
+  shadowOpacity = 0,
   imageFit = 'cover',
   cardColor = '#ffffff',
   cardGradientEnd = null,
@@ -927,6 +971,7 @@ const Lanyard = ({
     secondBackImage,
     secondCardColor,
     placeholders,
+    shadowOpacity,
     imageFit: imageFit === 'contain' ? 'contain' : 'cover',
     cardColor,
     cardGradientEnd,
@@ -1108,6 +1153,42 @@ const Lanyard = ({
     scene.add(clipBar);
     const pinA = new THREE.Vector3();
     const pinB = new THREE.Vector3();
+    const shadowTexture = makeShadowTexture();
+    const shadowGeometry = new THREE.PlaneGeometry(1, 1);
+    const shadows = [0, 1].map(() => {
+      const material = new THREE.MeshBasicMaterial({
+        map: shadowTexture,
+        color: 0x000000,
+        transparent: true,
+        depthWrite: false,
+        toneMapped: false
+      });
+      const mesh = new THREE.Mesh(shadowGeometry, material);
+      mesh.renderOrder = -1;
+      mesh.visible = false;
+      scene.add(mesh);
+      return mesh;
+    });
+    const shadowAxis = new THREE.Vector3();
+    // Follow each card: shift further from it the closer it swings toward the
+    // viewer, narrow as it turns edge-on, and tilt with its lean.
+    const updateShadows = () => {
+      const s = settingsRef.current;
+      const strength = clamp(s.shadowOpacity || 0, 0, 1);
+      [[sim, true], [companion, s.secondCard]].forEach(([card, active], index) => {
+        const mesh = shadows[index];
+        mesh.visible = active && strength > 0;
+        if (!mesh.visible) return;
+        const { position, quaternion } = card.body;
+        const depth = Math.max(0, position.z - SHADOW_Z);
+        const facing = Math.abs(shadowAxis.set(0, 0, 1).applyQuaternion(quaternion).z);
+        shadowAxis.set(1, 0, 0).applyQuaternion(quaternion);
+        mesh.position.set(position.x + SHADOW_LIGHT.x * depth, position.y + SHADOW_LIGHT.y * depth, SHADOW_Z);
+        mesh.rotation.set(0, 0, Math.atan2(shadowAxis.y, shadowAxis.x));
+        mesh.scale.set(layout.width * 1.3 * Math.max(0.2, facing), layout.height * 1.22, 1);
+        mesh.material.opacity = strength * (0.55 + 0.45 * facing) / (1 + depth * 0.6);
+      });
+    };
 
     const sim = createSimulation();
     const companion = createSimulation();
@@ -1471,6 +1552,7 @@ const Lanyard = ({
       secondGroup.position.copy(companion.body.position);
       secondGroup.quaternion.copy(companion.body.quaternion);
       updateBand();
+      updateShadows();
       renderer.render(scene, camera);
     };
 
@@ -1676,9 +1758,10 @@ const Lanyard = ({
       canvas.removeEventListener('pointercancel', onPointerUp);
       canvas.removeEventListener('lostpointercapture', onPointerUp);
       canvas.removeEventListener('touchstart', onTouchStart);
-      [bodyMesh, frontMesh, backMesh, secondBodyMesh, secondFrontMesh, secondBackMesh, ring, clampMesh, eyelet, clipBar, band].forEach(mesh => mesh.geometry?.dispose());
+      [bodyMesh, frontMesh, backMesh, secondBodyMesh, secondFrontMesh, secondBackMesh, ring, clampMesh, eyelet, clipBar, band, shadows[0]].forEach(mesh => mesh.geometry?.dispose());
       [...faceMaterials, edgeMaterial, secondEdgeMaterial, metalMaterial, bandMaterial].forEach(material => material.dispose());
-      [frontTexture, backTexture, secondFrontTexture, secondBackTexture, strapTexture, grain, weave].forEach(texture => texture.dispose());
+      [frontTexture, backTexture, secondFrontTexture, secondBackTexture, strapTexture, grain, weave, shadowTexture].forEach(texture => texture.dispose());
+      shadows.forEach(mesh => mesh.material.dispose());
       environment.dispose();
       renderer.dispose();
       if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
