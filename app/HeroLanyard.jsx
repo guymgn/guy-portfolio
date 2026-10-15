@@ -3,6 +3,7 @@
 import { useSyncExternalStore } from "react";
 import Lanyard from "@/components/Lanyard";
 import { trackEvent } from "./Analytics";
+import { badgePlaceholders } from "./badgePlaceholders";
 
 const trackBadgeInteraction = ({ action, ...properties }) => {
   try {
@@ -38,6 +39,7 @@ export function HeroLanyard() {
           secondFrontImage="/card-front-2.png"
           secondBackImage="/card-back-2.png"
           secondCardColor="#000000"
+          placeholders={badgePlaceholders}
           cardColor="#7776FF"
           cardGradientEnd="#6261D9"
           finish="matte"

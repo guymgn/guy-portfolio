@@ -64,10 +64,11 @@ for (const dragHeight of [.4, 1, 3]) test(`shared-strap cards settle after dragg
         placeHanging(card, layout, false);
       }
       second.freeCard = true;
-      first.body.hang.set(0, layout.hangY, 0);
-      second.body.hang.set(0, layout.hangY, 0);
+      first.body.hang.set(CARD_POSES[0].ringX, layout.hangY, 0);
+      second.body.hang.set(CARD_POSES[1].ringX, layout.hangY, 0);
       const attachment = first.nodes[JOINTS].clone();
-      first.clip.set(CLIP_HALF, 0, CLIP_DEPTH);
+      first.clip.set(CLIP_HALF, CLIP_DROP, CLIP_DEPTH);
+      [first, second].forEach((card, index) => { card.restTurn = CARD_POSES[index].yaw; });
       for (const [card, side] of [[first, 1], [second, -1]]) {
         card.body.position.copy(attachment).addScaledVector(first.clip, side)
           .sub(card.body.hang.clone().applyQuaternion(card.body.quaternion));

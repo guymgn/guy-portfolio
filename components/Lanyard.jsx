@@ -23,7 +23,13 @@ const STRAP_WIDTH = 0.36;
 const CLIP_HALF = 0.17;
 // The two rings also sit at different depths on the clip so the cards hang
 // in parallel planes instead of leaning into each other.
-const CLIP_DEPTH = 0.08;
+const CLIP_DEPTH = 0.11;
+// The clip sits slightly askew so the two cards hang at different heights.
+const CLIP_DROP = 0.06;
+// Resting pose per card, so the pair reads as casually hung, not mirrored.
+// yaw: resting turn toward/away from the viewer (radians). ringX: where the
+// ring sits inside the (centered, wide) slot; off-center lets gravity tilt it.
+const CARD_POSES = [{ yaw: -0.06, ringX: 0.07 }, { yaw: 0.12, ringX: -0.11 }];
 const RING_RADIUS = 0.095;
 const RING_TUBE = 0.0135;
 const EYELET_RADIUS = 0.036;
@@ -429,19 +435,29 @@ const drawFitted = (ctx, image, width, height, fit) => {
   ctx.drawImage(image, (width - w) / 2, (height - h) / 2, w, h);
 };
 
-const paintFace = (canvas, image, color, fit, gradientEnd) => {
+const faceBackgrounds = new Map();
+const pixelCanvas = typeof document === 'undefined' ? null : document.createElement('canvas');
+
+// Gradient plus stable, monochrome grain, cached so repeated repaints (such as
+// the pixel reveal) don't recompute it.
+const faceBackground = (width, height, color, gradientEnd) => {
+  const key = `${width}x${height}|${color.join(',')}|${gradientEnd}`;
+  const cached = faceBackgrounds.get(key);
+  if (cached) return cached;
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
   const ctx = canvas.getContext('2d');
-  if (!ctx) return;
+  if (!ctx) return canvas;
   ctx.fillStyle = toCss(color);
   if (gradientEnd) {
-    const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    const gradient = ctx.createLinearGradient(0, 0, 0, height);
     gradient.addColorStop(0, toCss(color));
     gradient.addColorStop(1, toCss(parseColor(gradientEnd, color)));
     ctx.fillStyle = gradient;
   }
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  // Bake stable, monochrome grain into the background beneath the artwork.
-  const background = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  ctx.fillRect(0, 0, width, height);
+  const background = ctx.getImageData(0, 0, width, height);
   const random = seeded(47);
   for (let i = 0; i < background.data.length; i += 4) {
     const grain = (random() - 0.5) * 24;
@@ -450,7 +466,33 @@ const paintFace = (canvas, image, color, fit, gradientEnd) => {
     background.data[i + 2] += grain;
   }
   ctx.putImageData(background, 0, 0);
-  if (image) drawFitted(ctx, image, canvas.width, canvas.height, fit);
+  faceBackgrounds.set(key, canvas);
+  return canvas;
+};
+
+// columns > 0 draws the artwork as a grid of that many blocks across, used
+// for the low-res placeholder and the reveal once the full image arrives.
+const paintFace = (canvas, image, color, fit, gradientEnd, columns = 0) => {
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+  ctx.drawImage(faceBackground(canvas.width, canvas.height, color, gradientEnd), 0, 0);
+  if (!image) return;
+  if (columns > 0 && pixelCanvas) {
+    const rows = Math.max(1, Math.round((columns * canvas.height) / canvas.width));
+    pixelCanvas.width = columns;
+    pixelCanvas.height = rows;
+    const small = pixelCanvas.getContext('2d');
+    if (small) {
+      small.imageSmoothingEnabled = true;
+      small.clearRect(0, 0, columns, rows);
+      drawFitted(small, image, columns, rows, fit);
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(pixelCanvas, 0, 0, canvas.width, canvas.height);
+      ctx.imageSmoothingEnabled = true;
+      return;
+    }
+  }
+  drawFitted(ctx, image, canvas.width, canvas.height, fit);
 };
 
 const paintStrap = (canvas, image, color) => {
@@ -506,6 +548,7 @@ const createSimulation = () => {
     clip: new THREE.Vector3(),
     grab: null,
     turn: 0,
+    restTurn: 0,
     twist: 0,
     twistRaw: 0,
     calm: 0
@@ -606,7 +649,9 @@ const clipOffset = (first, second, out) => {
   if (out.lengthSq() < 1e-6) out.set(1, 0, 0);
   out.normalize();
   const depth = scratch.h.set(-out.z, 0, out.x);
-  return out.multiplyScalar(CLIP_HALF).addScaledVector(depth, CLIP_DEPTH);
+  out.multiplyScalar(CLIP_HALF).addScaledVector(depth, CLIP_DEPTH);
+  out.y = CLIP_DROP;
+  return out;
 };
 
 // Couple two rigid cards at opposite ends of the clip, sharing drag forces
@@ -759,7 +804,7 @@ const stepSimulation = (sim, dt, physics, time, companion = null) => {
     }
     if (!grab) {
       const spin = body.angular.dot(up);
-      body.angular.addScaledVector(up, (physics.twist * (sim.turn - sim.twist) - physics.twistDamping * spin) * h);
+      body.angular.addScaledVector(up, (physics.twist * (sim.turn + sim.restTurn - sim.twist) - physics.twistDamping * spin) * h);
     }
     body.velocity.y -= physics.gravity * h;
     body.velocity.x += windX * 0.35 * h;
@@ -844,6 +889,9 @@ const Lanyard = ({
   secondFrontImage,
   secondBackImage,
   secondCardColor = null,
+  // Optional tiny versions of the four faces (for example inline data URIs),
+  // shown pixelated until the full images load.
+  placeholders = null,
   imageFit = 'cover',
   cardColor = '#ffffff',
   cardGradientEnd = null,
@@ -878,6 +926,7 @@ const Lanyard = ({
     secondFrontImage,
     secondBackImage,
     secondCardColor,
+    placeholders,
     imageFit: imageFit === 'contain' ? 'contain' : 'cover',
     cardColor,
     cardGradientEnd,
@@ -937,6 +986,24 @@ const Lanyard = ({
 
     const imageCache = new Map();
     const images = { front: null, back: null, strap: null, secondFront: null, secondBack: null };
+    const tiny = { front: null, back: null, secondFront: null, secondBack: null };
+    // Block count per face while its full image is being revealed (0 = sharp).
+    const reveal = { front: 0, back: 0, secondFront: 0, secondBack: 0 };
+    const revealTimers = new Set();
+    // Which source each face falls back to when its own image is missing.
+    const FACE_SOURCES = {
+      front: ['front'],
+      back: ['back', 'front'],
+      secondFront: ['secondFront', 'back', 'front'],
+      secondBack: ['secondBack', 'front']
+    };
+    const faceArt = face => {
+      for (const key of FACE_SOURCES[face]) {
+        if (images[key]) return { image: images[key], columns: reveal[key] };
+        if (tiny[key]) return { image: tiny[key], columns: tiny[key].width };
+      }
+      return { image: null, columns: 0 };
+    };
     const frontCanvas = document.createElement('canvas');
     const backCanvas = document.createElement('canvas');
     const strapCanvas = document.createElement('canvas');
@@ -1072,11 +1139,12 @@ const Lanyard = ({
       placeHanging(companion, layout, false);
       if (!settingsRef.current.secondCard) return;
       const attachment = sim.nodes[JOINTS].clone();
-      sim.body.hang.set(0, layout.hangY, 0);
-      companion.body.hang.set(0, layout.hangY, 0);
+      sim.body.hang.set(CARD_POSES[0].ringX, layout.hangY, 0);
+      companion.body.hang.set(CARD_POSES[1].ringX, layout.hangY, 0);
       sim.body.quaternion.identity();
       companion.body.quaternion.identity();
-      sim.clip.set(CLIP_HALF, 0, CLIP_DEPTH);
+      sim.clip.set(CLIP_HALF, CLIP_DROP, CLIP_DEPTH);
+      [sim, companion].forEach((card, index) => { card.restTurn = CARD_POSES[index].yaw; });
       for (const [card, side] of [[sim, 1], [companion, -1]]) {
         card.body.position.copy(attachment).addScaledVector(sim.clip, side)
           .sub(card.body.hang.clone().applyQuaternion(card.body.quaternion));
@@ -1085,7 +1153,7 @@ const Lanyard = ({
       }
     };
 
-    const paintFaces = () => {
+    const paintFaces = (onlyFaces = null) => {
       const s = settingsRef.current;
       const color = parseColor(s.cardColor, [1, 1, 1]);
       const width = FACE_WIDTH;
@@ -1104,17 +1172,41 @@ const Lanyard = ({
         secondFrontTexture.dispose();
         secondBackTexture.dispose();
       }
-      paintFace(frontCanvas, images.front, color, s.imageFit, s.cardGradientEnd);
-      paintFace(backCanvas, images.back || images.front, color, s.imageFit, s.cardGradientEnd);
       const secondColor = s.secondCardColor ? parseColor(s.secondCardColor, color) : color;
       const secondGradient = s.secondCardColor ? null : s.cardGradientEnd;
-      paintFace(secondFrontCanvas, images.secondFront || images.back || images.front, secondColor, s.imageFit, secondGradient);
-      paintFace(secondBackCanvas, images.secondBack || images.front, secondColor, s.imageFit, secondGradient);
-      frontTexture.needsUpdate = true;
-      backTexture.needsUpdate = true;
-      secondFrontTexture.needsUpdate = true;
-      secondBackTexture.needsUpdate = true;
+      const faces = {
+        front: [frontCanvas, frontTexture, color, s.cardGradientEnd],
+        back: [backCanvas, backTexture, color, s.cardGradientEnd],
+        secondFront: [secondFrontCanvas, secondFrontTexture, secondColor, secondGradient],
+        secondBack: [secondBackCanvas, secondBackTexture, secondColor, secondGradient]
+      };
+      for (const face of onlyFaces || Object.keys(faces)) {
+        const [canvas, texture, faceColor, gradientEnd] = faces[face];
+        const { image, columns } = faceArt(face);
+        paintFace(canvas, image, faceColor, s.imageFit, gradientEnd, columns);
+        texture.needsUpdate = true;
+      }
       start();
+    };
+
+    // Sharpen a freshly loaded image from coarse blocks to full detail.
+    const REVEAL_STEPS = [48, 96, 192, 384, 0];
+    const revealImage = key => {
+      const affected = Object.keys(FACE_SOURCES).filter(face => FACE_SOURCES[face].includes(key));
+      if (reducedMotion || !tiny[key]) {
+        reveal[key] = 0;
+        paintFaces(affected);
+        return;
+      }
+      REVEAL_STEPS.forEach((columns, index) => {
+        const timer = setTimeout(() => {
+          revealTimers.delete(timer);
+          if (!alive) return;
+          reveal[key] = columns;
+          paintFaces(affected);
+        }, index * 70);
+        revealTimers.add(timer);
+      });
     };
 
     const repaintStrap = () => {
@@ -1149,7 +1241,7 @@ const Lanyard = ({
       const hangTop = cardTop + (layout.hangY - layout.height / 2);
       sim.anchor.set(anchorX, anchorY, 0);
       configureSimulation(sim, layout, anchorY - hangTop);
-      if (s.secondCard) sim.body.hang.set(0, layout.hangY, 0);
+      if (s.secondCard) sim.body.hang.set(CARD_POSES[0].ringX, layout.hangY, 0);
       sim.nodes[0].copy(sim.anchor);
       sim.previous[0].copy(sim.anchor);
     };
@@ -1180,13 +1272,14 @@ const Lanyard = ({
         secondBackMesh.position.z = backMesh.position.z;
         secondBackMesh.rotation.y = Math.PI;
         ring.position.set(0, layout.ringY, 0);
+        ring.position.x = s.secondCard ? CARD_POSES[0].ringX : 0;
         // Rings hang straight up from the centered slot to their end of the clip;
         // the clip itself carries the depth offset between the two cards.
         const ringDepth = 0;
         ring.position.z = -ringDepth;
         ring.rotation.x = -Math.atan2(ringDepth, RING_RADIUS);
         ring.scale.y = Math.hypot(RING_RADIUS, ringDepth) / RING_RADIUS;
-        secondRing.position.set(0, layout.ringY, ringDepth);
+        secondRing.position.set(CARD_POSES[1].ringX, layout.ringY, ringDepth);
         secondRing.rotation.x = -ring.rotation.x;
         secondRing.scale.y = ring.scale.y;
         secondGroup.visible = s.secondCard;
@@ -1206,20 +1299,33 @@ const Lanyard = ({
       const imageKey = `${s.frontImage}|${s.backImage}|${s.secondFrontImage}|${s.secondBackImage}|${s.strapImage}`;
       if (imageKey !== applied.imageKey) {
         const token = ++imageToken;
-        Promise.all([
-          loadImage(imageCache, s.frontImage),
-          loadImage(imageCache, s.backImage),
-          loadImage(imageCache, s.strapImage),
-          loadImage(imageCache, s.secondFrontImage),
-          loadImage(imageCache, s.secondBackImage)
-        ]).then(([front, back, strap, secondFront, secondBack]) => {
+        const sources = { front: s.frontImage, back: s.backImage, secondFront: s.secondFrontImage, secondBack: s.secondBackImage };
+        const small = s.placeholders || {};
+        revealTimers.forEach(timer => clearTimeout(timer));
+        revealTimers.clear();
+        for (const key of Object.keys(sources)) {
+          images[key] = null;
+          tiny[key] = null;
+          reveal[key] = 0;
+        }
+        // Tiny placeholders first so the cards never sit empty on slow connections.
+        Promise.all(Object.keys(sources).map(key => loadImage(imageCache, small[key]).then(image => [key, image])))
+          .then(entries => {
+            if (!alive || token !== imageToken) return;
+            for (const [key, image] of entries) if (!images[key]) tiny[key] = image;
+            paintFaces();
+          });
+        // Then each full image independently, revealed as soon as it arrives.
+        for (const [key, url] of Object.entries(sources)) {
+          loadImage(imageCache, url).then(image => {
+            if (!alive || token !== imageToken || !image) return;
+            images[key] = image;
+            revealImage(key);
+          });
+        }
+        loadImage(imageCache, s.strapImage).then(strap => {
           if (!alive || token !== imageToken) return;
-          images.front = front;
-          images.back = back;
           images.strap = strap;
-          images.secondFront = secondFront;
-          images.secondBack = secondBack;
-          paintFaces();
           repaintStrap();
         });
       }
@@ -1558,6 +1664,7 @@ const Lanyard = ({
 
     return () => {
       alive = false;
+      revealTimers.forEach(timer => clearTimeout(timer));
       cancelAnimationFrame(raf);
       applyRef.current = null;
       resizeObserver.disconnect();
