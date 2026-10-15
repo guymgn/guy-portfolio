@@ -1,100 +1,55 @@
-# vinext-starter
+# guymagen.com
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+The source behind [guymagen.com](https://www.guymagen.com), the portfolio of Guy Magen, a Senior Product Designer and builder with 12+ years of experience designing complex B2B products across SaaS, fintech, cloud cost management and AI tools.
 
-## Prerequisites
+I designed and built the site myself, with AI coding tools as part of the workflow. It is meant to show the work, and also how I work: taking a messy, complex product problem, finding the model underneath it, and turning that into something people can understand and use.
 
-- Node.js `>=22.13.0`
+**[View the live site →](https://www.guymagen.com)**
 
-## Quick Start
+## What's inside
+
+**Case studies**
+
+- **Stigg** · Designing the model behind modern SaaS pricing. How plans, features and entitlements fit together, told through interactive pieces of the product rather than static screenshots.
+- **Finout** · Turning cloud cost chaos into one clear picture. Virtual tags, anomaly detection and the "MegaBill" view, rebuilt as small working demos.
+- **AI governance** · Exploring clearer controls for Shadow AI and sensitive access. An anonymized design assignment, starting from a detected AI model and showing where it lives, so teams can act on it precisely or block it globally.
+
+**Details worth poking at**
+
+- **Hanging badges in the hero.** Two ID badges on a lanyard, rendered in 3D with their own physics. Drag them, swing them, click to flip both. While the artwork loads they appear pixelated and sharpen once it arrives.
+- **Ask about Guy.** A small assistant that answers questions about my work, process and tools, grounded in what is actually on the site.
+- **Teara.** A live status card for Teara, the iOS travel app I designed and built independently. It shows the current App Store release from a single source of truth, so every mention on the site stays in sync.
+
+## How it's built
+
+- React and TypeScript, on [vinext](https://github.com/cloudflare/vinext) (Vite)
+- Three.js for the badge scene, with a custom physics step for the strap, clip and card collisions
+- Hosted on Netlify. Every change goes to a staging preview first and reaches production only after review.
+- The portfolio assistant runs as a separate Cloudflare Worker (`portfolio-agent/`)
+
+## Running it locally
+
+Requires Node.js 22.13 or newer.
 
 ```bash
 npm install
-npm run dev
-npm run build
+npm run dev        # http://localhost:3000
 ```
 
-This starter does not use `wrangler.jsonc`.
+Production build (as Netlify runs it):
 
-## Included Shape
-
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
-
-## Workspace Auth Headers
-
-Signed-in visitors receive both `oai-authenticated-user-id` and `oai-authenticated-user-email`. Private Sites require every visitor to sign in; public Sites may also have anonymous visitors, for whom neither header is present.
-
-The user ID is stable for the same user on the same Site and different across Sites. Email and name are intended for display or contact purposes.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const userId = requestHeaders.get("oai-authenticated-user-id");
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```bash
+NITRO_PRESET=netlify npm run build
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+Focused tests for the badge physics, analytics and Teara status:
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+```bash
+node --test tests/lanyard-analytics.test.mjs tests/lanyard-physics.test.mjs tests/teara-status.test.mjs
+```
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+## Contact
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+[guymagen.com](https://www.guymagen.com) · [hi@guymagen.com](mailto:hi@guymagen.com)
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
-
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
-
-## Useful Commands
-
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
-
-## Learn More
-
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+Case study content, artwork and photos belong to Guy Magen and are not licensed for reuse. Company names belong to their respective owners. DM Sans is used under the SIL Open Font License (see `public/fonts/`).
