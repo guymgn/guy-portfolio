@@ -38,10 +38,9 @@ export function HeroLanyard() {
           backImage="/card-back.png"
           secondFrontImage="/card-front-2.png"
           secondBackImage="/card-back-2.png"
-          secondCardColor="#000000"
+          secondCardColor="#333333"
           placeholders={badgePlaceholders}
-          cardColor="#7776FF"
-          cardGradientEnd="#6261D9"
+          cardColor="#333333"
           finish="matte"
           cornerRadius={0.5}
           size={0.47}
