@@ -22,10 +22,32 @@ I designed and built the site myself, with AI coding tools as part of the workfl
 
 ## How it's built
 
-- React and TypeScript, on [vinext](https://github.com/cloudflare/vinext) (Vite)
-- Three.js for the badge scene, with a custom physics step for the strap, clip and card collisions
-- Hosted on Netlify. Every change goes to a staging preview first and reaches production only after review.
-- The portfolio assistant runs as a separate Cloudflare Worker (`portfolio-agent/`)
+**Design**
+
+- **Figma** for the layouts, case study visuals and the badge artwork, exported straight from the design file into the site
+- Case study demos rebuilt as working components rather than screenshots, so visitors can click through the actual interaction patterns
+
+**Front end**
+
+- **React 19** and **TypeScript**, running on **[vinext](https://github.com/cloudflare/vinext)** (a Next.js-style framework on **Vite**)
+- **Tailwind CSS** for styling, with hand-written CSS for the layout and motion details
+- **Three.js** for the hero badges, with a custom physics step for the strap, clip, rings and card collisions, plus pixelated progressive loading for the artwork
+- **Recharts** for the data visuals in the Finout case study, **Lucide** for icons
+
+**Portfolio assistant**
+
+- A **Cloudflare Worker** (`portfolio-agent/`) running **Llama 3.3 70B on Cloudflare Workers AI**, with rate limiting and tests against prompt manipulation
+- Answers are grounded in the site's own content, and release questions about Teara read the same status file the site uses
+
+**Shipping and quality**
+
+- **GitHub** for source, **Netlify** for hosting. Every change is reviewed on a staging preview before it goes live.
+- **Mixpanel** for product analytics on the live domain only (for example, how visitors interact with the badges)
+- **Node's built-in test runner** for the badge physics, analytics events and release status; **ESLint** with accessibility rules (`jsx-a11y`)
+
+**AI in the workflow**
+
+- Built with **OpenAI Codex** and **Claude** as coding partners: I set the direction, design and review every change, and use them to move from idea to working code quickly
 
 ## Running it locally
 
